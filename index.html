@@ -335,13 +335,16 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 @media (max-width:860px){.classified{grid-template-columns:minmax(0,1fr)}}
 .void{position:relative;border-radius:22px;overflow:hidden;min-height:320px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;border:2px solid #3b2a66;
   background:var(--ink)}
-.void canvas{position:absolute;inset:0;width:100%;height:100%}
-.void > *:not(canvas){position:relative}
+.void .void-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.void .void-shade{position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,11,24,.92) 0%,rgba(7,11,24,.55) 38%,rgba(7,11,24,0) 70%);pointer-events:none}
+.void > *:not(video):not(.void-shade){position:relative}
 .void h3{font-size:clamp(28px,4vw,40px);font-weight:900}
 .void p{color:var(--muted);max-width:44ch}
 .locked{display:grid;gap:12px}
 .lock{display:flex;align-items:center;gap:14px;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:14px 16px}
 .lock .num{font-family:var(--f-display);font-weight:900;font-size:20px;color:var(--gold);min-width:3ch}
+.lock .thumb{width:112px;aspect-ratio:16/9;max-width:30%;object-fit:cover;border-radius:10px;border:1px solid var(--line);flex:none;display:block}
+.lock{padding:10px 14px}
 .lock .what{flex:1;min-width:0}
 .lock .what b{display:block}
 .lock .what span{font-size:14px;color:var(--muted)}
@@ -493,16 +496,16 @@ main section[id]{scroll-margin-top:84px}
       </div>
 
       <div class="cvc-tabs" role="tablist" aria-label="Pick a scene">
-        <button type="button" role="tab" aria-selected="true" data-sl="0">&#129504; Power on</button>
+        <button type="button" role="tab" aria-selected="false" data-sl="0">&#129504; Power on</button>
         <button type="button" role="tab" aria-selected="false" data-sl="1">&#127769; Moon base</button>
-        <button type="button" role="tab" aria-selected="false" data-sl="2">&#127981; Hangar</button>
+        <button type="button" role="tab" aria-selected="true" data-sl="2">&#127981; Hangar</button>
         <button type="button" role="tab" aria-selected="false" data-sl="3">&#128752;&#65039; Space station</button>
       </div>
       <div class="cvc" id="cvc" style="--cut:50%">
-        <img id="cvcOff" src="media/sl-power-off.jpg" alt="">
-        <img id="cvcOn" class="after" src="media/sl-power-on.jpg" alt="">
-        <span class="tag l"><span id="cvcOffT">BRAINS OFF</span><small id="cvcOffS">Just cargo. Sits there. Waits for you.</small></span>
-        <span class="tag r"><span id="cvcOnT">BRAINS ON</span><small id="cvcOnS">Wide awake and ready to fly.</small></span>
+        <img id="cvcOff" src="media/sl-hangar-off.jpg" alt="">
+        <img id="cvcOn" class="after" src="media/sl-hangar-on.jpg" alt="">
+        <span class="tag l"><span id="cvcOffT">BRAINS OFF</span><small id="cvcOffS">Lights off. Nothing gets built.</small></span>
+        <span class="tag r"><span id="cvcOnT">BRAINS ON</span><small id="cvcOnS">Welding, loading, inspecting. Lunch is ready.</small></span>
         <span class="bar"></span><span class="knob" aria-hidden="true">&#129504;</span>
         <input type="range" min="0" max="100" value="50" aria-label="Drag to compare cargo and crew">
       </div>
@@ -550,17 +553,17 @@ main section[id]{scroll-margin-top:84px}
       </div>
       <div class="classified">
         <div class="void">
-          <canvas id="voidfx" aria-hidden="true"></canvas>
-          <div class="row" style="gap:8px"><span class="chip" style="background:#b48cff">50 PATRONS</span><span class="chip" id="voidcap" style="background:rgba(7,11,24,.7);color:#d9c8ff;border:1px solid #5a3f99" aria-live="off">The pull</span></div>
+          <video id="voidvid" class="void-vid" autoplay muted loop playsinline preload="auto" poster="media/void-poster.jpg" aria-hidden="true"><source src="media/void-ring.mp4" type="video/mp4"></video><div class="void-shade" aria-hidden="true"></div>
+          <div class="row" style="gap:8px"><span class="chip" style="background:#b48cff">50 PATRONS</span><span class="chip" id="voidcap" style="background:rgba(7,11,24,.7);color:#d9c8ff;border:1px solid #5a3f99" aria-live="off">Swallowed whole</span></div>
           <h3>VOID RING</h3>
           <p>Something is out there that you do not want to fly into. It swallows ships whole. Where it spits them out is anyone's guess.</p>
         </div>
         <div class="locked">
-          <div class="lock"><span class="num">25</span><div class="what"><b>A new critter</b><span>Somewhere out there, a ninth world is waiting.</span></div></div>
-          <div class="lock"><span class="num">100</span><div class="what"><b>Kerbal Olympics</b><span>Events, medals and bragging rights.</span></div></div>
-          <div class="lock"><span class="num">150</span><div class="what"><b>EVA Pack</b><span><span class="redact">classified details here</span></span></div></div>
-          <div class="lock"><span class="num">200</span><div class="what"><b>Base Life</b><span><span class="redact">classified details</span></span></div></div>
-          <div class="lock"><span class="num">250</span><div class="what"><b>Supply Shuttle</b><span>Plus a patron vote on mod #8.</span></div></div>
+          <div class="lock"><span class="num">25</span><img class="thumb" src="media/cs-critter.jpg" alt="A mystery critter in the dark" loading="lazy"><div class="what"><b>A new critter</b><span>Somewhere out there, a ninth world is waiting.</span></div></div>
+          <div class="lock"><span class="num">100</span><img class="thumb" src="media/cs-olympics.jpg" alt="The crew on the Olympics podium" loading="lazy"><div class="what"><b>Kerbal Olympics</b><span>Events, medals and bragging rights.</span></div></div>
+          <div class="lock"><span class="num">150</span><img class="thumb" src="media/cs-eva.jpg" alt="The Engineer with mystery gear" loading="lazy"><div class="what"><b>EVA Pack</b><span><span class="redact">classified details here</span></span></div></div>
+          <div class="lock"><span class="num">200</span><img class="thumb" src="media/cs-baselife.jpg" alt="The Chef peeking out of a habitat" loading="lazy"><div class="what"><b>Base Life</b><span><span class="redact">classified details</span></span></div></div>
+          <div class="lock"><span class="num">250</span><img class="thumb" src="media/cs-shuttle.jpg" alt="Loading the supply shuttle" loading="lazy"><div class="what"><b>Supply Shuttle</b><span>Plus a patron vote on mod #8.</span></div></div>
         </div>
       </div>
     </div>
@@ -655,7 +658,7 @@ const TIERS = { FREE:'var(--ok)', NEURON:'var(--pink)', SYNAPSE:'var(--orange)',
 const p = (f, cap, sq) => ({ src: 'media/' + f, cap, sq: !!sq });
 const MODS = [
  { id:'kerbal-brains', anims:[{src:'media/a-kb-1e2343ed.mp4',poster:'media/a-kb-1e2343ed.jpg',title:'Moon buggy jump'},{src:'media/anim-kb-rover.mp4',poster:'media/anim-kb-rover.jpg',title:'Rover run on the Mun'},{src:'media/anim-kb-greenhouse.mp4',poster:'media/anim-kb-greenhouse.jpg',title:'Greenhouse harvest'},{src:'media/anim-kb-flag.mp4',poster:'media/anim-kb-flag.jpg',title:'Flag on the snowy moon'},{src:'media/a-kb-881061ff.mp4',poster:'media/a-kb-881061ff.jpg',title:'Hauling the fuel hose'},{src:'media/a-kb-b3a463d9.mp4',poster:'media/a-kb-b3a463d9.jpg',title:'Brain power-up'},{src:'media/a-kb-41ca770f.mp4',poster:'media/a-kb-41ca770f.jpg',title:'Spacewalk repair'},{src:'media/a-kb-2ae2ee3b.mp4',poster:'media/a-kb-2ae2ee3b.jpg',title:'Victory high-five'},{src:'media/a-kb-2420aa3c.mp4',poster:'media/a-kb-2420aa3c.jpg',title:'Crew salute'},{src:'media/a-kb-a3ba9fad.mp4',poster:'media/a-kb-a3ba9fad.jpg',title:'Break time on the rocket'},{src:'media/a-kb-2093f385.mp4',poster:'media/a-kb-2093f385.jpg',title:'Floating in the cabin'},{src:'media/a-kb-8300d2b1.mp4',poster:'media/a-kb-8300d2b1.jpg',title:'Liftoff'},{src:'media/a-kb-62c5a3cd.mp4',poster:'media/a-kb-62c5a3cd.jpg',title:'Approved!'},{src:'media/a-kb-5d42629f.mp4',poster:'media/a-kb-5d42629f.jpg',title:'Spacewalk somersault'},{src:'media/a-kb-e86abb4b.mp4',poster:'media/a-kb-e86abb4b.jpg',title:'Ta-daa!'},{src:'media/a-kb-398b7074.mp4',poster:'media/a-kb-398b7074.jpg',title:'Forklift run'},{src:'media/a-kb-46562890.mp4',poster:'media/a-kb-46562890.jpg',title:'Marshalling the rocket'},{src:'media/a-kb-a69e878c.mp4',poster:'media/a-kb-a69e878c.jpg',title:'Surprise hug'},{src:'media/a-kb-b93906d9.mp4',poster:'media/a-kb-b93906d9.jpg',title:'Boarding the rocket'},{src:'media/a-kb-c2aeb34f.mp4',poster:'media/a-kb-c2aeb34f.jpg',title:'Wrench catch'},{src:'media/a-kb-a3f69b66.mp4',poster:'media/a-kb-a3f69b66.jpg',title:'Crew march'},{src:'media/a-kb-405f423e.mp4',poster:'media/a-kb-405f423e.jpg',title:'Hero entrance'},{src:'media/a-kb-edb5d94f.mp4',poster:'media/a-kb-edb5d94f.jpg',title:'Hangar doors open'},{src:'media/a-kb-49fab609.mp4',poster:'media/a-kb-49fab609.jpg',title:'Oops!'},{src:'media/a-kb-fb7a50e5.mp4',poster:'media/a-kb-fb7a50e5.jpg',title:'Pep talk'},{src:'media/a-kb-01470cfd.mp4',poster:'media/a-kb-01470cfd.jpg',title:'The blueprint'},{src:'media/a-kb-892c649d.mp4',poster:'media/a-kb-892c649d.jpg',title:'Cargo crates burst open'},{src:'media/a-kb-147f4fb9.mp4',poster:'media/a-kb-147f4fb9.jpg',title:'Lunch bell'},{src:'media/a-kb-dc59ab89.mp4',poster:'media/a-kb-dc59ab89.jpg',title:'The crates wake up'},{src:'media/a-kb-1f869580.mp4',poster:'media/a-kb-1f869580.jpg',title:'Out of the crates'},{src:'media/a-kb-12edb202.mp4',poster:'media/a-kb-12edb202.jpg',title:'Station console'}], loop:'a-kb-1e2343ed', crew:'hero', role:'The Hero', a:'KERBAL ', b:'BRAINS', acc:'#ff5fa8', tier:'NEURON', tagline:'Kerbals that think for themselves',
-   cover:'media/kb-lunch.jpg', banner:'media/kb-jetrace.jpg',
+   cover:'media/kb-lunch.jpg', banner:'media/kb-crewday.jpg', bannerPos:'center 30%',
    features:['Kerbals walk, work and chat on their own','A busy Space Center ground crew with trucks and forklifts','Give orders: dig, build, drive the rover','Cinematic camera for launch-day shots','Works hand in hand with Iron Root colonies'],
    photos:[p('kb-lunch.jpg','Lunch truck at the Space Center'),p('kb-jetrace.jpg','Racing in orbit'),p('kb-firedrill.jpg','Fire drill at the pad'),p('kb-hangar.jpg','Welding in the hangar'),p('kb-rover.jpg','Rover run on the Mun'),p('kb-mine.jpg','Mining shift'),p('kb-greenhouse.jpg','Greenhouse harvest'),p('kb-smelter.jpg','Smelter duty'),p('kb-photo.jpg','Crew photo'),p('kb-dance.jpg','Victory dance'),p('kb-station.jpg','Lunch on the station'),p('kb-colony.jpg','Colony on Duna')],
    trailers:[{src:'media/kb_promo_720.mp4',poster:'media/kb_promo_poster.jpg',title:'Kerbal Brains promo',yt:'https://youtu.be/JVYGYjZi2-g'}],
@@ -663,7 +666,7 @@ const MODS = [
    gameplay:[], guide:'guides/kerbal-brains/index.html', guideName:'Kerbal Brains Field Manual',
    guideHas:['Giving orders to your crew','Ground crew and vehicles at the Space Center','Camera controls and settings'] },
  { id:'iron-root', anims:[{src:'media/a-ir-f77eba8e.mp4',poster:'media/a-ir-f77eba8e.jpg',title:'Watering the seedlings'},{src:'media/anim-ir-build.mp4',poster:'media/anim-ir-build.jpg',title:'Building the dome colony'},{src:'media/anim-ir-pickaxe.mp4',poster:'media/anim-ir-pickaxe.jpg',title:'Mining shift'},{src:'media/a-ir-c97f2caa.mp4',poster:'media/a-ir-c97f2caa.jpg',title:'The colony at night'},{src:'media/a-ir-d1e438d1.mp4',poster:'media/a-ir-d1e438d1.jpg',title:'Pickaxe swing'}], loop:'a-ir-f77eba8e', crew:'miner', role:'The Miner', a:'IRON ', b:'ROOT', acc:'#ff8a3d', tier:'SYNAPSE', tagline:'Grow. Mine. Survive.',
-   cover:'media/ir-colony.jpg', banner:'media/ir-icemoon.jpg',
+   cover:'media/ir-colony.jpg', banner:'media/ir-redcolony.jpg', bannerPos:'center 30%',
    features:['Build colonies, greenhouses and habitats','Walk-in mines and smelters turn ore into metal','Farm cities that feed your crew','Colony Express drops a colony anywhere','A job board that keeps every Kerbal busy','Outworld Colonies add-on packs included at Synapse'],
    photos:[p('ir-colony.jpg','Colony on Duna'),p('ir-mine.jpg','Open-pit mine and smelter'),p('ir-icemoon.jpg','Ice moon domes'),p('ir-landing.jpg','Colony Express landing'),p('ir-builders.jpg','Builders at work'),p('ir-rover.jpg','Supply rover'),p('ir-flag.jpg','Planting the flag'),p('ir-home.jpg','Home base')],
    trailers:[], clips:[{src:'media/clip-ir-mine.mp4',poster:'media/clip-ir-mine.jpg',title:'Running the mine and smelter'},{src:'media/clip-ir-colony.mp4',poster:'media/clip-ir-colony.jpg',title:'The colony at night'}],
@@ -683,7 +686,7 @@ const MODS = [
    trailers:[], clips:[], gameplay:[], guide:'guides/hullworks/index.html', guideName:'HullWorks Paint Shop Manual',
    guideHas:['Painting a whole ship','Saving liveries','Stickers and custom logos'] },
  { id:'glow-up', anims:[{src:'media/a-gu-4275b4b3.mp4',poster:'media/a-gu-4275b4b3.jpg',title:'Instant glow-up: pink to gold'},{src:'media/anim-gu-selfie.mp4',poster:'media/anim-gu-selfie.jpg',title:'Suit-up selfie'},{src:'media/a-gu-4219814e.mp4',poster:'media/a-gu-4219814e.jpg',title:'Group photo'}], loop:'a-gu-4275b4b3', crew:'groundcrew', role:'The Ground Crew', a:'GLOW-', b:'UP', acc:'#c77dff', tier:'NEURON', tagline:'New suits, patches and Photo Mode',
-   cover:'media/gu-lockerroom.jpg', banner:'media/gu-selfie.jpg',
+   cover:'media/gu-lockerroom.jpg', banner:'media/gu-runway.jpg', bannerPos:'center 25%',
    features:['42 suits in 5 tabs: Planets, Jobs, Fun, Team and Colony','Wardrobe (F8): change outfits on EVA anywhere, with a puff of smoke','New hires dress in their job colors automatically','Glowing helmet lights and matching backpacks in every suit','40 mission patches you can use as flags','Photo Mode (F7): freeze time, pose and snap at up to 4x size'],
    photos:[p('gu-lockerroom.jpg','The locker room'),p('gu-selfie.jpg','Moon selfie'),p('gu-director.jpg','Photo Mode director'),p('gu-quickchange.jpg','Quick change')],
    trailers:[], clips:[{src:'media/clip-gu-crew.mp4',poster:'media/clip-gu-crew.jpg',title:'Crew photo and dance'}],
@@ -873,7 +876,7 @@ lb.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouc
 
 /* void ring: three rotating scenes (the pull, swallowed, something in there) */
 (function(){
-  const c=document.getElementById('voidfx'); const ctx=c.getContext('2d'); if(!ctx) return;
+  const c=document.getElementById('voidfx'); if(!c) return; const ctx=c.getContext('2d'); if(!ctx) return;
   const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const cap=document.getElementById('voidcap');
   const dots=[...Array(160)].map(()=>({r:40+Math.random()*280,a:Math.random()*6.28,s:.002+Math.random()*.006,z:Math.random()}));
@@ -1026,7 +1029,7 @@ function show(i){var x=SL[i];off.src='media/sl-'+x.k+'-off.jpg';on.src='media/sl
  document.getElementById('cvcOffT').textContent=x.o[0];document.getElementById('cvcOffS').textContent=x.o[1];
  document.getElementById('cvcOnT').textContent=x.n[0];document.getElementById('cvcOnS').textContent=x.n[1];
  document.querySelectorAll('.cvc-tabs button').forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');});}
-show(0);
+show(2);
 document.querySelector('.cvc-tabs').addEventListener('click',function(e){var b=e.target.closest('button[data-sl]');if(b)show(+b.dataset.sl);});
 })();
 </script>

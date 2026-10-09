@@ -1,0 +1,411 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kerbal Jump Gate Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a mission manual. Full-bleed art plates alternate with narrow reading columns; a rainbow lane stripe threads the page. */
+:root {
+  --void: #070a12;        /* deep space background */
+  --hull: #0f1524;        /* panels */
+  --hull-2: #161f33;      /* raised panels, borders */
+  --ink: #e9eef8;         /* main text */
+  --dim: #9aa6bf;         /* secondary text */
+  --swirl: #3fd4ff;       /* gate cyan, the accent */
+  --flare: #ff9a3c;       /* Kerbal Brains orange, used sparingly */
+  --ok: #5cf08a;
+  --warn: #ffd34d;
+  --display: "Chakra Petch", "Bahnschrift", "Segoe UI", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+  --r: #ff2a2a; --o: #ff8c1a; --y: #ffe226; --g: #33ff4d; --b: #338cff; --i: #5940ff; --v: #bf4dff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+body { background: var(--void); color: var(--ink); font: 400 17px/1.6 var(--body); margin: 0; }
+a { color: var(--swirl); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--swirl); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; display: block; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.1; text-wrap: balance; margin: 0; }
+h2 { font-size: clamp(28px, 4.2vw, 42px); font-weight: 700; letter-spacing: 0.01em; }
+h3 { font-size: 21px; font-weight: 600; }
+p { margin: 0; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+.col { max-width: 68ch; }
+.eyebrow { font: 600 13px/1 var(--display); letter-spacing: 0.18em; text-transform: uppercase; color: var(--swirl); }
+.lane-stripe { height: 6px; background: linear-gradient(90deg, var(--r), var(--o), var(--y), var(--g), var(--b), var(--i), var(--v)); }
+kbd, .key { font: 500 0.82em var(--mono); background: var(--hull-2); border: 1px solid #2a3654; border-bottom-width: 3px; border-radius: 5px; padding: 1px 7px; white-space: nowrap; }
+.ui { font: 600 0.92em var(--display); color: var(--swirl); white-space: nowrap; }
+
+/* Hero */
+.hero { position: relative; isolation: isolate; overflow: hidden; }
+.hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(7,10,18,0.15) 0%, rgba(7,10,18,0.35) 45%, var(--void) 100%); }
+.hero .wrap { padding-block: clamp(90px, 16vw, 200px) 40px; display: grid; gap: 18px; }
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand img { width: 64px; height: 64px; }
+.brand span { font: 600 13px/1.3 var(--display); letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
+.hero h1 { font-size: clamp(46px, 9vw, 104px); font-weight: 700; letter-spacing: -0.01em; text-shadow: 0 0 40px rgba(63,212,255,0.35); }
+.hero .lede { font-size: clamp(18px, 2.2vw, 22px); max-width: 52ch; color: var(--ink); }
+.ver { font: 500 13px var(--mono); color: var(--dim); }
+.ver b { color: var(--ok); font-weight: 500; }
+
+/* Quick start strip */
+.quick { background: var(--hull); border-block: 1px solid var(--hull-2); }
+.quick .wrap { padding-block: 28px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.qs { display: grid; gap: 6px; align-content: start; }
+.qs .n { font: 700 30px/1 var(--display); color: var(--swirl); }
+.qs h3 { font-size: 18px; }
+.qs p { font-size: 15px; color: var(--dim); }
+@media (max-width: 820px) { .quick .wrap { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 460px) { .quick .wrap { grid-template-columns: 1fr; } }
+
+/* Contents */
+.toc { padding-block: 34px 6px; }
+.toc ol { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.toc a { display: inline-block; text-decoration: none; color: var(--ink); background: var(--hull); border: 1px solid var(--hull-2); padding: 7px 13px; border-radius: 999px; font: 600 14px var(--display); letter-spacing: 0.03em; }
+.toc a:hover { border-color: var(--swirl); color: var(--swirl); }
+
+/* Sections */
+section.chap { padding-block: 64px 16px; scroll-margin-top: 10px; }
+.chap-head { display: grid; gap: 10px; margin-bottom: 26px; }
+.split { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 34px; align-items: start; }
+.split.flip > :first-child { order: 2; }
+@media (max-width: 860px) { .split, .split.flip { grid-template-columns: 1fr; } .split.flip > :first-child { order: 0; } }
+.plate { margin: 0; }
+.plate img { border-radius: 10px; border: 1px solid var(--hull-2); width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.plate figcaption { font-size: 14px; color: var(--dim); margin-top: 8px; }
+.text { display: grid; gap: 14px; min-width: 0; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: s; }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 12px; align-items: start; }
+.steps > li::before { content: counter(s); font: 700 15px/30px var(--display); text-align: center; width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--swirl); color: var(--swirl); }
+.bul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.note { border-left: 3px solid var(--flare); background: rgba(255,154,60,0.08); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 15.5px; }
+.tip { border-left: 3px solid var(--ok); background: rgba(92,240,138,0.07); padding: 10px 14px; border-radius: 0 8px 8px 0; font-size: 15.5px; }
+
+/* Rainbow lane diagram */
+.diagram { background: var(--hull); border: 1px solid var(--hull-2); border-radius: 12px; padding: 18px; overflow-x: auto; }
+.diagram svg { display: block; width: 100%; min-width: 620px; height: auto; }
+.diagram text { font-family: var(--display); }
+
+/* HUD mock */
+.hud { display: flex; gap: 16px; align-items: center; background: #05070d; border: 1px solid var(--hull-2); border-radius: 12px; padding: 16px; flex-wrap: wrap; }
+.hud svg { width: 120px; height: 120px; flex: none; }
+.hud .read { font: 600 13px/1.6 var(--display); color: #bfe9ff; min-width: 0; }
+.hud .big { font-size: 22px; color: var(--ok); letter-spacing: 0.03em; }
+.hud .lock { color: var(--swirl); font-size: 16px; }
+
+/* Dial mock */
+.dial { background: #05070d; border: 1px solid var(--hull-2); border-radius: 12px; padding: 14px; font: 600 14px var(--display); display: grid; gap: 7px; }
+.dial .t { color: var(--dim); letter-spacing: 0.08em; text-transform: uppercase; font-size: 12px; }
+.dial .row { display: grid; grid-template-columns: 110px minmax(0, 1fr); gap: 10px; align-items: center; }
+.dial .btn { background: var(--hull-2); border: 1px solid #2a3654; border-radius: 6px; padding: 4px 8px; text-align: center; }
+.dial .on { color: var(--ok); }
+.dial .off { color: #6b7790; }
+.dial .sel .btn { border-color: var(--ok); color: var(--ok); }
+
+/* Chain */
+.chain { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font: 600 14px var(--display); }
+.chain span { padding: 6px 11px; border-radius: 999px; border: 1px solid var(--hull-2); background: var(--hull); }
+.chain i { color: var(--dim); font-style: normal; }
+.chain .start { border-color: var(--ok); color: var(--ok); }
+
+/* Feature cards */
+.feats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+@media (max-width: 860px) { .feats { grid-template-columns: 1fr; } }
+.feat { display: grid; gap: 10px; align-content: start; }
+.feat img { border-radius: 10px; border: 1px solid var(--hull-2); aspect-ratio: 16 / 9; object-fit: cover; width: 100%; }
+.feat p { font-size: 15.5px; color: var(--dim); }
+
+/* Settings table */
+.tbl { overflow-x: auto; border: 1px solid var(--hull-2); border-radius: 10px; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15.5px; }
+th, td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--hull-2); vertical-align: top; }
+th { font: 600 13px var(--display); letter-spacing: 0.08em; text-transform: uppercase; color: var(--dim); background: var(--hull); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-family: var(--display); font-weight: 600; white-space: nowrap; }
+
+/* FAQ */
+details { border: 1px solid var(--hull-2); border-radius: 10px; background: var(--hull); }
+details + details { margin-top: 10px; }
+summary { cursor: pointer; padding: 13px 16px; font: 600 17px var(--display); list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "+"; color: var(--swirl); font-size: 22px; line-height: 1; }
+details[open] summary::after { content: "–"; }
+details .a { padding: 0 16px 14px; display: grid; gap: 8px; color: var(--ink); }
+
+footer { margin-top: 70px; border-top: 1px solid var(--hull-2); }
+footer .wrap { padding-block: 30px 46px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; color: var(--dim); font-size: 14px; }
+footer .brand img { width: 44px; height: 44px; }
+</style>
+
+<header class="hero">
+  <img src="img/hero.jpg" alt="A Kerbal Jump Gate in orbit with its swirl glowing">
+  <div class="wrap">
+    <div class="brand"><img src="img/badge.png" alt=""><span>A Kerbal Brains mod<br>for Kerbal Space Program 1.12</span></div>
+    <h1>Kerbal Jump Gate</h1>
+    <p class="lede">Fly through. Arrive anywhere. This guide shows you how to find a gate, line up, jump to another planet, and build gates of your own.</p>
+    <p class="ver">Guide for version <b>0.6.0</b></p>
+  </div>
+</header>
+<div class="lane-stripe" aria-hidden="true"></div>
+
+<section class="quick" aria-label="Quick start">
+  <div class="wrap">
+    <div class="qs"><span class="n">1</span><h3>Install</h3><p>Drop the <b>KerbalJumpGate</b> folder into your KSP <b>GameData</b> folder.</p></div>
+    <div class="qs"><span class="n">2</span><h3>Open the window</h3><p>In flight, click the ring button on the toolbar to open the Jump Gate window.</p></div>
+    <div class="qs"><span class="n">3</span><h3>Reach a gate</h3><p>Target the Kerbin Gate and fly to it, or press <span class="ui">Fly to</span>.</p></div>
+    <div class="qs"><span class="n">4</span><h3>Fly the rainbow</h3><p>Follow the rings in. The beam lines you up and the gate sends you to Duna.</p></div>
+  </div>
+</section>
+
+<nav class="wrap toc" aria-label="Contents">
+  <span class="eyebrow">In this guide</span>
+  <ol>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#first">Your first jump</a></li>
+    <li><a href="#lane">Rainbow lane &amp; beam</a></li>
+    <li><a href="#dial">The dial</a></li>
+    <li><a href="#build">Build a gate</a></li>
+    <li><a href="#career">Career</a></li>
+    <li><a href="#alive">What the gate does</a></li>
+    <li><a href="#settings">Settings</a></li>
+    <li><a href="#help">Help</a></li>
+  </ol>
+</nav>
+
+<main>
+  <section class="chap wrap" id="install">
+    <div class="chap-head"><span class="eyebrow">Step 1</span><h2>Install</h2></div>
+    <div class="split">
+      <div class="text">
+        <ol class="steps">
+          <li><div><b>Back up your saves first.</b> Copy the <b>saves</b> folder inside your KSP folder somewhere safe. It takes ten seconds and protects your games.</div></li>
+          <li><div>Close KSP. Unzip the download. Inside is a <b>GameData</b> folder with <b>KerbalJumpGate</b> in it.</div></li>
+          <li><div>Copy <b>KerbalJumpGate</b> into <b>Kerbal Space Program/GameData</b>. On Steam that is usually <span class="key">Steam/steamapps/common/Kerbal Space Program</span>.</div></li>
+          <li><div>Start KSP. You will see Jump Gate pictures and tips on the loading screen, like <i>“Loading Kerbal Jump Gate...”</i>. That means it worked.</div></li>
+        </ol>
+        <p class="tip">Works with stock planets and with planet packs like JNSQ. Gates place themselves at a safe height above any planet, so you never have to set numbers.</p>
+      </div>
+      <figure class="plate"><img src="img/burst.jpg" alt="A ship bursting out of a gate"><figcaption>Each gate links a planet into the network.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="first">
+    <div class="chap-head"><span class="eyebrow">Step 2</span><h2>Your first jump: Kerbin to Duna</h2>
+      <p class="col">Every game starts with two gates already in orbit: the <b>Kerbin Gate</b> and the <b>Duna Gate</b>. They are always on, glowing and pulsing, waiting for you.</p></div>
+    <div class="split flip">
+      <div class="text">
+        <ol class="steps">
+          <li><div>Launch any ship and get into orbit around Kerbin.</div></li>
+          <li><div>Open the Jump Gate window and go to the <span class="ui">Gates</span> tab. Next to Kerbin, press <span class="ui">Target</span>. You can also click the gate's ring marker on screen or in map view.</div></li>
+          <li><div>Now it works like any target: navball markers, and closest approach in map view. Plan a meeting with it like you would with a space station. MechJeb's rendezvous autopilot can fly it for you too.</div></li>
+          <li><div>Or press <span class="ui">Fly to</span>:
+            <ul class="bul">
+              <li><b>Sandbox:</b> it hops your ship straight to the start of the lane, lined up and rolling in.</li>
+              <li><b>Career:</b> get within 5 km first. Then the autopilot does the last part with real engine burns. Press <span class="ui">Stop</span> to take over any time.</li>
+            </ul></div></li>
+          <li><div>Fly through the swirl. Hold on. You come out at Duna, and the Duna Gate is already set to take you home.</div></li>
+        </ol>
+      </div>
+      <figure class="plate"><img src="img/network.jpg" alt="Gates linking planets across the solar system"><figcaption>Kerbin and Duna start linked. You build the rest.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="lane">
+    <div class="chap-head"><span class="eyebrow">Step 3</span><h2>The rainbow lane and the capture beam</h2>
+      <p class="col">Seven glowing rings float out from each side of every gate, like a runway in space. Red is the farthest out and violet is closest to the gate. They pulse inward toward the swirl, and the pulse speeds up as you get closer.</p></div>
+
+    <figure class="plate" style="margin-bottom:22px"><img src="img/lane.jpg" alt="A ship flying through rainbow rings toward a gate: red farthest out, violet nearest the gate"><figcaption>Fly in through red, orange, yellow, green, blue, indigo, then violet, and into the swirl.</figcaption></figure>
+    <div class="diagram" role="img" aria-label="Diagram of the approach: rings from red at 400 meters to violet at 70 meters, capture beam range 2 kilometers">
+      <svg viewBox="0 0 1000 250" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="sw" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff"/><stop offset="0.35" stop-color="#3fd4ff"/><stop offset="1" stop-color="#3a2a8f"/></radialGradient>
+        </defs>
+        <line x1="40" y1="125" x2="930" y2="125" stroke="#2a3654" stroke-width="2" stroke-dasharray="6 6"/>
+        <!-- beam range bracket -->
+        <path d="M 60 40 L 60 30 L 905 30 L 905 40" fill="none" stroke="#3fd4ff" stroke-width="2"/>
+        <text x="480" y="22" fill="#3fd4ff" font-size="16" text-anchor="middle" font-weight="600">Capture beam grabs you inside 2 km</text>
+        <!-- ship -->
+        <g transform="translate(60,125)"><path d="M -18 -7 L 10 -7 L 22 0 L 10 7 L -18 7 Z" fill="#e9eef8"/><path d="M -18 -7 L -26 -13 L -26 13 L -18 7 Z" fill="#9aa6bf"/></g>
+        <text x="60" y="165" fill="#9aa6bf" font-size="14" text-anchor="middle">You</text>
+        <!-- rings: x positions from 860 (gate) back: 70+55i scaled -->
+        <g fill="none" stroke-width="7">
+          <ellipse cx="410" cy="125" rx="9" ry="66" stroke="#ff2a2a"/>
+          <ellipse cx="485" cy="125" rx="9" ry="62" stroke="#ff8c1a"/>
+          <ellipse cx="560" cy="125" rx="9" ry="58" stroke="#ffe226"/>
+          <ellipse cx="635" cy="125" rx="9" ry="54" stroke="#33ff4d"/>
+          <ellipse cx="710" cy="125" rx="9" ry="50" stroke="#338cff"/>
+          <ellipse cx="785" cy="125" rx="9" ry="46" stroke="#5940ff"/>
+          <ellipse cx="860" cy="125" rx="9" ry="42" stroke="#bf4dff"/>
+        </g>
+        <!-- gate -->
+        <ellipse cx="925" cy="125" rx="16" ry="62" fill="url(#sw)" stroke="#9aa6bf" stroke-width="6"/>
+        <text x="925" y="215" fill="#e9eef8" font-size="15" text-anchor="middle" font-weight="600">Gate</text>
+        <text x="410" y="215" fill="#ff2a2a" font-size="14" text-anchor="middle">~400 m</text>
+        <text x="860" y="215" fill="#bf4dff" font-size="14" text-anchor="middle">~70 m</text>
+        <text x="635" y="240" fill="#9aa6bf" font-size="13" text-anchor="middle">Not to scale. The gate is 40 m wide.</text>
+      </svg>
+    </div>
+
+    <div class="split" style="margin-top:28px">
+      <div class="text">
+        <h3>Line up with the bullseye</h3>
+        <p>Within about 2.5 km, a target appears on your screen. The dot shows where your ship is compared with the center of the gate. Get it in the middle and point your nose at the gate.</p>
+        <div class="hud" aria-label="Example of the on-screen line-up display">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="57" fill="rgba(102,230,255,0.12)" stroke="#66e6ff" stroke-width="2"/>
+            <circle cx="60" cy="60" r="38" fill="none" stroke="#66e6ff" stroke-width="2"/>
+            <circle cx="60" cy="60" r="19" fill="none" stroke="#66e6ff" stroke-width="2"/>
+            <line x1="60" y1="4" x2="60" y2="116" stroke="#66e6ff" stroke-opacity=".5"/><line x1="4" y1="60" x2="116" y2="60" stroke="#66e6ff" stroke-opacity=".5"/>
+            <circle cx="66" cy="55" r="8" fill="#5cf08a"/>
+          </svg>
+          <div class="read"><div class="big">ALIGNED 92%</div><div>Off-center 2.1 m · Nose 3°</div><div>Closing 14.0 m/s · 640 m</div><div>Kerbin Gate &gt;&gt; Duna</div><div class="lock">CAPTURE BEAM LOCKED</div></div>
+        </div>
+        <ul class="bul">
+          <li><b>Green</b> means lined up. <b>Yellow</b> is close. <b>Red</b> means you would miss.</li>
+          <li>Your ship has to pass through the middle of the swirl to jump. Clipping the edge does nothing.</li>
+        </ul>
+      </div>
+      <div class="text">
+        <figure class="plate"><img src="img/beam.jpg" alt="Twin spiral strands of the capture beam pulling a ship to the gate"><figcaption>The capture beam: two spiral strands with sparkles flowing in.</figcaption></figure>
+        <h3>The capture beam</h3>
+        <p>Head toward the gate with your nose roughly pointed at it, inside 2 km. The beam locks on, turns off SAS, straightens your ship and reels you in to the center. <b>Hands off</b> while it works. It gives SAS back when you arrive.</p>
+        <p class="note">The beam lets go if you turn away, drift too far off to the side, or fly past. Back up and come in again.</p>
+      </div>
+    </div>
+
+    <div class="split flip" style="margin-top:34px">
+      <div class="text">
+        <h3>The jump and the arrival</h3>
+        <p>When you hit the swirl, the movie camera cuts to a side shot, the tunnel spins, and you pop out of the gate at the other planet. Press any key to skip the camera shot.</p>
+        <p>You arrive glowing in that planet's color, with energy trails peeling off your ship, while the gate breathes out a wave of light: orange at Duna, purple at Eve, teal at Laythe, icy white at Eeloo.</p>
+        <p class="tip">The gate you arrive at is already set to send you back the way you came.</p>
+      </div>
+      <figure class="plate"><img src="img/arrival.jpg" alt="A ship bursting out of a gate at Duna in an orange wave of energy"><figcaption>Arriving at Duna: everything turns Duna orange.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="dial">
+    <div class="chap-head"><span class="eyebrow">Step 4</span><h2>The dial: choose where you go</h2>
+      <p class="col">Each gate sends you to one other gate. The dial window opens by itself when you are within 3 km, or press <span class="ui">Dial</span> next to any gate in the Gates tab.</p></div>
+    <div class="split">
+      <div class="dial" aria-label="Example of the dial window">
+        <span class="t">Kerbin Gate: choose destination</span>
+        <div class="row"><span class="btn off">Moho</span><span class="off">Locked: build and deploy a gate there</span></div>
+        <div class="row"><span class="btn off">Eve</span><span class="off">Locked: build and deploy a gate there</span></div>
+        <div class="row"><span>Kerbin</span><span class="off">You are here</span></div>
+        <div class="row"><span class="btn off">Mun</span><span class="off">Locked: build and deploy a gate there</span></div>
+        <div class="row sel"><span class="btn">&gt; Duna</span><span class="on">SELECTED | ON: fly through!</span></div>
+        <div class="row"><span class="btn">Eeloo</span><span class="on">Linked</span></div>
+      </div>
+      <div class="text">
+        <ul class="bul">
+          <li><b>Linked</b> planets have a gate. Click one to pick it.</li>
+          <li><b>Locked</b> planets have no gate yet. The dial tells you what is needed.</li>
+          <li>Every planet and moon is on the list, including planet packs like JNSQ.</li>
+          <li>If you never pick anything: the Kerbin Gate goes to the newest gate you built, and every other gate goes to Kerbin.</li>
+          <li>The dial also has <span class="ui">Target this gate</span> and <span class="ui">Fly me to the gate</span> buttons.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="build">
+    <div class="chap-head"><span class="eyebrow">Step 5</span><h2>Build your own gate</h2>
+      <p class="col">The <b>Kerbal Jump Gate (Folded)</b> is a 3.75 m, 12 ton part. Fly it to a planet, deploy it in orbit, and that planet joins the network.</p></div>
+    <div class="split">
+      <div class="text">
+        <ol class="steps">
+          <li><div>In the VAB, open the <b>Utility</b> parts or search <span class="key">jump gate</span>.</div></li>
+          <li><div>Right-click the part and choose <span class="ui">Preview unfolded</span> to see a see-through, full-size 40 m gate around your rocket, swirl spinning. Click again to fold it away.</div></li>
+          <li><div>Put the gate on the <b>very top</b> (or very bottom) of the stack. It can't deploy from the middle.</div></li>
+          <li><div>Fly to the planet and get into a stable orbit, above the air and the mountains. Stop time warp.</div></li>
+          <li><div>Right-click the gate and choose <span class="ui">Deploy Jump Gate</span>. If it says no, it tells you why.</div></li>
+        </ol>
+      </div>
+      <figure class="plate"><img src="img/deploy.jpg" alt="The folded gate drifting away from a rocket and unfolding"><figcaption>The folded gate floats clear, then unfolds.</figcaption></figure>
+    </div>
+
+    <h3 style="margin-top:34px">Then watch the show</h3>
+    <div class="feats" style="margin-top:16px">
+      <div class="feat"><img src="img/deploy.jpg" alt=""><h3>1 · Drift clear</h3><p>The gate floats 300 m away from your ship on its little thrusters, so you can see the whole thing.</p></div>
+      <div class="feat"><img src="img/powerup.jpg" alt=""><h3>2 · Unfold and power up</h3><p>It unfolds into a 40 m ring. Then comes 15 seconds of rumble, racing lights, crackling arcs, a boom and a shockwave as the swirl ignites.</p></div>
+      <div class="feat"><img src="img/burst.jpg" alt=""><h3>3 · Always on</h3><p>The rainbow rings shoot out one by one. The gate stays on from then on, and Kerbin's gate now points to it.</p></div>
+    </div>
+    <p class="note" style="margin-top:18px">The movie camera follows the whole deploy. Press any key to skip straight to the finished gate.</p>
+  </section>
+
+  <section class="chap wrap" id="career">
+    <div class="chap-head"><span class="eyebrow">Career mode</span><h2>Unlocking the network</h2>
+      <p class="col">In career and science games, gates are something you earn.</p></div>
+    <div class="split">
+      <div class="text">
+        <ul class="bul">
+          <li><b>Research the tech.</b> The folded gate is a late part in the tech tree. The window shows which node you need.</li>
+          <li><b>Orbit a planet before you can gate it.</b> Reaching orbit there unlocks deploying a gate around it.</li>
+          <li><b>Link planets in order.</b> Each new planet needs the one before it.</li>
+          <li><b>Contracts.</b> Mission Control offers a contract for each next gate. You also get a bonus if you land on that planet after accepting.</li>
+          <li><b>Moons</b> can be gated any time once you have orbited them.</li>
+        </ul>
+      </div>
+      <div class="text">
+        <h3>The planet order</h3>
+        <div class="chain" aria-label="Career order">
+          <span class="start">Kerbin</span><i>+</i><span class="start">Duna</span><i>→</i><span>Eve</span><i>→</i><span>Moho</span><i>→</i><span>Dres</span><i>→</i><span>Jool</span><i>→</i><span>Laythe</span><i>→</i><span>Tylo</span><i>→</i><span>Eeloo</span>
+        </div>
+        <p class="tip">Kerbin and Duna start linked, so your first contract is a gate at Eve.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="alive">
+    <div class="chap-head"><span class="eyebrow">Know your gate</span><h2>What the gate does</h2></div>
+    <div class="feats">
+      <div class="feat"><img src="img/funnel.jpg" alt="A swirl funnel reaching out of the gate"><h3>It breathes</h3><p>Every 8 to 15 seconds a funnel of swirl reaches out of one side, spins, and gets sucked back in with a whoosh.</p></div>
+      <div class="feat"><img src="img/powerup.jpg" alt="The gate's lights blazing"><h3>Its lights chase</h3><p>The seven diamond lights chase round the ring, slowly cycling through every color of the rainbow.</p></div>
+      <div class="feat"><img src="img/hero.jpg" alt="A gate glowing in orbit"><h3>It has a heartbeat</h3><p>The swirl and ring flare on every beat, in time with the rainbow rings. The closer you get, the faster it beats.</p></div>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="settings">
+    <div class="chap-head"><span class="eyebrow">Your choice</span><h2>Settings</h2>
+      <p class="col">Open the Jump Gate window and choose the <span class="ui">Settings</span> tab.</p></div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>Setting</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td>Jump cost</td><td><b>Free</b>, or <b>Power (EC)</b>: each jump uses electric charge for every ton of ship, with a slider for how much.</td></tr>
+          <tr><td>Movie camera</td><td>The side-view camera shots on jumps and gate deploys. Any key skips a shot.</td></tr>
+          <tr><td>Capture beam</td><td>Turn the 2 km auto line-up on or off.</td></tr>
+          <tr><td>Rainbow approach rings</td><td>Show or hide the lane rings.</td></tr>
+          <tr><td>Texture quality</td><td>In <span class="key">GameData/KerbalJumpGate/Settings.cfg</span>: <b>High</b>, <b>Medium</b> or <b>Low</b>. Lower uses less memory. Restart KSP after changing it.</td></tr>
+          <tr><td>Dial planets</td><td>Also in Settings.cfg. <b>auto</b> lists every planet and moon, or write your own list.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="chap wrap" id="help">
+    <div class="chap-head"><span class="eyebrow">Stuck?</span><h2>Help</h2></div>
+    <details><summary>I flew through and nothing happened</summary><div class="a"><p>Go through the <b>middle</b> of the swirl, not the edge. Check the gate isn't still powering up (the dial shows a countdown). There must be at least one other gate to go to.</p></div></details>
+    <details><summary>The capture beam won't grab me</summary><div class="a"><p>Be inside 2 km, moving <b>toward</b> the gate, with your nose roughly pointed at it. If it let go, fly back out a few hundred meters and come in again.</p></div></details>
+    <details><summary>Deploy Jump Gate says no</summary><div class="a"><p>Read the message. Common ones: stop time warp, put the gate at the end of the stack, raise your orbit, or (career) research the tech, orbit the planet, or link the planet before it first.</p></div></details>
+    <details><summary>I closed the dial and it won't come back</summary><div class="a"><p>Open the Jump Gate window, Gates tab, and press <span class="ui">Dial</span> next to the gate.</p></div></details>
+    <details><summary>Where is the gate part in the VAB?</summary><div class="a"><p>In <b>Utility</b>, or search <span class="key">jump gate</span>. In career it appears once you research its tech node.</p></div></details>
+    <details><summary>The game feels slow near a gate</summary><div class="a"><p>Set <b>quality = Low</b> in Settings.cfg, or turn off the approach rings in the Settings tab.</p></div></details>
+    <details><summary>Sandbox: what is the Test bench?</summary><div class="a"><p>Sandbox games get a <span class="ui">Test bench</span> tab with shortcuts: go to orbit around any planet, spawn and deploy a folded gate, jump next to any gate, and try career rules without a career save.</p></div></details>
+  </section>
+</main>
+
+<footer>
+  <div class="lane-stripe" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="brand"><img src="img/badge.png" alt=""><span>Kerbal Jump Gate · a Kerbal Brains mod</span></div>
+    <span>Kerbal Space Program is a game by its owners. This is a fan-made mod.</span>
+  </div>
+</footer>
+
+<a id="kbHome" href="../../index.html" style="position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:99999;display:none;background:#ffb8d6;color:#4a0d2a;border:3px solid #d63f84;border-radius:999px;padding:10px 16px;font:700 14px/1 system-ui,sans-serif;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,.35)">&larr; All mods</a><script>try{if(window.top===window)document.getElementById('kbHome').style.display='block'}catch(e){}</script></body></html>

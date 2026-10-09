@@ -1,0 +1,1002 @@
+<!doctype html><html lang="en"><head><title>Kerbal Brains Mods</title><meta name="robots" content="noindex"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="apple-mobile-web-app-capable" content="yes"><style>html{color-scheme:dark}body{margin:0}[hidden]{display:none!important}img{max-width:100%}.yt-row{display:flex;justify-content:center;margin:14px 0 0}.yt-btn{display:inline-flex;align-items:center;gap:8px}
+
+/* ===== Brain power ===== */
+.hero-text{position:relative}
+#neuroBg{position:absolute;inset:-40px -10vw;width:calc(100% + 20vw);height:calc(100% + 80px);z-index:-1;pointer-events:none;opacity:.9}
+.hero-top{position:relative;z-index:0}
+h1 .p.neuro{position:relative;display:inline-block;cursor:pointer;color:var(--pink);animation:brainGlow 2.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+@keyframes brainGlow{0%,100%{text-shadow:0 0 10px rgba(255,95,168,.55),0 0 26px rgba(255,95,168,.35)}50%{text-shadow:0 0 18px rgba(255,95,168,.95),0 0 46px rgba(255,95,168,.7),0 0 80px rgba(34,229,255,.35)}}
+.zap{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px var(--pink),0 0 18px #fff;pointer-events:none;animation:zapOut .9s ease-out forwards;z-index:3}
+.zap.c{background:var(--cyan);box-shadow:0 0 10px var(--cyan),0 0 18px #fff}
+@keyframes zapOut{to{transform:translate(var(--dx),var(--dy)) scale(.15);opacity:0}}
+
+#brains{position:relative}
+#brains .sec-head h2 .p{color:var(--pink);text-shadow:0 0 18px rgba(255,95,168,.6)}
+.cvc{position:relative;max-width:980px;margin:22px auto 0;border-radius:var(--r);overflow:hidden;border:2px solid var(--line);aspect-ratio:16/9;max-width:100%;touch-action:pan-y;user-select:none;-webkit-user-select:none;background:#000}
+.cvc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.cvc .after{clip-path:inset(0 0 0 var(--cut,50%))}
+.cvc .tag{position:absolute;top:14px;font-family:var(--f-display);font-weight:900;letter-spacing:.08em;font-size:clamp(12px,1.6vw,16px);padding:8px 12px;border-radius:10px;background:rgba(7,11,24,.78);border:2px solid var(--line);max-width:44%}
+.cvc .tag small{display:block;font-family:var(--f-body);font-weight:500;letter-spacing:0;font-size:clamp(11px,1.2vw,13px);color:var(--muted);margin-top:3px}
+.cvc .tag.l{left:14px}.cvc .tag.r{right:14px;text-align:right;border-color:var(--btn-edge);color:var(--btn)}
+.cvc .bar{position:absolute;top:0;bottom:0;left:var(--cut,50%);width:4px;margin-left:-2px;background:var(--btn);box-shadow:0 0 16px var(--pink)}
+.cvc .knob{position:absolute;top:50%;left:var(--cut,50%);transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:var(--btn);border:3px solid var(--btn-edge);display:grid;place-items:center;font-size:26px;box-shadow:0 0 24px rgba(255,95,168,.7);pointer-events:none}
+.cvc input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;pointer-events:none}.cvc{cursor:ew-resize}
+@media (max-width:600px){.cvc .tag small{display:none}.cvc .knob{width:46px;height:46px;font-size:20px}}
+.cvc-hint{text-align:center;color:var(--muted);font-size:14px;margin-top:10px}
+
+.console{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:18px;margin-top:34px;align-items:start}
+@media (max-width:820px){.console{grid-template-columns:minmax(0,1fr)}}
+.ordermenu{background:#0b1226;border:2px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:6px}
+.ordermenu .om-h{font-family:var(--f-display);font-size:12px;letter-spacing:.12em;color:var(--muted);padding:6px 8px 8px;border-bottom:1px solid var(--line);margin-bottom:4px}
+.ordermenu button{all:unset;box-sizing:border-box;cursor:pointer;padding:11px 12px;border-radius:9px;font-size:15px;display:block;line-height:1.35;border:1px solid transparent;-webkit-tap-highlight-color:transparent}
+.ordermenu button b{color:var(--btn);font-weight:700}
+.ordermenu button:hover{background:var(--panel-2)}
+.ordermenu button[aria-pressed="true"]{background:rgba(255,95,168,.14);border-color:var(--btn-edge)}
+.ordermenu button:focus-visible{outline:3px solid var(--cyan)}
+.screen{background:var(--panel);border:2px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.screen video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#000}
+.screen .log{padding:14px 16px 16px;display:grid;gap:6px}
+.screen .log .who{font-family:var(--f-display);font-size:12px;letter-spacing:.1em;color:var(--cyan)}
+.screen .log p{margin:0;font-size:16px}
+.screen .log .typing::after{content:"\25CF\25CF\25CF";letter-spacing:2px;color:var(--pink);animation:blink 1s steps(2) infinite;margin-left:6px}
+@keyframes blink{50%{opacity:.2}}
+
+.can-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:34px}
+@media (max-width:900px){.can-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.can-grid{grid-template-columns:minmax(0,1fr)}}
+.can{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 16px 14px;min-width:0}
+.can h3{font-size:17px;display:flex;gap:10px;align-items:center;margin:0 0 8px}
+.can h3 .ic{width:34px;height:34px;flex:0 0 34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,95,168,.14);border:1px solid var(--btn-edge);font-size:18px}
+.can ul{margin:0;padding-left:18px;color:var(--muted);font-size:14px;display:grid;gap:3px}
+.can .with{display:inline-block;margin-top:8px;font-size:12px;color:var(--orange);font-weight:600}
+.only{margin:30px auto 0;text-align:center;font-family:var(--f-display);font-weight:900;font-size:clamp(20px,3vw,30px);letter-spacing:.02em}
+.only .p{color:var(--pink);text-shadow:0 0 18px rgba(255,95,168,.6)}
+
+/* crew thoughts + stats */
+.mate .think{position:absolute;left:8px;right:8px;top:-14px;z-index:2;background:#fff;color:#2a1030;font-size:12px;font-weight:600;line-height:1.25;padding:7px 9px;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,.4);text-align:center;transition:opacity .35s,transform .35s;min-height:32px;display:flex;align-items:center;justify-content:center}
+.mate .think::before,.mate .think::after{content:"";position:absolute;background:#fff;border-radius:50%}
+.mate .think::before{width:10px;height:10px;bottom:-8px;left:30%}
+.mate .think::after{width:6px;height:6px;bottom:-15px;left:26%}
+.mate .think.fade{opacity:0;transform:translateY(-4px)}
+.crew{padding-top:22px}
+.mate .stats{display:grid;gap:4px;margin-top:8px;text-align:left}
+.mate .stat{display:grid;grid-template-columns:66px minmax(0,1fr);gap:4px;align-items:center;font-size:10px;color:var(--muted);letter-spacing:0}
+.mate .stat i{display:block;height:6px;border-radius:4px;background:var(--line);overflow:hidden;position:relative}
+.mate .stat i::after{content:"";position:absolute;inset:0;width:var(--v);background:linear-gradient(90deg,var(--btn-edge),var(--btn));border-radius:4px;transform-origin:left;animation:fillIn 1.2s ease-out both}
+@keyframes fillIn{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+dialog.kbm[open]{position:fixed;inset:0;margin:auto;z-index:1000;display:block;box-shadow:0 0 0 100vmax rgba(3,6,16,.78)}
+dialog#guideView.kbm[open]{display:flex;z-index:1100;box-shadow:none;margin:0}
+dialog.kbm:not([open]){display:none}
+html.kb-lock,html.kb-lock body{overflow:hidden}
+.bay video,.bay img,.mini video,.mini img,.mate img,.bay .shot,.mini .mshot{pointer-events:none;-webkit-touch-callout:none}
+.bay,.mini,.mate,.tier{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+main section[id]{scroll-margin-top:84px}
+</style></head><body>
+<script>
+(function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
+function fresh(){try{var ds=document.getElementsByTagName('dialog');for(var i=0;i<ds.length;i++){if(ds[i].hasAttribute('open')&&ds[i].close)ds[i].close();}}catch(e){}
+ document.documentElement.classList.remove('kb-lock');var hm=document.querySelector('.holdmenu');if(hm)hm.remove();
+ if(location.hash){try{history.replaceState(null,'',location.pathname+location.search);}catch(e){}}window.scrollTo(0,0);}
+window.addEventListener('pageshow',function(e){fresh();});
+document.addEventListener('DOMContentLoaded',function(){fresh();setTimeout(function(){window.scrollTo(0,0);},50);});
+})();
+</script>
+<script>
+/* iPad tap fix: a quick tap on a card or control fires right away on finger-up */
+(function(){var SEL='.bay,.mini,.tier,.mate,.go,.ordermenu button,#sTabs button,#sClose,.holdmenu button,[data-guide],.fl-btn,.btn,.gal button,.lb button';
+var st=null,last=null,lastT=0,lastX=0,lastY=0;
+document.addEventListener('pointerdown',function(e){if(e.pointerType!=='touch'){st=null;return;}var el=e.target.closest&&e.target.closest(SEL);st=el?{el:el,x:e.clientX,y:e.clientY,t:Date.now()}:null;},true);
+document.addEventListener('pointermove',function(e){if(st&&(Math.abs(e.clientX-st.x)>12||Math.abs(e.clientY-st.y)>12))st=null;},true);
+document.addEventListener('pointercancel',function(){st=null;},true);
+document.addEventListener('pointerup',function(e){if(!st||e.pointerType!=='touch')return;var o=st;st=null;if(Date.now()-o.t>450)return;
+ var el=o.el;if(el.tagName==='A'&&el.href&&!el.hasAttribute('data-guide')&&!/^#/.test(el.getAttribute('href')||''))return; /* real links: let the browser handle */
+ last=el;lastT=Date.now();lastX=e.clientX;lastY=e.clientY;e.preventDefault();el.click();},true);
+document.addEventListener('click',function(e){if(!e.isTrusted)return;if(last&&Date.now()-lastT<800&&Math.abs(e.clientX-lastX)<30&&Math.abs(e.clientY-lastY)<30){e.preventDefault();e.stopImmediatePropagation();}},true);
+})();
+</script>
+<title>Kerbal Brains Mods</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Lexend:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: launch-night sales page. Video hero, a hangar grid of six mod bays that open into tabbed sheets
+   (Overview / Photos / Videos / Guide), tier ladder, "classified" coming-soon bay, community dock.
+   One committed dark look (the Kerbal Brains brand): ink ground, cyan + orange family rule, per-mod accents. */
+:root{
+  color-scheme: dark;
+  --ink:#070b18; --panel:#10172e; --panel-2:#172042; --line:#26315c;
+  --text:#eef2ff; --muted:#a9b3da; --cyan:#22e5ff; --orange:#ff7a1a; --pink:#ff5fa8; --gold:#ffc74d; --ok:#4ade80;
+  --on-accent:#0b1020; --btn:#ffb8d6; --btn-edge:#d63f84;
+  --f-display:"Orbitron","Segoe UI",system-ui,sans-serif;
+  --f-body:"Lexend","Segoe UI",system-ui,sans-serif;
+  --r:18px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{background:var(--ink);color:var(--text);font-family:var(--f-body);font-size:17px;line-height:1.55;
+  background-image:radial-gradient(1px 1px at 12% 18%,rgba(255,255,255,.55) 50%,transparent 51%),radial-gradient(1px 1px at 64% 72%,rgba(255,255,255,.4) 50%,transparent 51%),radial-gradient(1.5px 1.5px at 38% 40%,rgba(255,255,255,.6) 50%,transparent 51%),radial-gradient(1px 1px at 86% 12%,rgba(255,255,255,.5) 50%,transparent 51%);
+  background-size:380px 380px,460px 460px,540px 540px,420px 420px;background-attachment:fixed}
+a{color:var(--cyan)}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:3px;border-radius:8px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:.02em;line-height:1.08}
+p{margin:0}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,4vw)}
+section{padding-block:clamp(48px,8vw,88px)}
+.eyebrow{font-family:var(--f-display);font-weight:800;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--cyan)}
+.sec-head{display:grid;gap:10px;margin-bottom:28px}
+.sec-head h2{font-size:clamp(28px,4.4vw,44px)}
+.sec-head p{color:var(--muted);max-width:60ch}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 24px;border-radius:999px;font-family:var(--f-display);font-weight:900;font-size:15px;letter-spacing:.08em;text-decoration:none;border:0;cursor:pointer;color:#4a0d2a;background:var(--btn);border:3px solid var(--btn-edge);box-shadow:inset 0 -3px 0 rgba(160,30,80,.35),0 6px 18px -6px rgba(255,95,168,.55)}
+.btn.ghost{background:transparent;color:var(--text);border:2px solid var(--line);box-shadow:none}
+.btn:hover{background:#ffcde2}.btn:active{transform:translateY(1px)}
+.chip{display:inline-block;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.12em;padding:6px 11px;border-radius:999px;color:var(--on-accent);white-space:nowrap}
+
+/* nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,11,24,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;gap:16px;min-height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font-family:var(--f-display);font-weight:900;letter-spacing:.06em;font-size:16px}
+.brand img{width:38px;height:38px}
+.nav nav{display:flex;gap:22px;margin-left:auto}
+.nav nav a{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
+.nav nav a:hover{color:var(--text)}
+.nav .btn{min-height:42px;padding:8px 18px;font-size:13px}
+@media (max-width:760px){.nav nav{display:none}.nav .btn{margin-left:auto}}
+
+/* hero: the crew poster as the backdrop */
+.hero{position:relative;overflow-x:clip;background:radial-gradient(ellipse at 50% 32%,rgba(7,11,24,.9) 0%,rgba(7,11,24,.72) 45%,rgba(7,11,24,.45) 100%),linear-gradient(0deg,var(--ink) 0%,rgba(7,11,24,0) 30%),url(media/poster.jpg) center 30%/cover no-repeat}
+@media (max-width:860px){.hero{background:linear-gradient(0deg,var(--ink) 8%,rgba(7,11,24,.82) 60%,rgba(7,11,24,.55) 100%),url(media/poster.jpg) center top/cover no-repeat}}
+.hero .wrap{display:grid;gap:clamp(28px,4vw,48px);padding-block:clamp(8px,2vw,24px)}
+.hero-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,3.2fr) minmax(0,1fr);align-items:center;gap:clamp(8px,2vw,24px)}
+.hero-text{text-align:center;display:flex;flex-direction:column;align-items:center}
+.hero-text .lede{margin-inline:auto;max-width:46ch}
+.hero-text .ctas{justify-content:center}
+.hero-text .facts{justify-content:center}
+.floater{display:flex;justify-content:center}
+.floater img{width:100%;max-width:250px;filter:drop-shadow(0 0 26px rgba(255,95,168,.45)) drop-shadow(0 24px 30px rgba(0,0,0,.55));animation:floatA 7s ease-in-out infinite}
+.floater.left img{animation-name:floatB;animation-duration:8.5s}
+@keyframes floatA{0%{transform:translateY(0) rotate(8deg)}50%{transform:translateY(-22px) rotate(-4deg)}100%{transform:translateY(0) rotate(8deg)}}
+@keyframes floatB{0%{transform:translateY(-10px) rotate(-10deg)}50%{transform:translateY(16px) rotate(3deg)}100%{transform:translateY(-10px) rotate(-10deg)}}
+.hero .player{max-width:980px;width:100%;margin-inline:auto}
+@media (max-width:760px){.hero-top{grid-template-columns:minmax(0,1fr);position:relative}.floater{position:absolute;top:-6px;width:84px;z-index:2;opacity:.95}.floater.left{left:0}.floater.right{right:0}.hero-text{position:relative;z-index:1;padding-top:96px}}
+.hero h1{font-size:clamp(40px,6.4vw,76px);font-weight:900}
+.hero h1 .p{color:var(--pink)} .hero h1 .c{color:var(--cyan)}
+.hero .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);margin-top:18px;max-width:34ch}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .note{margin-top:14px;color:var(--muted);font-size:15px}
+.player{position:relative;border-radius:22px;overflow:hidden;border:2px solid var(--line);background:#000;box-shadow:0 30px 80px -30px rgba(34,229,255,.35)}
+.player video{display:block;width:100%;aspect-ratio:16/9;max-width:100%;background:#000}
+.player .tag{position:absolute;left:14px;top:14px;pointer-events:none}
+@media (max-width:860px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.hero .lede{max-width:none}}
+
+/* stat strip: real numbers from the suite */
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:34px;padding-top:22px;border-top:1px solid var(--line)}
+.facts div{font-size:14px;color:var(--muted)} .facts b{display:block;font-family:var(--f-display);font-size:24px;color:var(--text)}
+
+/* mod bays */
+.bays{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:980px){.bays{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.bays{grid-template-columns:minmax(0,1fr)}}
+.bay{all:unset;box-sizing:border-box;display:flex;flex-direction:column;background:var(--panel);border:2px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
+.bay:hover{transform:translateY(-3px);border-color:var(--acc)}
+.bay:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.bay .shot{position:relative;aspect-ratio:16/9;max-width:100%;overflow:hidden}
+.bay .shot img{width:100%;height:100%;object-fit:cover;display:block}
+.bay .shot video.live{width:100%;height:100%;object-fit:cover;display:block}
+.bay .shot .livetag{position:absolute;right:12px;bottom:12px;font-family:var(--f-display);font-weight:800;font-size:10px;letter-spacing:.14em;color:#fff;background:rgba(7,11,24,.72);padding:5px 9px;border-radius:999px}
+.bay .shot .livetag{color:#ff6b6b}
+.bay .shot img.drift{animation:drift 14s ease-in-out infinite alternate;transform-origin:60% 40%}
+@keyframes drift{from{transform:scale(1)}to{transform:scale(1.12) translate(-2%,1%)}}
+.bay .shot .chip{position:absolute;right:12px;top:12px}
+.bay .top{position:relative}
+.bay .mascot{position:absolute;left:14px;bottom:-34px;width:76px;height:76px;border-radius:50%;border:3px solid var(--acc);object-fit:cover;background:#0d1f5c;box-shadow:0 8px 20px rgba(0,0,0,.45)}
+.bay .guide-by{font-size:13px;color:var(--muted);margin-left:84px;margin-top:-6px;min-height:30px;display:flex;align-items:center}
+.bay .guide-by b{color:var(--acc);margin-left:4px}
+.bay .meta{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.bay h3{font-size:24px;font-weight:900}
+.bay h3 span{color:var(--acc)}
+.bay .tagline{color:var(--muted);font-size:15px}
+.bay .counts{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;font-size:13px;color:var(--muted)}
+.bay .counts b{color:var(--text)}
+.bay .open{margin-top:10px;font-family:var(--f-display);font-weight:800;font-size:13px;letter-spacing:.1em;color:var(--acc)}
+
+/* meet the crew */
+.crew{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px}
+@media (max-width:1040px){.crew{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:560px){.crew{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.mate{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;background:#0d1f5c;border:2px solid var(--line);border-radius:16px;overflow:hidden;text-align:center;transition:transform .15s ease,border-color .15s ease}
+.mate:hover{transform:translateY(-4px);border-color:var(--acc)}
+.mate:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.mate .img-wrap{display:block}.mate img{width:100%;aspect-ratio:540/696;max-width:100%;object-fit:cover;display:block}
+.mate .lbl{background:var(--panel);padding:10px 8px 12px;display:grid;gap:2px;border-top:3px solid var(--acc)}
+.mate .lbl b{font-family:var(--f-display);font-size:14px;letter-spacing:.06em}
+.mate .lbl span{font-size:12px;color:var(--muted)}
+.chef-host{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.chef-host img{width:96px;height:96px;border-radius:50%;border:3px solid #e84545;object-fit:cover;flex:none}
+.chef-host p{color:var(--muted);max-width:52ch}
+.chef-host b{color:var(--text)}
+
+/* sheet */
+dialog.sheet{width:min(1060px,calc(100% - 24px));max-height:calc(100% - 24px);padding:0;border:2px solid var(--line);border-radius:22px;background:var(--panel);color:var(--text);overflow:hidden}
+dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
+.sheet-in{display:flex;flex-direction:column;max-height:calc(100dvh - 28px)}
+.sheet-top{position:relative;flex:none}
+.sheet-top .banner{width:100%;aspect-ratio:21/7;max-width:100%;object-fit:cover;display:block}
+.sheet-top .fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,23,46,0) 30%,var(--panel) 100%)}
+.sheet-top .title{position:absolute;left:24px;right:80px;bottom:12px;display:grid;gap:6px}
+.sheet-top h2{font-size:clamp(26px,4vw,40px);font-weight:900}
+.sheet-top h2 span{color:var(--acc)}
+.sheet-top .sub{color:var(--muted)}
+.x{position:absolute;right:14px;top:14px;width:48px;height:48px;border-radius:50%;border:0;background:rgba(7,11,24,.8);color:var(--text);cursor:pointer;display:grid;place-items:center}
+.tabs{display:flex;gap:6px;padding:10px 20px 0;border-bottom:1px solid var(--line);overflow-x:auto;flex:none}
+.tabs button{all:unset;cursor:pointer;padding:12px 16px;min-height:24px;font-family:var(--f-display);font-weight:800;font-size:13px;letter-spacing:.1em;color:var(--muted);border-bottom:3px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--text);border-bottom-color:var(--acc)}
+.tabs button:focus-visible{outline:3px solid var(--cyan)}
+.tabs .n{font-family:var(--f-body);font-weight:600;color:var(--muted);margin-left:6px;font-size:12px}
+.panes{overflow-y:auto;padding:22px 24px 28px;-webkit-overflow-scrolling:touch}
+.pane{display:grid;gap:18px}
+.feat{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.feat{grid-template-columns:minmax(0,1fr)}}
+.feat li{display:flex;gap:12px;align-items:flex-start;background:var(--panel-2);border-radius:14px;padding:14px 16px;min-width:0}
+.feat svg{flex:none;margin-top:3px}
+.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.small{font-size:14px;color:var(--muted)}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.gallery button{all:unset;cursor:pointer;border-radius:12px;overflow:hidden;aspect-ratio:16/9;max-width:100%;background:var(--panel-2);position:relative}
+.gallery button.sq{aspect-ratio:1/1;background:#dfe1e6}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.gallery button.sq img{object-fit:contain}
+.gallery button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.vgroup{display:grid;gap:12px}
+.vgroup h3{font-size:16px;letter-spacing:.1em;color:var(--muted)}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.vid{background:var(--panel-2);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.vid video{width:100%;aspect-ratio:16/9;max-width:100%;display:block;background:#000}
+.vid p{padding:10px 14px;font-weight:600;font-size:15px}
+.soon{border:2px dashed var(--line);border-radius:14px;padding:22px;color:var(--muted);display:grid;gap:4px}
+.soon b{color:var(--text);font-family:var(--f-display);font-size:14px;letter-spacing:.08em}
+.guide-card{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:22px;align-items:center;background:var(--panel-2);border-radius:16px;padding:18px 22px 18px 18px}
+.guide-card .who{width:150px;aspect-ratio:540/696;max-width:100%;object-fit:cover;border-radius:12px;border:2px solid var(--acc)}
+@media (max-width:640px){.guide-card{grid-template-columns:minmax(0,1fr)}.guide-card .who{width:120px}}
+.host{display:flex;align-items:center;gap:12px;background:var(--panel-2);border-radius:999px;padding:6px 18px 6px 6px;justify-self:start}
+.host img{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid var(--acc)}
+.host span{font-size:15px;color:var(--muted)} .host b{color:var(--text)}
+.guide-card ul{margin:10px 0 0;padding-left:20px;color:var(--muted)}
+
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:5;background:rgba(3,5,12,.94);display:grid;grid-template-rows:1fr auto;place-items:center;padding:16px}
+[hidden]{display:none!important}
+.lb img{max-width:100%;max-height:calc(100dvh - 140px);border-radius:12px;object-fit:contain}
+.lb .bar{display:flex;gap:12px;align-items:center;padding-top:12px}
+.lb .bar button{min-width:56px}
+.lb .cap{color:var(--muted);min-width:8ch;text-align:center;font-size:14px}
+
+/* tiers */
+.tiers{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+@media (max-width:1040px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:640px){.tiers{grid-template-columns:minmax(0,1fr)}}
+
+.tier{all:unset;box-sizing:border-box;cursor:pointer;background:var(--panel);border:2px solid var(--line);border-top:5px solid var(--acc);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;transition:transform .15s ease,background .15s ease}
+.tier:hover{transform:translateY(-3px)}
+.tier:focus-visible{outline:3px solid var(--cyan);outline-offset:3px}
+.tier[aria-expanded="true"]{background:var(--panel-2);border-color:var(--acc);transform:translateY(-4px)}
+.tier .peek{margin-top:auto;padding-top:8px;font-family:var(--f-display);font-weight:800;font-size:10px;letter-spacing:.14em;color:var(--acc)}
+.tier-open{margin-top:16px;background:var(--panel-2);border:2px solid var(--acc);border-radius:18px;padding:20px;animation:pop .28s ease}
+@keyframes pop{from{opacity:0;transform:translateY(-8px) scale(.98)}to{opacity:1;transform:none}}
+.tier-open-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;margin-bottom:14px}
+.tier-open-head h3{font-size:22px;color:var(--acc)}
+.minis{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.mini{all:unset;text-decoration:none;color:var(--text);box-sizing:border-box;cursor:pointer;background:var(--panel);border:2px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;animation:pop .3s ease both}
+.mini:hover{border-color:var(--macc)}
+.mini:focus-visible{outline:3px solid var(--cyan)}
+.mini .mshot{position:relative;aspect-ratio:16/9;max-width:100%}
+.mini video,.mini .mshot img.c{width:100%;height:100%;object-fit:cover;display:block}
+.mini .mhead{position:absolute;left:10px;bottom:-22px;width:50px;height:50px;border-radius:50%;border:3px solid var(--macc);object-fit:cover}
+.mini .mt{padding:28px 12px 12px;display:grid;gap:2px}
+.mini .mt b{font-family:var(--f-display);font-size:15px}
+.mini .mt span{font-size:13px;color:var(--muted)}
+.mini.extra{border-style:dashed;justify-content:center;align-items:center;text-align:center;padding:18px;min-height:150px;color:var(--muted)}
+.mini.extra b{display:block;color:var(--text);font-family:var(--f-display);font-size:14px;margin-bottom:4px}
+/* crew tap: spin + hop + bubble */
+.mate{position:relative;overflow:visible}
+.mate .img-wrap{overflow:hidden;border-radius:14px 14px 0 0;perspective:600px}
+.mate.spin .img-wrap img{animation:spinhop .9s cubic-bezier(.3,1.4,.5,1)}
+@keyframes spinhop{0%{transform:rotateY(0) translateY(0)}35%{transform:rotateY(200deg) translateY(-14%)}70%{transform:rotateY(360deg) translateY(0) scale(1.04)}85%{transform:scale(.97,1.03)}100%{transform:none}}
+.bubble{position:absolute;left:50%;top:-12px;transform:translate(-50%,-100%);width:max(190px,110%);background:var(--text);color:var(--ink);border-radius:14px;padding:10px 12px;font-size:13px;line-height:1.35;text-align:left;z-index:4;box-shadow:0 12px 30px rgba(0,0,0,.5);animation:pop .25s ease}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-8px;transform:translateX(-50%);border:8px solid transparent;border-bottom:0;border-top-color:var(--text)}
+.bubble .go{display:inline-block;margin-top:8px;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.1em;color:#0b1020;background:var(--acc);border-radius:999px;padding:7px 12px;cursor:pointer;border:0}
+/* hold menu */
+.holdmenu{position:fixed;z-index:30;background:var(--panel-2);border:2px solid var(--macc,var(--cyan));border-radius:16px;padding:8px;display:grid;gap:4px;min-width:210px;box-shadow:0 20px 50px rgba(0,0,0,.6);animation:pop .2s ease}
+.holdmenu b{font-family:var(--f-display);font-size:13px;letter-spacing:.08em;padding:8px 10px 4px;color:var(--macc,var(--cyan))}
+.holdmenu button{all:unset;cursor:pointer;padding:12px 12px;border-radius:10px;font-weight:600;font-size:15px}
+.holdmenu button:hover,.holdmenu button:focus-visible{background:var(--line)}
+.bay.holding{transform:scale(.97)}
+.bay .hint{font-size:12px;color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.mate.spin .img-wrap img{animation:none}}
+
+.tier h3{font-size:18px;color:var(--acc)}
+.tier .price{font-family:var(--f-display);font-weight:900;font-size:30px}
+.tier .price small{font-size:14px;color:var(--muted);font-family:var(--f-body);font-weight:500}
+.tier ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:15px}
+.tier li::before{content:"+ ";color:var(--acc);font-weight:700}
+.tier.best{background:var(--panel-2)}
+.tiers-foot{margin-top:18px;color:var(--muted);font-size:15px}
+
+/* classified */
+.classified{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:20px}
+@media (max-width:860px){.classified{grid-template-columns:minmax(0,1fr)}}
+.void{position:relative;border-radius:22px;overflow:hidden;min-height:320px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;border:2px solid #3b2a66;
+  background:var(--ink)}
+.void canvas{position:absolute;inset:0;width:100%;height:100%}
+.void > *:not(canvas){position:relative}
+.void h3{font-size:clamp(28px,4vw,40px);font-weight:900}
+.void p{color:var(--muted);max-width:44ch}
+.locked{display:grid;gap:12px}
+.lock{display:flex;align-items:center;gap:14px;background:var(--panel);border:2px solid var(--line);border-radius:14px;padding:14px 16px}
+.lock .num{font-family:var(--f-display);font-weight:900;font-size:20px;color:var(--gold);min-width:3ch}
+.lock .what{flex:1;min-width:0}
+.lock .what b{display:block}
+.lock .what span{font-size:14px;color:var(--muted)}
+.redact{display:inline-block;background:var(--text);opacity:.85;border-radius:3px;color:transparent;user-select:none}
+
+/* community */
+.dock{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.dock{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.dock{grid-template-columns:minmax(0,1fr)}}
+.port{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px;min-height:170px}
+.port .ph{display:flex;align-items:center;gap:12px}
+.port .logo{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;background:#0b1020;color:var(--lc);border:2px solid var(--line);flex:none}
+.port.live .logo{border-color:var(--lc)}
+.port h3{font-size:18px}
+.port .state{font-size:14px;color:var(--muted)}
+.port.live{border-color:var(--orange)}
+.port .btn{margin-top:auto}
+.port .pending{margin-top:auto;font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.14em;color:var(--muted);border:2px dashed var(--line);border-radius:999px;padding:12px;text-align:center}
+.qr{display:flex;gap:18px;align-items:center;margin-top:18px;background:var(--panel);border:2px dashed var(--line);border-radius:16px;padding:16px 18px}
+.qr > div:last-child{min-width:0}.qr b{overflow-wrap:anywhere}
+.qr .box{width:96px;height:96px;flex:none;border:2px dashed var(--muted);border-radius:10px;display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.08em;color:var(--muted);line-height:1.3}
+
+/* install */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
+@media (max-width:820px){.steps{grid-template-columns:minmax(0,1fr)}}
+.step{background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:8px;counter-increment:s}
+.step::before{content:"STEP " counter(s);font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.16em;color:var(--cyan)}
+.step p{color:var(--muted);font-size:15px}
+footer{border-top:1px solid var(--line);padding-block:32px;color:var(--muted);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between}
+
+#guideView{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:var(--ink);color:var(--text);z-index:200}
+#guideView::backdrop{background:#000}
+#guideView[open]{display:flex;flex-direction:column}
+#guideView .gbar{display:flex;align-items:center;gap:12px;padding:10px 16px;padding-top:calc(10px + env(safe-area-inset-top,0px));background:var(--panel);border-bottom:1px solid rgba(255,255,255,.08)}
+#guideView .gbar img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:2px solid var(--btn-edge)}
+#guideView .gbar b{flex:1;min-width:0;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#guideView .gbar small{display:block;color:var(--muted);font-weight:400;font-size:12px}
+#guideView iframe{flex:1;width:100%;border:0;background:#fff}
+
+.fl-btn{all:unset;cursor:pointer;position:relative;display:block;width:100%;max-width:250px;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.fl-btn:focus-visible{outline:3px solid var(--btn-edge);outline-offset:6px;border-radius:24px}
+.fl-act{display:block;transform-origin:50% 85%}
+.fl-act img{display:block}
+.fl-act.wave{animation:flWave 1.1s ease-in-out}
+.fl-act.flip{animation:flFlip 1s cubic-bezier(.3,.7,.3,1)}
+.fl-act.boost{animation:flBoost 1.2s cubic-bezier(.3,.7,.3,1)}
+.fl-act.wiggle{animation:flWiggle .9s ease-in-out}
+@keyframes flWave{0%,100%{transform:rotate(0)}15%{transform:rotate(-16deg) translateY(-6px)}30%{transform:rotate(14deg)}45%{transform:rotate(-14deg) translateY(-6px)}60%{transform:rotate(12deg)}75%{transform:rotate(-8deg)}}
+@keyframes flFlip{0%{transform:none}40%{transform:translateY(-30%) rotate(200deg) scale(.95)}75%{transform:translateY(-6%) rotate(360deg)}88%{transform:scale(1.06,.94)}100%{transform:none}}
+@keyframes flBoost{0%{transform:none}25%{transform:scale(.9,1.1)}55%{transform:translateY(-45%) scale(1.12)}80%{transform:translateY(4%) scale(1.04,.96)}100%{transform:none}}
+@keyframes flWiggle{0%,100%{transform:none}20%{transform:scale(1.12,.9)}40%{transform:scale(.92,1.1) rotate(-6deg)}60%{transform:scale(1.06,.95) rotate(6deg)}80%{transform:scale(.98,1.02)}}
+.fl-say{position:absolute;left:50%;top:4%;transform:translate(-50%,-100%) scale(.6);opacity:0;pointer-events:none;background:var(--btn);color:#4a0d2a;border:3px solid var(--btn-edge);border-radius:16px;padding:7px 12px;font:700 14px/1.2 var(--f-body);white-space:nowrap;transition:opacity .2s,transform .25s cubic-bezier(.3,1.6,.5,1);z-index:3}
+.fl-say::after{content:"";position:absolute;left:50%;bottom:-9px;width:12px;height:12px;background:var(--btn);border-right:3px solid var(--btn-edge);border-bottom:3px solid var(--btn-edge);transform:translateX(-50%) rotate(45deg)}
+.fl-say.on{opacity:1;transform:translate(-50%,-100%) scale(1)}
+.fl-spark{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--pink);box-shadow:0 0 12px var(--pink);pointer-events:none;animation:flSpark .8s ease-out forwards;z-index:2}
+@keyframes flSpark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+@media (max-width:760px){.fl-say{font-size:12px;padding:5px 9px;top:100%;transform:translate(-50%,8px) scale(.6)}.fl-say.on{transform:translate(-50%,8px) scale(1)}.fl-say::after{bottom:auto;top:-9px;transform:translateX(-50%) rotate(225deg)}.floater.left .fl-say{left:0;transform:translate(0,8px) scale(.6)}.floater.left .fl-say.on{transform:translate(0,8px) scale(1)}.floater.right .fl-say{left:auto;right:0;transform:translate(0,8px) scale(.6)}.floater.right .fl-say.on{transform:translate(0,8px) scale(1)}.floater.left .fl-say::after{left:30px}.floater.right .fl-say::after{left:auto;right:18px}}
+@media (prefers-reduced-motion:reduce){.fl-act{animation:none!important}}
+main section[id]{scroll-margin-top:84px}
+</style>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="media/badge.png" alt="">KERBAL BRAINS</a>
+    <nav aria-label="Sections"><a href="#mods">Mods</a><a href="#tiers">Tiers</a><a href="#brains">Brains</a><a href="#soon">Coming soon</a><a href="#community">Community</a><a href="#install">Install</a></nav>
+    <a class="btn" href="https://www.patreon.com/c/KerbalBrains">JOIN ON PATREON</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+      <div class="floater left"><button class="fl-btn" type="button" aria-label="Say hi to The Pilot"><span class="fl-act"><img src="media/float-pilot.png" alt=""></span><span class="fl-say" aria-live="polite"></span></button></div>
+      <div class="hero-text">
+        <p class="eyebrow">Fan-made mods for Kerbal Space Program 1</p>
+        <canvas id="neuroBg" aria-hidden="true"></canvas><h1 style="margin-top:12px">Your crew finally has <span class="p neuro" role="button" tabindex="0" aria-label="brains (tap for sparks)">brains.</span></h1>
+        <p class="sub2" style="font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.2vw,24px);color:var(--cyan);margin-top:14px;letter-spacing:.03em">They were cargo. Now they're crew.</p>
+        <p class="lede">Six mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates and meet the locals.</p>
+        <div class="ctas">
+          <a class="btn" href="https://www.patreon.com/c/KerbalBrains">JOIN ON PATREON</a>
+          <a class="btn ghost" href="#mods">SEE THE MODS</a>
+        </div>
+        <p class="note">Join free on Patreon: HullWorks + Badge Bar.</p>
+        <div class="facts" aria-label="Suite at a glance">
+          <div><b>6</b>mods</div>
+          <div><b>8</b>critters to find</div>
+          <div><b>42</b>new suits</div>
+          <div><b>55</b>paint colors</div>
+        </div>
+      </div>
+      <div class="floater right"><button class="fl-btn" type="button" aria-label="Say hi to The Hero"><span class="fl-act"><img src="media/float-hero.png" alt=""></span><span class="fl-say" aria-live="polite"></span></button></div>
+      </div>
+      <div class="player">
+        <video id="promo" controls playsinline preload="metadata" poster="media/kb_promo_poster.jpg">
+          <source src="media/kb_promo_720.mp4" type="video/mp4">
+        </video>
+      </div>
+      <p class="yt-row"><a class="btn yt-btn" href="https://youtu.be/JVYGYjZi2-g" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="#FF0000" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8z"/><path fill="#fff" d="M9.6 15.6 15.8 12 9.6 8.4z"/></svg> WATCH ON YOUTUBE</a></p>
+      <script>
+      (()=>{const h=location.hostname;if(/claude|anthropic|usercontent/i.test(h))return;
+        const pl=document.querySelector('.player');if(!pl)return;
+        pl.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/JVYGYjZi2-g?playsinline=1&rel=0&modestbranding=1" title="Kerbal Brains promo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:inherit;display:block"></iframe>';})();
+      </script>
+    </div>
+  </section>
+
+  <section id="mods">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The hangar</p>
+        <h2>Pick a mod. Open the bay.</h2>
+        <p>Tap any mod for its features, photos, videos and an interactive how-to guide. Press and hold a card for the quick menu.</p>
+      </div>
+      <div class="bays" id="bays"></div>
+    </div>
+  </section>
+
+  <section id="tiers">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Patreon tiers</p>
+        <h2>Join the crew</h2>
+        <p>Each tier includes everything in the tiers before it. Tap a tier to see what is inside.</p>
+      </div>
+      <div class="tiers" id="tierGrid">
+        <button class="tier" style="--acc:var(--ok)" data-tier="FREE" aria-expanded="false"><h3>JOIN FREE</h3><div class="price" style="font-size:22px">Free membership</div><ul><li>HullWorks ship paint</li><li>Badge Bar</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--pink)" data-tier="NEURON" aria-expanded="false"><h3>NEURON</h3><div class="price">$8<small>/mo</small></div><ul><li>Kerbal Brains</li><li>All Kerbal Brains add-on packs</li><li>Glow-Up</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--orange)" data-tier="SYNAPSE" aria-expanded="false"><h3>SYNAPSE</h3><div class="price">$12<small>/mo</small></div><ul><li>Iron Root</li><li>All colony add-on packs</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier best" style="--acc:var(--gold)" data-tier="HIVE" aria-expanded="false"><h3>HIVE MIND</h3><div class="price">$25<small>/mo</small></div><ul><li>Everything</li><li>Early access to new mods</li><li>Name in the credits</li><li>Priority roadmap vote</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+      </div>
+      <div class="tier-open" id="tierOpen" hidden>
+        <div class="tier-open-head"><h3 id="toTitle"></h3><p class="small" id="toNote"></p><button class="btn ghost" id="toClose" style="margin-left:auto;min-height:40px;padding:8px 16px;font-size:12px">CLOSE</button></div>
+        <div class="minis" id="toMinis"></div>
+        <div class="row" style="margin-top:16px"><a class="btn" id="toJoin" href="https://www.patreon.com/c/KerbalBrains">JOIN</a></div>
+      </div>
+      <p class="tiers-foot">Your membership supports development. Every paid tier gets all updates, the patron Discord and a vote on what's next.</p>
+    </div>
+  </section>
+
+  <section id="brains" style="padding-top:clamp(24px,4vw,48px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Only in Kerbal Brains</p>
+        <h2>You give the orders. <span class="p">They think for themselves.</span></h2>
+        <p>Stock Kerbals sit in their seats and wait. Kerbal Brains Kerbals get up, walk around, take jobs, fix things, drive rovers, team up and make friends. You can boss them around, or just watch them live.</p>
+      </div>
+
+      <div class="cvc" id="cvc" style="--cut:50%">
+        <img src="media/a-kb-dc59ab89.jpg" alt="Four closed CARGO crates in the hangar">
+        <img class="after" src="media/a-kb-1f869580.jpg" alt="Four brain crew mascots standing on top of the open crates, cheering">
+        <span class="tag l">CARGO<small>Stock KSP. Rides along. Waits for you.</small></span>
+        <span class="tag r">CREW<small>Kerbal Brains. Thinks, works, talks, high-fives.</small></span>
+        <span class="bar"></span><span class="knob" aria-hidden="true">&#129504;</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Drag to compare cargo and crew">
+      </div>
+      <p class="cvc-hint">&#8596; Drag the brain to wake them up</p>
+
+      <div class="console">
+        <div class="ordermenu" role="group" aria-label="Brain orders">
+          <div class="om-h">RIGHT-CLICK A KERBAL &middot; BRAIN ORDERS</div>
+        </div>
+        <div class="screen">
+          <video id="orderVid" muted loop playsinline autoplay preload="metadata"></video>
+          <div class="log"><span class="who" id="orderWho">MISSION LOG</span><p id="orderText"></p></div>
+        </div>
+      </div>
+
+      <div class="can-grid">
+        <div class="can"><h3><span class="ic">&#128640;</span>They run the ship</h3><ul><li>Get up from their seats and float or walk around the cabin</li><li>Go hatch to hatch into the next module</li><li>Press buttons, look out the windows, then sit back down</li><li>"Everyone OUT" and "Everyone IN" in one tap</li></ul></div>
+        <div class="can"><h3><span class="ic">&#128295;</span>They fix things</h3><ul><li>Spacewalks to fix solar panels, antennas and engines</li><li>Fix a broken rover wheel</li><li>Refuel the lander from the base</li><li>Do science on any experiment nearby</li></ul></div>
+        <div class="can"><h3><span class="ic">&#129309;</span>They team up</h3><ul><li>A free Kerbal comes to help with big jobs</li><li>High-fives when the job's done</li><li>Stuck? They yell "Help!" and a friend comes running</li><li>Best friends hang out and chat more</li></ul></div>
+        <div class="can"><h3><span class="ic">&#127970;</span>They run the Space Center</h3><ul><li>VAB welders weld every part you place</li><li>A safety inspector stamps your rocket APPROVED (or not)</li><li>Lunch truck, forklifts, crane, fuel crews, glow-wand rollout</li><li>Fire drill if a rocket crashes near the pad</li></ul></div>
+        <div class="can"><h3><span class="ic">&#9935;&#65039;</span>They run the colony</h3><ul><li>Dig ore in the Strip Mine with pickaxes and jackhammers</li><li>Drive the colony rover to far jobs</li><li>Build, farm and run the smelter</li><li>"Put everyone to work" fills every job at once</li></ul><span class="with">with the Iron Root mod</span></div>
+        <div class="can"><h3><span class="ic">&#128483;&#65039;</span>They have personality</h3><ul><li>4 gibberish voices, each Kerbal with their own pitch</li><li>Arguments, gossip, tag, rock-paper-scissors, BOO pranks</li><li>Victory dances, naps, night-shift helmet lights</li><li>A wobbly pink brain antenna that glows when they talk</li></ul></div>
+      </div>
+      <p class="only">Other Kerbals ride along. <span class="p">Only Kerbal Brains run things.</span></p>
+    </div>
+  </section>
+
+  <section id="crew" style="padding-top:clamp(24px,4vw,48px)">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Meet the crew</p>
+        <h2>Seven brains. One mission.</h2>
+        <p>Every mod has its own crew member. Tap one to see what they run.</p>
+      </div>
+      <div class="crew" id="crewGrid"></div>
+    </div>
+  </section>
+
+  <section id="soon">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Classified</p>
+        <h2>Coming soon</h2>
+        <p>New mods unlock as the crew grows. Patron milestones reveal what's next.</p>
+      </div>
+      <div class="classified">
+        <div class="void">
+          <canvas id="voidfx" aria-hidden="true"></canvas>
+          <div class="row" style="gap:8px"><span class="chip" style="background:#b48cff">50 PATRONS</span><span class="chip" id="voidcap" style="background:rgba(7,11,24,.7);color:#d9c8ff;border:1px solid #5a3f99" aria-live="off">The pull</span></div>
+          <h3>VOID RING</h3>
+          <p>Something is out there that you do not want to fly into. It swallows ships whole. Where it spits them out is anyone's guess.</p>
+        </div>
+        <div class="locked">
+          <div class="lock"><span class="num">25</span><div class="what"><b>A new critter</b><span>Somewhere out there, a ninth world is waiting.</span></div></div>
+          <div class="lock"><span class="num">100</span><div class="what"><b>Kerbal Olympics</b><span>Events, medals and bragging rights.</span></div></div>
+          <div class="lock"><span class="num">150</span><div class="what"><b>EVA Pack</b><span><span class="redact">classified details here</span></span></div></div>
+          <div class="lock"><span class="num">200</span><div class="what"><b>Base Life</b><span><span class="redact">classified details</span></span></div></div>
+          <div class="lock"><span class="num">250</span><div class="what"><b>Supply Shuttle</b><span>Plus a patron vote on mod #8.</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Community</p>
+        <h2>Follow the launches</h2>
+        <p>Trailers, gameplay and new-mod reveals go out here first.</p>
+      </div>
+      <div class="dock">
+        <div class="port live"><div class="ph"><span class="logo" style="--lc:#FF424D"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M22.957 7.21c-.004-3.064-2.391-5.576-5.191-6.482-3.478-1.125-8.064-.962-11.384.604C2.357 3.231 1.093 7.391 1.046 11.54c-.039 3.411.302 12.396 5.369 12.46 3.765.047 4.326-4.804 6.068-7.141 1.24-1.662 2.836-2.132 4.801-2.618 3.376-.836 5.678-3.501 5.673-7.031Z"/></svg></span><h3>Patreon</h3></div><p class="state">Mods, early access and the roadmap vote.</p><a class="btn" href="https://www.patreon.com/c/KerbalBrains">OPEN PATREON</a></div>
+        <div class="port"><div class="ph"><span class="logo" style="--lc:#FF0000"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span><h3>YouTube</h3></div><p class="state">Trailers and full gameplay runs.</p><span class="pending">CHANNEL COMING SOON</span></div>
+        <div class="port"><div class="ph"><span class="logo" style="--lc:#FFFFFF"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg></span><h3>TikTok</h3></div><p class="state">Quick clips and mod reveals.</p><span class="pending">CHANNEL COMING SOON</span></div>
+        <div class="port"><div class="ph"><span class="logo" style="--lc:#5865F2"><svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="currentColor" d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg></span><h3>Discord</h3></div><p class="state">Patron chat, help and sneak peeks.</p><span class="pending">SERVER COMING SOON</span></div>
+      </div>
+      <div class="qr"><div class="box">QR CODE<br>COMING<br>SOON</div><div><b>patreon.com/c/KerbalBrains</b><p class="small">Scan to join from your phone.</p></div></div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Getting started</p>
+        <h2>Install in three steps</h2>
+        <p>Made for KSP 1.12.x on PC. Every mod has its own interactive guide inside its bay.</p>
+      </div>
+      <div class="chef-host"><img src="media/head-chef.jpg" alt="The Chef"><p><b>The Chef's recipe.</b> Three steps and your crew is ready to cook. Lunch is on us.</p></div>
+      <div class="steps">
+        <div class="step"><h3>Back up your save</h3><p>Copy your KSP saves folder somewhere safe before adding any mod.</p></div>
+        <div class="step"><h3>Get the helpers</h3><p>Install ModuleManager and Harmony from CKAN or SpaceDock. Both are free.</p></div>
+        <div class="step"><h3>Drop in the mod</h3><p>Unzip the mod into your KSP GameData folder and launch the game.</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>Kerbal Brains Mods are fan-made add-ons. Not made by, affiliated with or endorsed by Take-Two Interactive, Private Division or Squad. Kerbal Space Program and its logos are trademarks of their owners. Patreon memberships support development of these fan projects; you need your own copy of Kerbal Space Program.</span><a href="https://www.patreon.com/c/KerbalBrains">patreon.com/c/KerbalBrains</a></div></footer>
+
+<dialog class="sheet" id="sheet" aria-labelledby="sheetTitle">
+  <div class="sheet-in">
+    <div class="sheet-top">
+      <img class="banner" id="sBanner" alt="">
+      <div class="fade"></div>
+      <div class="title"><span id="sChip" class="chip" style="justify-self:start"></span><h2 id="sheetTitle"></h2><p class="sub" id="sSub"></p></div>
+      <button class="x" id="sClose" aria-label="Close"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M4 4l12 12M16 4L4 16"/></svg></button>
+    </div>
+    <div class="tabs" role="tablist" id="sTabs">
+      <button role="tab" id="t-overview" data-tab="overview" aria-selected="true">OVERVIEW</button>
+      <button role="tab" id="t-photos" data-tab="photos" aria-selected="false">PHOTOS<span class="n" id="nPhotos"></span></button>
+      <button role="tab" id="t-videos" data-tab="videos" aria-selected="false">VIDEOS<span class="n" id="nVideos"></span></button>
+      <button role="tab" id="t-guide" data-tab="guide" aria-selected="false">HOW-TO GUIDE</button>
+    </div>
+    <div class="panes" id="sPanes">
+      <div class="pane" data-pane="overview" role="tabpanel" aria-labelledby="t-overview"></div>
+      <div class="pane" data-pane="photos" role="tabpanel" aria-labelledby="t-photos" hidden></div>
+      <div class="pane" data-pane="videos" role="tabpanel" aria-labelledby="t-videos" hidden></div>
+      <div class="pane" data-pane="guide" role="tabpanel" aria-labelledby="t-guide" hidden></div>
+    </div>
+  </div>
+  <div class="lb" id="lb" hidden>
+    <img id="lbImg" alt="">
+    <div class="bar">
+      <button class="btn ghost" id="lbPrev" aria-label="Previous photo">&#8592;</button>
+      <span class="cap" id="lbCap"></span>
+      <button class="btn ghost" id="lbNext" aria-label="Next photo">&#8594;</button>
+      <button class="btn" id="lbClose">CLOSE</button>
+    </div>
+  </div>
+</dialog>
+<script>
+/* Modal shim: same behavior on every iPad/Safari version and inside app web views */
+(function(){var stack=[];
+function prep(d){if(!d||d.__kb)return;d.__kb=1;d.classList.add('kbm');
+ try{Object.defineProperty(d,'open',{configurable:true,get:function(){return this.hasAttribute('open');},set:function(v){if(v)this.setAttribute('open','');else this.removeAttribute('open');}});}catch(e){}
+ d.showModal=d.show=function(){if(this.hasAttribute('open'))return;this.setAttribute('open','');stack.push(this);document.documentElement.classList.add('kb-lock');};
+ d.close=function(){if(!this.hasAttribute('open'))return;this.removeAttribute('open');var i=stack.indexOf(this);if(i>-1)stack.splice(i,1);if(!stack.length)document.documentElement.classList.remove('kb-lock');var ev;try{ev=new Event('close');}catch(e){ev=document.createEvent('Event');ev.initEvent('close',false,false);}this.dispatchEvent(ev);};}
+function all(){var ds=document.getElementsByTagName('dialog');for(var i=0;i<ds.length;i++)prep(ds[i]);}
+all();document.addEventListener('DOMContentLoaded',all);
+document.addEventListener('keydown',function(e){if(e.key!=='Escape'&&e.key!=='Esc')return;var top=stack[stack.length-1];if(!top)return;var ev;try{ev=new Event('cancel',{cancelable:true});}catch(x){ev=document.createEvent('Event');ev.initEvent('cancel',false,true);}var go=top.dispatchEvent(ev);if(go&&!ev.defaultPrevented)top.close();});
+/* tap the dark area outside the sheet to close it */
+document.addEventListener('click',function(e){var top=stack[stack.length-1];if(top&&e.target===top&&top.id==='sheet'){var ev;try{ev=new Event('cancel',{cancelable:true});}catch(x){ev=document.createEvent('Event');ev.initEvent('cancel',false,true);}top.dispatchEvent(ev);if(!ev.defaultPrevented)top.close();}});
+})();
+</script>
+
+
+<script>
+/* ===== Mod data. To add a video: put the file in media/ and add {src, poster, title} to trailers or gameplay. ===== */
+const TIERS = { FREE:'var(--ok)', NEURON:'var(--pink)', SYNAPSE:'var(--orange)', CORTEX:'var(--cyan)' };
+const p = (f, cap, sq) => ({ src: 'media/' + f, cap, sq: !!sq });
+const MODS = [
+ { id:'kerbal-brains', anims:[{src:'media/a-kb-1e2343ed.mp4',poster:'media/a-kb-1e2343ed.jpg',title:'Moon buggy jump'},{src:'media/anim-kb-rover.mp4',poster:'media/anim-kb-rover.jpg',title:'Rover run on the Mun'},{src:'media/anim-kb-greenhouse.mp4',poster:'media/anim-kb-greenhouse.jpg',title:'Greenhouse harvest'},{src:'media/anim-kb-flag.mp4',poster:'media/anim-kb-flag.jpg',title:'Flag on the snowy moon'},{src:'media/a-kb-881061ff.mp4',poster:'media/a-kb-881061ff.jpg',title:'Hauling the fuel hose'},{src:'media/a-kb-b3a463d9.mp4',poster:'media/a-kb-b3a463d9.jpg',title:'Brain power-up'},{src:'media/a-kb-41ca770f.mp4',poster:'media/a-kb-41ca770f.jpg',title:'Spacewalk repair'},{src:'media/a-kb-2ae2ee3b.mp4',poster:'media/a-kb-2ae2ee3b.jpg',title:'Victory high-five'},{src:'media/a-kb-2420aa3c.mp4',poster:'media/a-kb-2420aa3c.jpg',title:'Crew salute'},{src:'media/a-kb-a3ba9fad.mp4',poster:'media/a-kb-a3ba9fad.jpg',title:'Break time on the rocket'},{src:'media/a-kb-2093f385.mp4',poster:'media/a-kb-2093f385.jpg',title:'Floating in the cabin'},{src:'media/a-kb-8300d2b1.mp4',poster:'media/a-kb-8300d2b1.jpg',title:'Liftoff'},{src:'media/a-kb-62c5a3cd.mp4',poster:'media/a-kb-62c5a3cd.jpg',title:'Approved!'},{src:'media/a-kb-5d42629f.mp4',poster:'media/a-kb-5d42629f.jpg',title:'Spacewalk somersault'},{src:'media/a-kb-e86abb4b.mp4',poster:'media/a-kb-e86abb4b.jpg',title:'Ta-daa!'},{src:'media/a-kb-398b7074.mp4',poster:'media/a-kb-398b7074.jpg',title:'Forklift run'},{src:'media/a-kb-46562890.mp4',poster:'media/a-kb-46562890.jpg',title:'Marshalling the rocket'},{src:'media/a-kb-a69e878c.mp4',poster:'media/a-kb-a69e878c.jpg',title:'Surprise hug'},{src:'media/a-kb-b93906d9.mp4',poster:'media/a-kb-b93906d9.jpg',title:'Boarding the rocket'},{src:'media/a-kb-c2aeb34f.mp4',poster:'media/a-kb-c2aeb34f.jpg',title:'Wrench catch'},{src:'media/a-kb-a3f69b66.mp4',poster:'media/a-kb-a3f69b66.jpg',title:'Crew march'},{src:'media/a-kb-405f423e.mp4',poster:'media/a-kb-405f423e.jpg',title:'Hero entrance'},{src:'media/a-kb-edb5d94f.mp4',poster:'media/a-kb-edb5d94f.jpg',title:'Hangar doors open'},{src:'media/a-kb-49fab609.mp4',poster:'media/a-kb-49fab609.jpg',title:'Oops!'},{src:'media/a-kb-fb7a50e5.mp4',poster:'media/a-kb-fb7a50e5.jpg',title:'Pep talk'},{src:'media/a-kb-01470cfd.mp4',poster:'media/a-kb-01470cfd.jpg',title:'The blueprint'},{src:'media/a-kb-892c649d.mp4',poster:'media/a-kb-892c649d.jpg',title:'Cargo crates burst open'},{src:'media/a-kb-147f4fb9.mp4',poster:'media/a-kb-147f4fb9.jpg',title:'Lunch bell'},{src:'media/a-kb-dc59ab89.mp4',poster:'media/a-kb-dc59ab89.jpg',title:'The crates wake up'},{src:'media/a-kb-1f869580.mp4',poster:'media/a-kb-1f869580.jpg',title:'Out of the crates'},{src:'media/a-kb-12edb202.mp4',poster:'media/a-kb-12edb202.jpg',title:'Station console'}], loop:'a-kb-1e2343ed', crew:'hero', role:'The Hero', a:'KERBAL ', b:'BRAINS', acc:'#ff5fa8', tier:'NEURON', tagline:'Kerbals that think for themselves',
+   cover:'media/kb-lunch.jpg', banner:'media/kb-jetrace.jpg',
+   features:['Kerbals walk, work and chat on their own','A busy Space Center ground crew with trucks and forklifts','Give orders: dig, build, drive the rover','Cinematic camera for launch-day shots','Works hand in hand with Iron Root colonies'],
+   photos:[p('kb-lunch.jpg','Lunch truck at the Space Center'),p('kb-jetrace.jpg','Racing in orbit'),p('kb-firedrill.jpg','Fire drill at the pad'),p('kb-hangar.jpg','Welding in the hangar'),p('kb-rover.jpg','Rover run on the Mun'),p('kb-mine.jpg','Mining shift'),p('kb-greenhouse.jpg','Greenhouse harvest'),p('kb-smelter.jpg','Smelter duty'),p('kb-photo.jpg','Crew photo'),p('kb-dance.jpg','Victory dance'),p('kb-station.jpg','Lunch on the station'),p('kb-colony.jpg','Colony on Duna')],
+   trailers:[{src:'media/kb_promo_720.mp4',poster:'media/kb_promo_poster.jpg',title:'Kerbal Brains promo',yt:'https://youtu.be/JVYGYjZi2-g'}],
+   clips:[{src:'media/clip-kb-work.mp4',poster:'media/clip-kb-work.jpg',title:'Ground crew at work'},{src:'media/clip-kb-wake.mp4',poster:'media/clip-kb-wake.jpg',title:'The crew wakes up'},{src:'media/clip-kb-rollout.mp4',poster:'media/clip-kb-rollout.jpg',title:'Rollout and inspection'},{src:'media/clip-kb-liftoff.mp4',poster:'media/clip-kb-liftoff.jpg',title:'Liftoff and spacewalk'}],
+   gameplay:[], guide:'guides/kerbal-brains/index.html', guideName:'Kerbal Brains Field Manual',
+   guideHas:['Giving orders to your crew','Ground crew and vehicles at the Space Center','Camera controls and settings'] },
+ { id:'iron-root', anims:[{src:'media/a-ir-f77eba8e.mp4',poster:'media/a-ir-f77eba8e.jpg',title:'Watering the seedlings'},{src:'media/anim-ir-build.mp4',poster:'media/anim-ir-build.jpg',title:'Building the dome colony'},{src:'media/anim-ir-pickaxe.mp4',poster:'media/anim-ir-pickaxe.jpg',title:'Mining shift'},{src:'media/a-ir-c97f2caa.mp4',poster:'media/a-ir-c97f2caa.jpg',title:'The colony at night'},{src:'media/a-ir-d1e438d1.mp4',poster:'media/a-ir-d1e438d1.jpg',title:'Pickaxe swing'}], loop:'a-ir-f77eba8e', crew:'miner', role:'The Miner', a:'IRON ', b:'ROOT', acc:'#ff8a3d', tier:'SYNAPSE', tagline:'Grow. Mine. Survive.',
+   cover:'media/ir-colony.jpg', banner:'media/ir-icemoon.jpg',
+   features:['Build colonies, greenhouses and habitats','Walk-in mines and smelters turn ore into metal','Farm cities that feed your crew','Colony Express drops a colony anywhere','A job board that keeps every Kerbal busy','Outworld Colonies add-on packs included at Synapse'],
+   photos:[p('ir-colony.jpg','Colony on Duna'),p('ir-mine.jpg','Open-pit mine and smelter'),p('ir-icemoon.jpg','Ice moon domes'),p('ir-landing.jpg','Colony Express landing'),p('ir-builders.jpg','Builders at work'),p('ir-rover.jpg','Supply rover'),p('ir-flag.jpg','Planting the flag'),p('ir-home.jpg','Home base')],
+   trailers:[], clips:[{src:'media/clip-ir-mine.mp4',poster:'media/clip-ir-mine.jpg',title:'Running the mine and smelter'},{src:'media/clip-ir-colony.mp4',poster:'media/clip-ir-colony.jpg',title:'The colony at night'}],
+   gameplay:[], guide:'guides/iron-root/index.html', guideName:'IRONROOT Field Manual',
+   guideHas:['Picking a colony site','Mines, smelters and metal','Colony Express and the job board'] },
+ { id:'jump-gate', anims:[{src:'media/a-jg-e991c767.mp4',poster:'media/a-jg-e991c767.jpg',title:'Pilot drops the visor'},{src:'media/a-jg-5e1e3a08.mp4',poster:'media/a-jg-5e1e3a08.jpg',title:'Threading the rings'},{src:'media/anim-jg-portal.mp4',poster:'media/anim-jg-portal.jpg',title:'Portal powers up'},{src:'media/anim-jg-burst.mp4',poster:'media/anim-jg-burst.jpg',title:'Bursting out of the gate'},{src:'media/a-jg-d2b5434f.mp4',poster:'media/a-jg-d2b5434f.jpg',title:'Exit blast'},{src:'media/a-jg-c48b7f16.mp4',poster:'media/a-jg-c48b7f16.jpg',title:'Chase cam through the rings'},{src:'media/a-jg-c77354e6.mp4',poster:'media/a-jg-c77354e6.jpg',title:'Portal exit flash'},{src:'media/a-jg-d9f49dd7.mp4',poster:'media/a-jg-d9f49dd7.jpg',title:'Throttle up'},{src:'media/a-jg-53c20030.mp4',poster:'media/a-jg-53c20030.jpg',title:'The gate powers up'},{src:'media/a-jg-01cfa5ec.mp4',poster:'media/a-jg-01cfa5ec.jpg',title:'Warp tunnel'},{src:'media/a-jg-8128e298.mp4',poster:'media/a-jg-8128e298.jpg',title:'Cockpit close-up'},{src:'media/a-jg-5c1dd186.mp4',poster:'media/a-jg-5c1dd186.jpg',title:'Full throttle'},{src:'media/a-jg-a7411c38.mp4',poster:'media/a-jg-a7411c38.jpg',title:'Rainbow ring run'},{src:'media/a-jg-ada916b4.mp4',poster:'media/a-jg-ada916b4.jpg',title:'Portal swirl'}], loop:'a-jg-e991c767', crew:'pilot', role:'The Pilot', a:'JUMP ', b:'GATE', acc:'#22e5ff', tier:'CORTEX', tagline:'Fly through the ring. Pop out at another planet.',
+   cover:'media/jg-rainbow.jpg', banner:'media/jg-network.jpg',
+   features:['Kerbin to Duna in seconds','Build and deploy your own gates','A 40 m ring that folds into a 3.75 m box','Gate contracts with landing bonuses','Link gates into a network across the system'],
+   photos:[p('jg-rainbow.jpg','Ring run'),p('jg-hero.jpg','Gate over Kerbin'),p('jg-arrival.jpg','Arrival burst'),p('jg-network.jpg','The gate network'),p('jg-deploy.jpg','Deploying a gate'),p('jg-powerup.jpg','Powering up'),p('jg-beam.jpg','Capture beam'),p('jg-funnel.jpg','Approach funnel'),p('jg-lane.jpg','Approach lane'),p('jg-burst.jpg','Exit burst'),p('jg-jg_load_1.jpg','Loading screen 1'),p('jg-jg_load_2.jpg','Loading screen 2'),p('jg-jg_load_3.jpg','Loading screen 3')],
+   trailers:[], clips:[{src:'media/clip-jg-gate.mp4',poster:'media/clip-jg-gate.jpg',title:'Through the gate'}],
+   gameplay:[], guide:'guides/jump-gate/index.html', guideName:'Kerbal Jump Gate Guide',
+   guideHas:['Building and deploying a gate','Lining up the approach','Gate contracts'] },
+ { id:'hullworks', anims:[{src:'media/anim-hw-paint.mp4',poster:'media/anim-hw-paint.jpg',title:'Robot arms paint the rocket'},{src:'media/anim-hw-lineup.mp4',poster:'media/anim-hw-lineup.jpg',title:'The painted lineup at sunset'},{src:'media/a-hw-43dbb404.mp4',poster:'media/a-hw-43dbb404.jpg',title:'Fin check'},{src:'media/a-hw-fdbd7aa3.mp4',poster:'media/a-hw-fdbd7aa3.jpg',title:'Welding the seam'},{src:'media/a-hw-730e569d.mp4',poster:'media/a-hw-730e569d.jpg',title:'Hull welding in the hangar'},{src:'media/a-hw-f0ee4c83.mp4',poster:'media/a-hw-f0ee4c83.jpg',title:'Paintbrush flyby'}], loop:'anim-hw-paint', crew:'engineer', role:'The Engineer', a:'HULL', b:'WORKS', acc:'#ff4fd8', tier:'FREE', tagline:'A paint shop for every ship',
+   cover:'media/hw-lineup.jpg', banner:'media/hw-paintbay.jpg',
+   features:['55 colors plus chrome and metallic','Paint the whole ship in one click','Save liveries and reuse them','A full color picker','61 stickers, plus your own logos'],
+   photos:[p('hw-lineup.jpg','Sunset lineup'),p('hw-noseart.jpg','Nose art'),p('hw-paintbay.jpg','The paint bay'),p('hw-g-hero.jpg','Fresh paint'),p('hw-g-lineup.jpg','Livery lineup'),p('hw-g-noseart.jpg','Shark mouth')],
+   trailers:[], clips:[], gameplay:[], guide:'guides/hullworks/index.html', guideName:'HullWorks Paint Shop Manual',
+   guideHas:['Painting a whole ship','Saving liveries','Stickers and custom logos'] },
+ { id:'glow-up', anims:[{src:'media/a-gu-4275b4b3.mp4',poster:'media/a-gu-4275b4b3.jpg',title:'Instant glow-up: pink to gold'},{src:'media/anim-gu-selfie.mp4',poster:'media/anim-gu-selfie.jpg',title:'Suit-up selfie'},{src:'media/a-gu-4219814e.mp4',poster:'media/a-gu-4219814e.jpg',title:'Group photo'}], loop:'a-gu-4275b4b3', crew:'groundcrew', role:'The Ground Crew', a:'GLOW-', b:'UP', acc:'#c77dff', tier:'NEURON', tagline:'New suits, patches and Photo Mode',
+   cover:'media/gu-lockerroom.jpg', banner:'media/gu-selfie.jpg',
+   features:['42 suits in 5 tabs: Planets, Jobs, Fun, Team and Colony','Wardrobe (F8): change outfits on EVA anywhere, with a puff of smoke','New hires dress in their job colors automatically','Glowing helmet lights and matching backpacks in every suit','40 mission patches you can use as flags','Photo Mode (F7): freeze time, pose and snap at up to 4x size'],
+   photos:[p('gu-lockerroom.jpg','The locker room'),p('gu-selfie.jpg','Moon selfie'),p('gu-director.jpg','Photo Mode director'),p('gu-quickchange.jpg','Quick change')],
+   trailers:[], clips:[{src:'media/clip-gu-crew.mp4',poster:'media/clip-gu-crew.jpg',title:'Crew photo and dance'}],
+   gameplay:[], guide:'guides/glow-up/index.html', guideName:'Kerbal Glow-Up Guide',
+   guideHas:['The 42-suit locker and the F8 Wardrobe','Helmet lights, backpacks and 40 patches','Photo Mode controls'] },
+ { id:'critters', anims:[{src:'media/a-kc-dbc6f791.mp4',poster:'media/a-kc-dbc6f791.jpg',title:'Catching a Mun Hopper'},{src:'media/anim-kc-drifters.mp4',poster:'media/anim-kc-drifters.jpg',title:'Glow Drifters in space'}], loop:'a-kc-dbc6f791', crew:'scientist', role:'The Scientist', a:'KERBAL ', b:'CRITTERS', acc:'#5cf0a0', tier:'CORTEX', tagline:'Every world has a creature waiting',
+   cover:'media/kc-moon.jpg', banner:'media/kc-laythe.jpg',
+   features:['8 critters on 8 worlds (4 still classified)','Land on a world to unlock its critter','Fill your Creature Book','Critters roam near your lander','Critter Crate part with a spinning hologram'],
+   photos:[p('kc-book-hopper.jpg','Crater Hopper (Mun)',1),p('kc-book-slider.jpg','Mint Slider (Minmus)',1),p('kc-book-dustpuff.jpg','Dust Puff (Duna)',1),p('kc-book-drifter.jpg','Glow Drifter (Laythe)',1),p('kc-moon.jpg','Glow drifters at night'),p('kc-laythe.jpg','Laythe shores')],
+   trailers:[], clips:[], gameplay:[], guide:'guides/critters/index.html', guideName:'Kerbal Critters Guide',
+   guideHas:['Where each critter lives','Using the Creature Book','The Critter Crate'] }
+];
+
+const check = c => `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>`;
+const esc = s => String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+const vcount = m => m.trailers.length + m.anims.length + m.clips.length + m.gameplay.length;
+
+/* bays */
+document.getElementById('bays').innerHTML = MODS.map(m => `
+  <button class="bay" style="--acc:${m.acc}" data-id="${m.id}" aria-label="Open ${esc(m.a+m.b)}">
+    <div class="top"><div class="shot"><video class="live" muted loop playsinline autoplay preload="metadata" poster="media/${m.loop}.jpg" aria-hidden="true"><source src="media/${m.loop}.mp4" type="video/mp4"></video><span class="livetag">&#9679; LIVE</span><span class="chip" style="background:${TIERS[m.tier]}">${m.tier}</span></div><img class="mascot" src="media/head-${m.crew}.jpg" alt=""></div>
+    <div class="guide-by">Run by<b>${m.role}</b></div>
+    <div class="meta" style="padding-top:6px">
+      <h3>${esc(m.a)}<span>${esc(m.b)}</span></h3>
+      <p class="tagline">${esc(m.tagline)}</p>
+      <div class="counts"><span><b>${m.photos.length}</b> photos</span><span><b>${vcount(m)}</b> ${vcount(m)===1?"video":"videos"}</span><span><b>1</b> guide</span></div>
+      <span class="open">OPEN BAY &#8594;</span><span class="hint">Tap to open. Hold for the quick menu.</span>
+    </div>
+  </button>`).join('');
+
+/* card clips: play when on screen, pause when not */
+(function(){
+  const vids=[...document.querySelectorAll('video.live')];
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  vids.forEach(v=>{ v.muted=true; v.defaultMuted=true; });
+  if(still){ vids.forEach(v=>{ v.removeAttribute('autoplay'); v.pause(); }); return; }
+  if(!('IntersectionObserver' in window)) return;
+  const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ const p=e.target.play(); if(p&&p.catch) p.catch(()=>{}); } else e.target.pause(); }),{threshold:.25});
+  vids.forEach(v=>io.observe(v));
+})();
+
+/* crew grid */
+const CREW = MODS.map(m => ({key:m.crew, role:m.role, job:esc(m.a+m.b).trim(), acc:m.acc, id:m.id}));
+CREW.push({key:'chef', role:'The Chef', job:'Install steps', acc:'#e84545', id:null});
+const LINES={hero:"Hi, I'm the Hero! My crew walks, works and chats on their own now.",pilot:"Pilot here. Strap in, we're jumping to Duna in seconds.",engineer:"Engineer reporting! I'll paint your whole ship in one click.",scientist:"Scientist on duty. Eight critters are out there. Let's find them!",groundcrew:"Ground Crew! New suits, helmet lights and Photo Mode, coming right up.",miner:"Miner here. Dig ore, smelt metal, build a colony. Easy!",chef:"Chef's in! Three steps to install, then lunch is on me."};
+const THOUGHTS={hero:["Plant a flag here? Yes!","Who wants a group photo?","Best friend: the Engineer","Victory dance time!","Following you, boss"],
+pilot:["Lining up the gate...","Drive the rover over there? On it","Floating hatch to hatch","Rainbow lane locked in","Guarding the base"],
+engineer:["That rover wheel looks broken","Welding this seam...","Solar panel fixed. Ta-daa!","Help! This job is big","Refueling the lander"],
+scientist:["Science on that rock!","Taking notes on the repair","A Mun Hopper? Must find it!","Stamp says: APPROVED","Hmm... TWR too low"],
+groundcrew:["Glow wands ready","Fuel hose to the pad","Forklift, crates, go!","New suit time (F8)","Say SNACKS!"],
+miner:["Dig ore in the Strip Mine","Jackhammer time","Smelter needs a worker","The pit's getting deeper","Taking the colony rover"],
+chef:["Lunch bell! Ding ding ding","Burger tray: Yum!","Coffee spill... again","Picnic tables in 5","Mop crew, aisle 3"]};
+const STATN=['SMARTS','COURAGE','TEAMWORK','SNACKS'];
+const STATS={hero:[78,96,90,70],pilot:[84,99,72,55],engineer:[92,70,95,64],scientist:[99,48,80,60],groundcrew:[70,82,98,75],miner:[66,88,85,92],chef:[74,60,93,100]};
+const order=['hero','pilot','engineer','scientist','groundcrew','miner','chef'];
+CREW.sort((a,b)=>order.indexOf(a.key)-order.indexOf(b.key));
+document.getElementById('crewGrid').innerHTML = CREW.map(c => `
+  <button class="mate" style="--acc:${c.acc}" data-key="${c.key}" data-mod="${c.id||''}" aria-label="${c.role}: ${c.job}">
+    <span class="img-wrap"><img src="media/crew-${c.key}.jpg" alt="" loading="lazy"></span>
+    <span class="think" aria-hidden="true">${(THOUGHTS[c.key]||[''])[0]}</span>
+    <span class="lbl"><b>${c.role.replace('The ','').toUpperCase()}</b><span>${c.job}</span><span class="stats">${STATN.map((n,i)=>`<span class="stat">${n}<i style="--v:${(STATS[c.key]||[50,50,50,50])[i]}%"></i></span>`).join('')}</span></span>
+  </button>`).join('');
+document.getElementById('crewGrid').addEventListener('click', e => {
+  const go=e.target.closest('.go'); if(go){ e.stopPropagation(); const id=go.dataset.mod; document.querySelectorAll('.bubble').forEach(x=>x.remove()); if(id){ (function(){var p=document.getElementById('promo');if(p&&p.pause)p.pause();})(); openMod(id); } else document.getElementById('install').scrollIntoView(); return; }
+  const b=e.target.closest('.mate'); if(!b) return;
+  document.querySelectorAll('.bubble').forEach(x=>x.remove());
+  b.classList.remove('spin'); void b.offsetWidth; b.classList.add('spin');
+  const key=b.dataset.key; const c=CREW.find(x=>x.key===key);
+  const bub=document.createElement('span'); bub.className='bubble';
+  bub.innerHTML=`${LINES[key]}<br><span class="go" role="button" tabindex="0" data-mod="${c.id||''}">${c.id?'OPEN '+c.job.toUpperCase():'SEE THE STEPS'} &#8594;</span>`;
+  b.appendChild(bub); clearTimeout(b._t); b._t=setTimeout(()=>bub.remove(),6000);
+});
+document.addEventListener('click', e => { if(!e.target.closest('.mate')) document.querySelectorAll('.bubble').forEach(x=>x.remove()); });
+
+/* sheet */
+const sheet = document.getElementById('sheet');
+let cur = null, lbIndex = 0;
+function videoCard(v){ return `<div class="vid"><video controls playsinline preload="none" poster="${v.poster||''}"><source src="${v.src}" type="video/mp4"></video><p>${esc(v.title)}</p></div>`; }
+function vgroup(title, list, empty){
+  return `<div class="vgroup"><h3>${title}</h3>${list.length ? `<div class="vids">${list.map(videoCard).join('')}</div>` : `<div class="soon"><b>COMING SOON</b><span>${empty}</span></div>`}</div>`;
+}
+function openMod(id, tab){
+  const m = MODS.find(x => x.id === id); if(!m) return;
+  cur = m;
+  sheet.style.setProperty('--acc', m.acc);
+  document.getElementById('sBanner').src = m.banner;
+  document.getElementById('sheetTitle').innerHTML = `${esc(m.a)}<span>${esc(m.b)}</span>`;
+  document.getElementById('sSub').textContent = m.tagline;
+  const chip = document.getElementById('sChip'); chip.textContent = m.tier === 'FREE' ? 'FREE MEMBERSHIP' : m.tier + ' TIER'; chip.style.background = TIERS[m.tier];
+  document.getElementById('nPhotos').textContent = m.photos.length;
+  document.getElementById('nVideos').textContent = vcount(m);
+  const panes = document.getElementById('sPanes');
+  panes.querySelector('[data-pane=overview]').innerHTML = `
+    <div class="host"><img src="media/head-${m.crew}.jpg" alt=""><span><b>${m.role}</b> runs ${esc(m.a+m.b).trim()}</span></div>
+    <ul class="feat">${m.features.map(f => `<li>${check(m.acc)}<span>${esc(f)}</span></li>`).join('')}</ul>
+    <div class="row"><a class="btn" href="https://www.patreon.com/c/KerbalBrains">${m.tier==='FREE'?'JOIN FREE ON PATREON':'INCLUDED WITH '+m.tier+' ON PATREON'}</a><button class="btn ghost" data-go="guide">OPEN THE HOW-TO GUIDE</button></div>`;
+  panes.querySelector('[data-pane=photos]').innerHTML = `<div class="gallery">${m.photos.map((ph,i) => `<button class="${ph.sq?'sq':''}" data-ph="${i}" aria-label="View ${esc(ph.cap)}"><img src="${ph.src}" alt="${esc(ph.cap)}" loading="lazy"></button>`).join('')}</div><p class="small">Tap a photo to see it full size.</p>`;
+  panes.querySelector('[data-pane=videos]').innerHTML =
+    (m.trailers.length ? vgroup('TRAILERS', m.trailers, '') : '') +
+    vgroup('ANIMATED SHOTS', m.anims, '') +
+    vgroup('CLIPS FROM THE PROMO', m.clips, 'Promo clips for this mod are on the way.') +
+    vgroup('GAMEPLAY', m.gameplay, 'Real in-game footage is on the way.');
+  panes.querySelector('[data-pane=guide]').innerHTML = `
+    <div class="guide-card"><img class="who" src="media/crew-${m.crew}.jpg" alt="${m.role}"><div><p class="eyebrow" style="color:var(--acc)">${m.role} walks you through it</p><h3 style="font-size:22px;margin-top:6px">${esc(m.guideName)}</h3><p class="small" style="margin-top:6px">Step-by-step and interactive. Inside:</p><ul>${m.guideHas.map(g=>`<li>${esc(g)}</li>`).join('')}</ul></div>
+    <button class="btn" data-guide="${m.guide}" data-gname="${esc(m.guideName)}" data-gcrew="${m.crew}">OPEN GUIDE</button></div>`;
+  selectTab(tab || 'overview');
+  if(!sheet.open) sheet.showModal();
+}
+function selectTab(t){
+  document.querySelectorAll('#sTabs button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab===t)));
+  document.querySelectorAll('#sPanes .pane').forEach(p => p.hidden = p.dataset.pane !== t);
+  document.querySelectorAll('#sPanes video').forEach(v => v.pause());
+  document.getElementById('sPanes').scrollTop = 0;
+}
+function closeSheet(){ document.querySelectorAll('#sPanes video').forEach(v=>v.pause()); closeLb(); sheet.close(); }
+
+/* hold a card: quick menu. tap: open */
+let holdT=null, held=false, menuEl=null;
+function closeMenu(){ if(menuEl){ menuEl.remove(); menuEl=null; } }
+function showMenu(b,x,y){
+  closeMenu(); const m=MODS.find(q=>q.id===b.dataset.id);
+  menuEl=document.createElement('div'); menuEl.className='holdmenu'; menuEl.style.setProperty('--macc',m.acc); menuEl.setAttribute('role','menu');
+  menuEl.innerHTML=`<b>${esc(m.a+m.b)}</b>`+[['overview','Overview'],['photos','Photos ('+m.photos.length+')'],['videos','Videos ('+vcount(m)+')'],['guide','How-to guide']].map(([t,l])=>`<button role="menuitem" data-t="${t}">${l}</button>`).join('');
+  document.body.appendChild(menuEl);
+  const w=menuEl.offsetWidth,h=menuEl.offsetHeight; menuEl.style.left=Math.max(12,Math.min(innerWidth-w-12,x-w/2))+'px'; menuEl.style.top=Math.max(12,Math.min(innerHeight-h-12,y-h-14))+'px';
+  menuEl.addEventListener('click',ev=>{ const t=ev.target.closest('button'); if(!t) return; closeMenu(); (function(){var p=document.getElementById('promo');if(p&&p.pause)p.pause();})(); openMod(m.id,t.dataset.t); });
+  menuEl.querySelector('button').focus();
+}
+const bays=document.getElementById('bays');
+bays.addEventListener('pointerdown', e => { const b=e.target.closest('.bay'); if(!b) return; held=false; clearTimeout(b._hc); b._hc=setTimeout(()=>b.classList.add('holding'),170); const x=e.clientX,y=e.clientY; holdT=setTimeout(()=>{ held=true; b.classList.remove('holding'); if(navigator.vibrate) try{navigator.vibrate(15)}catch(_){} showMenu(b,x,y); },480); });
+['pointerup','pointerleave','pointercancel'].forEach(ev=>bays.addEventListener(ev, e=>{ clearTimeout(holdT); document.querySelectorAll('.bay').forEach(x=>clearTimeout(x._hc)); const b=e.target.closest&&e.target.closest('.bay'); document.querySelectorAll('.bay.holding').forEach(x=>x.classList.remove('holding')); }));
+bays.addEventListener('contextmenu', e => { const b=e.target.closest('.bay'); if(b){ e.preventDefault(); clearTimeout(holdT); held=true; showMenu(b,e.clientX,e.clientY); } });
+bays.addEventListener('click', e => { const b = e.target.closest('.bay'); if(!b) return; if(held){ held=false; e.preventDefault(); return; } (function(){var p=document.getElementById('promo');if(p&&p.pause)p.pause();})(); openMod(b.dataset.id); });
+document.addEventListener('pointerdown', e => { if(menuEl && !menuEl.contains(e.target)) closeMenu(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+/* tap a tier: it opens with the mods inside */
+const TIER_MODS={FREE:['hullworks'],NEURON:['kerbal-brains','glow-up'],SYNAPSE:['iron-root'],CORTEX:['jump-gate','critters'],HIVE:['kerbal-brains','iron-root','jump-gate','hullworks','glow-up','critters']};
+const TIER_INFO={FREE:['Free membership','Join free on Patreon. No card needed.','JOIN FREE'],NEURON:['Neuron · $8/mo','Plus everything in the free membership.','JOIN NEURON'],SYNAPSE:['Synapse · $12/mo','Plus everything in Neuron and the free membership.','JOIN SYNAPSE'],CORTEX:['Cortex · $20/mo','Plus everything in Synapse, Neuron and the free membership.','JOIN CORTEX'],HIVE:['Hive Mind · $25/mo','Every mod, plus early access, credits and a roadmap vote.','JOIN HIVE MIND']};
+const TIER_EXTRA={FREE:[],NEURON:[['Kerbal Brains add-on packs','Every add-on pack for Kerbal Brains as it drops.']],SYNAPSE:[['Colony add-on packs','Every Iron Root and Outworld Colonies pack.']],HIVE:[['Early access','New mods before anyone else, starting with the Void Ring.']]};
+const tierWrap=document.getElementById("tierGrid"), tierOpen=document.getElementById('tierOpen');
+function openTier(key, btn){
+  tierWrap.querySelectorAll('.tier').forEach(t=>t.setAttribute('aria-expanded', String(t===btn)));
+  const [title,note,cta]=TIER_INFO[key]; const acc=getComputedStyle(btn).getPropertyValue('--acc');
+  tierOpen.style.setProperty('--acc',acc);
+  document.getElementById('toTitle').textContent=title; document.getElementById('toNote').textContent=note; document.getElementById('toJoin').textContent=cta;
+  const minis=TIER_MODS[key].map((id,i)=>{ const m=MODS.find(q=>q.id===id); return `<button class="mini" style="--macc:${m.acc};animation-delay:${i*60}ms" data-id="${m.id}"><span class="mshot"><video muted loop playsinline autoplay preload="metadata" poster="media/${m.loop}.jpg" aria-hidden="true"><source src="media/${m.loop}.mp4" type="video/mp4"></video><img class="mhead" src="media/head-${m.crew}.jpg" alt=""></span><span class="mt"><b>${esc(m.a)}<span style="color:${m.acc}">${esc(m.b)}</span></b><span>${esc(m.tagline)}</span></span></button>`; });
+  const extras=(TIER_EXTRA[key]||[]).map(([t,d])=>`<div class="mini extra"><div><b>${t}</b>${d}</div></div>`);
+  if(key==='FREE'||key==='HIVE') minis.push(`<a class="mini" style="--macc:#ffc74d" href="guides/badge-bar/index.html" data-guide="guides/badge-bar/index.html" data-gname="Badge Bar Guide" data-gcrew=""><span class="mshot"><video muted loop playsinline autoplay preload="metadata" poster="media/a-bb-badges.jpg" aria-hidden="true"><source src="media/a-bb-badges.mp4" type="video/mp4"></video><img class="mhead" src="media/badge.png" alt="" style="background:#0b1020"></span><span class="mt"><b>BADGE <span style="color:#ffc74d">BAR</span></b><span>Main-menu badges for your top mods. Opens its guide.</span></span></a>`);
+  document.getElementById('toMinis').innerHTML=minis.concat(extras).join('');
+  tierOpen.hidden=false; tierOpen.style.animation='none'; void tierOpen.offsetWidth; tierOpen.style.animation='';
+  tierOpen.querySelectorAll('video').forEach(v=>{ v.muted=true; const p=v.play(); if(p&&p.catch) p.catch(()=>{}); });
+  if(tierOpen.getBoundingClientRect().top > innerHeight-120) tierOpen.scrollIntoView({block:'nearest'});
+}
+tierWrap.addEventListener('click', e => { const t=e.target.closest('.tier'); if(!t) return; if(t.getAttribute('aria-expanded')==='true'){ t.setAttribute('aria-expanded','false'); tierOpen.hidden=true; return; } openTier(t.dataset.tier,t); });
+document.getElementById('toClose').addEventListener('click',()=>{ tierOpen.hidden=true; tierWrap.querySelectorAll('.tier').forEach(t=>t.setAttribute('aria-expanded','false')); });
+document.getElementById('toMinis').addEventListener('click', e => { const b=e.target.closest('.mini[data-id]'); if(b){ (function(){var p=document.getElementById('promo');if(p&&p.pause)p.pause();})(); openMod(b.dataset.id); } });
+document.getElementById('sTabs').addEventListener('click', e => { const b = e.target.closest('button[data-tab]'); if(b) selectTab(b.dataset.tab); });
+document.getElementById('sTabs').addEventListener('keydown', e => {
+  if(!['ArrowLeft','ArrowRight'].includes(e.key)) return;
+  const bs=[...document.querySelectorAll('#sTabs button')]; const i=bs.indexOf(document.activeElement); if(i<0) return;
+  const n=bs[(i+(e.key==='ArrowRight'?1:bs.length-1))%bs.length]; n.focus(); selectTab(n.dataset.tab);
+});
+document.getElementById('sPanes').addEventListener('click', e => {
+  const g = e.target.closest('[data-go]'); if(g){ selectTab(g.dataset.go); return; }
+  const ph = e.target.closest('[data-ph]'); if(ph) openLb(+ph.dataset.ph);
+});
+document.getElementById('sClose').addEventListener('click', closeSheet);
+sheet.addEventListener('click', e => { if(e.target === sheet) closeSheet(); });
+sheet.addEventListener('cancel', e => { if(!document.getElementById('lb').hidden){ e.preventDefault(); closeLb(); } else { e.preventDefault(); closeSheet(); } });
+
+/* lightbox with swipe */
+const lb = document.getElementById('lb');
+function showLb(){ const ph = cur.photos[lbIndex]; const im=document.getElementById('lbImg'); im.src = ph.src; im.alt = ph.cap; document.getElementById('lbCap').textContent = `${ph.cap} · ${lbIndex+1}/${cur.photos.length}`; }
+function openLb(i){ lbIndex=i; showLb(); lb.hidden=false; document.getElementById('lbClose').focus(); }
+function closeLb(){ lb.hidden = true; }
+function step(d){ lbIndex=(lbIndex+d+cur.photos.length)%cur.photos.length; showLb(); }
+document.getElementById('lbPrev').onclick=()=>step(-1);
+document.getElementById('lbNext').onclick=()=>step(1);
+document.getElementById('lbClose').onclick=closeLb;
+lb.addEventListener('keydown', e => { if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
+let tx=null; lb.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+lb.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouches[0].clientX-tx; if(Math.abs(dx)>40) step(dx<0?1:-1); tx=null; });
+
+/* deep link: #iron-root opens that bay */
+/* always start fresh at the top (no remembered card or scroll spot) */
+
+/* void ring: three rotating scenes (the pull, swallowed, something in there) */
+(function(){
+  const c=document.getElementById('voidfx'); const ctx=c.getContext('2d'); if(!ctx) return;
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cap=document.getElementById('voidcap');
+  const dots=[...Array(160)].map(()=>({r:40+Math.random()*280,a:Math.random()*6.28,s:.002+Math.random()*.006,z:Math.random()}));
+  let W=0,H=0,k=1;
+  function size(){ const r=c.getBoundingClientRect(); k=devicePixelRatio||1; W=c.width=r.width*k; H=c.height=r.height*k; }
+  size(); addEventListener('resize',size);
+  const SCENES=[{n:'The pull',d:6.5},{n:'Swallowed',d:6.5},{n:'Something in there',d:7.5}];
+  let scene=0, t0=performance.now();
+  function core(cx,cy,R,glow){ const g=ctx.createRadialGradient(cx,cy,R*.2,cx,cy,R*2.4); g.addColorStop(0,'rgba(0,0,0,1)'); g.addColorStop(.42,'rgba(0,0,0,1)'); g.addColorStop(.55,`rgba(140,70,255,${.35*glow})`); g.addColorStop(1,'rgba(20,8,40,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,R*2.4,0,6.29); ctx.fill(); }
+  function swirl(cx,cy,speed,alpha){ for(const d of dots){ d.a+=d.s*(300/d.r)*speed; d.r-=.14*speed; if(d.r<36) d.r=320; const x=cx+Math.cos(d.a)*d.r*k, y=cy+Math.sin(d.a)*d.r*.55*k; ctx.fillStyle=`rgba(${180+d.z*60},${140+d.z*50},255,${Math.min(1,d.r/140)*.8*alpha})`; ctx.fillRect(x,y,2*k,2*k);} }
+  function ship(x,y,ang,sc,a){ ctx.save(); ctx.translate(x,y); ctx.rotate(ang); ctx.scale(sc,sc); ctx.globalAlpha=a; ctx.fillStyle='#eef2ff'; ctx.beginPath(); ctx.moveTo(14*k,0); ctx.lineTo(-9*k,-7*k); ctx.lineTo(-5*k,0); ctx.lineTo(-9*k,7*k); ctx.closePath(); ctx.fill(); ctx.fillStyle='#ff7a1a'; ctx.beginPath(); ctx.moveTo(-6*k,-3*k); ctx.lineTo(-16*k-Math.random()*6*k,0); ctx.lineTo(-6*k,3*k); ctx.fill(); ctx.restore(); ctx.globalAlpha=1; }
+  function eye(x,y,r,open,look){ if(open<=0.02) return; ctx.save(); ctx.beginPath(); ctx.ellipse(x,y,r*1.6,r*open,0,0,6.29); ctx.clip();
+    const g=ctx.createRadialGradient(x,y,0,x,y,r*1.6); g.addColorStop(0,'#fff6b0'); g.addColorStop(.35,'#ffd400'); g.addColorStop(1,'#ff5a00'); ctx.fillStyle=g; ctx.fillRect(x-r*2,y-r*2,r*4,r*4);
+    ctx.fillStyle='#000'; ctx.beginPath(); ctx.ellipse(x+look*r*.5,y,r*.22,r*.95,0,0,6.29); ctx.fill(); ctx.restore();
+    ctx.save(); ctx.shadowColor='#ffb000'; ctx.shadowBlur=30*k; ctx.strokeStyle=`rgba(255,180,0,${.5*open})`; ctx.lineWidth=2*k; ctx.beginPath(); ctx.ellipse(x,y,r*1.6,r*open,0,0,6.29); ctx.stroke(); ctx.restore(); }
+  function frame(now){
+    let t=(now-t0)/1000; if(t>SCENES[scene].d){ scene=(scene+1)%SCENES.length; t0=now; t=0; if(cap) cap.textContent=SCENES[scene].n; }
+    const fade=Math.min(1,t/.6,(SCENES[scene].d-t)/.6);
+    const cx=W*.62, cy=H*.42, R=48*k;
+    ctx.fillStyle='rgba(7,11,24,.32)'; ctx.fillRect(0,0,W,H);
+    if(scene===0){ swirl(cx,cy,1,fade); core(cx,cy,R,1); }
+    if(scene===1){ swirl(cx,cy,.5,.6*fade); core(cx,cy,R,1);
+      const p=Math.min(1,t/5.2), r=(1-p)*Math.min(W,H)*.55+R*.3, a=-2.6+p*9;
+      if(p<1){ const x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r*.55; ship(x,y,a+1.9,Math.max(.25,1-p*.8)*1.9,1); }
+      if(t>5.2&&t<5.9){ const f=1-(t-5.2)/.7; ctx.fillStyle=`rgba(200,160,255,${f*.8})`; ctx.beginPath(); ctx.arc(cx,cy,R*(1+(1-f)*3),0,6.29); ctx.fill(); } }
+    if(scene===2){ core(cx,cy,R*1.5,.6+.2*Math.sin(t*2)); swirl(cx,cy,.15,.35*fade);
+      const o = t<1.5?0 : t<2.6?(t-1.5)/1.1 : t<3.0?1 : t<3.15?1-(t-3)/.15 : t<3.3?(t-3.15)/.15 : t<5.6?1 : Math.max(0,1-(t-5.6)/1.2);
+      const look = t>3.4&&t<5.6 ? Math.sin((t-3.4)*1.6)*.8 : 0;
+      eye(cx-R*1.7,cy-R*.15,R*.7,o*.62,look); eye(cx+R*1.7,cy-R*.15,R*.7,o*.62,look); }
+    requestAnimationFrame(frame);
+  }
+  if(still){ ctx.fillStyle='#070b18'; ctx.fillRect(0,0,W,H); core(W*.62,H*.42,48*k,1); swirl(W*.62,H*.42,0,1); return; }
+  requestAnimationFrame(frame);
+})();
+</script>
+<dialog id="guideView" aria-label="How-to guide"><div class="gbar"><img id="gvHead" alt=""><b><span id="gvName">Guide</span><small>How-to guide &middot; you're still on the site</small></b><button class="btn" id="gvBack">&larr; BACK TO THE HANGAR</button></div><iframe id="gvFrame" title="How-to guide"></iframe></dialog>
+
+<script>
+(()=>{const gv=document.getElementById('guideView'),fr=document.getElementById('gvFrame');
+document.addEventListener('click',e=>{const b=e.target.closest('[data-guide]');if(!b)return;e.preventDefault();
+ fr.src=b.dataset.guide;document.getElementById('gvName').textContent=b.dataset.gname||'Guide';
+ const h=document.getElementById('gvHead');h.src=b.dataset.gcrew?('media/head-'+b.dataset.gcrew+'.jpg'):'media/badge.png';
+ document.querySelectorAll('video.live,.mini video').forEach(v=>{try{v.pause()}catch(_){}});
+ gv.showModal();},true);
+const close=()=>{gv.close();};
+document.getElementById('gvBack').onclick=close;
+gv.addEventListener('close',()=>{fr.src='about:blank';document.querySelectorAll('video.live,.mini video').forEach(v=>{try{v.play().catch(()=>{})}catch(_){}});});
+})();
+</script>
+
+<script>
+(()=>{const MOVES=[['wave','Hi there! \ud83d\udc4b'],['flip','Wheee! \ud83c\udf00'],['boost','To the Mun! \ud83d\ude80'],['wiggle','Hehe, that tickles!'],['wave','Your crew has brains now \ud83e\udde0']];
+const LINES={left:['Pilot here. Ready to jump! \ud83d\udc4b','Wheee! \ud83c\udf00','Full throttle! \ud83d\ude80','Hey, watch the visor!','See you through the gate \ud83c\udf08'],right:['Hi! I\'m the Hero \ud83d\udc4b','Wheee! \ud83c\udf00','To the Mun! \ud83d\ude80','Hehe, that tickles!','Your crew has brains now \ud83e\udde0']};
+document.querySelectorAll('.fl-btn').forEach(btn=>{let i=0,t1,busy=false;const act=btn.querySelector('.fl-act'),say=btn.querySelector('.fl-say');const side=btn.closest('.floater').classList.contains('left')?'left':'right';
+ const go=(silent)=>{if(busy)return;busy=true;const [cls]=MOVES[i%MOVES.length];const line=LINES[side][i%LINES[side].length];i++;
+  act.classList.remove('wave','flip','boost','wiggle');void act.offsetWidth;act.classList.add(cls);
+  if(!silent){say.textContent=line;say.classList.add('on');clearTimeout(t1);t1=setTimeout(()=>say.classList.remove('on'),1900);
+   for(let k=0;k<9;k++){const sp=document.createElement('span');sp.className='fl-spark';const a=Math.random()*Math.PI*2,r=50+Math.random()*60;sp.style.left='50%';sp.style.top='45%';sp.style.setProperty('--dx',Math.cos(a)*r+'px');sp.style.setProperty('--dy',Math.sin(a)*r+'px');if(k%3===0)sp.style.background='var(--cyan)';btn.appendChild(sp);setTimeout(()=>sp.remove(),850);}}
+ };
+ act.addEventListener('animationend',()=>{busy=false;});
+ btn.addEventListener('click',()=>go(false));
+ btn._hint=()=>{const save=i;i=0;go(true);i=save;};
+});
+setTimeout(()=>{const b=document.querySelector('.floater.right .fl-btn');b&&b._hint&&b._hint();},2200);
+})();
+</script>
+
+
+<script>
+/* iPad helper: force muted inline playback, play cards as they scroll in, and retry on first touch (Low Power Mode blocks autoplay until you tap). */
+(()=>{const vids=()=>document.querySelectorAll('video[autoplay],video.live,.mini video');
+const prep=v=>{v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('playsinline','');v.setAttribute('webkit-playsinline','');};
+const tryPlay=v=>{prep(v);const p=v.play();if(p&&p.catch)p.catch(()=>{});};
+const io=('IntersectionObserver' in window)?new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)tryPlay(e.target);else{try{e.target.pause()}catch(_){}}}),{rootMargin:'120px'}):null;
+const hook=()=>vids().forEach(v=>{if(v._kb)return;v._kb=1;prep(v);io?io.observe(v):tryPlay(v);});
+hook();new MutationObserver(hook).observe(document.body,{childList:true,subtree:true});
+const kick=()=>{vids().forEach(v=>{const r=v.getBoundingClientRect();if(r.bottom>0&&r.top<innerHeight)tryPlay(v);});};
+['touchend','scroll'].forEach(ev=>addEventListener(ev,function(){setTimeout(kick,60);},{passive:true}));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)kick();});
+})();
+</script>
+
+<script>
+/* Brain power: neural web behind the headline, sparks on "brains.", thought cycling, cargo vs crew, orders console */
+(()=>{const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* neural web */
+const cv=document.getElementById('neuroBg');
+if(cv){const ctx=cv.getContext('2d');let W=0,H=0,N=[],pulses=[],on=true,dpr=Math.min(2,devicePixelRatio||1);
+ const size=()=>{const r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
+  const n=Math.round(Math.min(70,Math.max(26,W*H/14000)));N=[];for(let i=0;i<n;i++)N.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.25,vy:(Math.random()-.5)*.25});};
+ size();addEventListener('resize',size);
+ const L=130;
+ const frame=()=>{if(!on){requestAnimationFrame(frame);return;}ctx.clearRect(0,0,W,H);
+  for(const p of N){if(!RM){p.x+=p.vx;p.y+=p.vy;}if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;}
+  for(let i=0;i<N.length;i++)for(let j=i+1;j<N.length;j++){const a=N[i],b=N[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<L){ctx.strokeStyle='rgba(255,95,168,'+(.5*(1-d/L))+')';ctx.lineWidth=1.3;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+   if(!RM&&Math.random()<.002&&pulses.length<40)pulses.push({a,b,t:0,c:Math.random()<.35});}}
+  for(const p of N){ctx.fillStyle='rgba(255,184,214,.95)';ctx.beginPath();ctx.arc(p.x,p.y,2.4,0,7);ctx.fill();}
+  pulses=pulses.filter(q=>{q.t+=.025;if(q.t>1)return false;const x=q.a.x+(q.b.x-q.a.x)*q.t,y=q.a.y+(q.b.y-q.a.y)*q.t;ctx.fillStyle=q.c?'#22e5ff':'#ff5fa8';ctx.shadowColor=ctx.fillStyle;ctx.shadowBlur=12;ctx.beginPath();ctx.arc(x,y,2.6,0,7);ctx.fill();ctx.shadowBlur=0;return true;});
+  requestAnimationFrame(frame);};
+ requestAnimationFrame(frame);
+ if('IntersectionObserver' in window)new IntersectionObserver(e=>{on=e[0].isIntersecting;}).observe(cv);
+ window._neuroFire=(n)=>{for(let k=0;k<n;k++){const a=N[Math.floor(Math.random()*N.length)];let b=null,bd=1e9;for(const o of N){const d=Math.hypot(o.x-a.x,o.y-a.y);if(o!==a&&d<L&&d<bd){bd=d;b=o;}}if(b)pulses.push({a,b,t:0,c:k%3===0});}};
+}
+/* sparks on the word */
+const w=document.querySelector('h1 .neuro');
+const zap=(n)=>{if(!w)return;for(let k=0;k<n;k++){const z=document.createElement('span');z.className='zap'+(k%3===0?' c':'');const a=Math.random()*Math.PI*2,r=40+Math.random()*90;z.style.left=(20+Math.random()*60)+'%';z.style.top='50%';z.style.setProperty('--dx',Math.cos(a)*r+'px');z.style.setProperty('--dy',Math.sin(a)*r+'px');w.appendChild(z);setTimeout(()=>z.remove(),950);}window._neuroFire&&window._neuroFire(18);};
+if(w){w.addEventListener('click',()=>zap(16));w.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();zap(16);}});if(!RM){setTimeout(()=>zap(10),900);setInterval(()=>{if(!document.hidden)zap(5);},5200);}}
+
+/* thought bubbles */
+const cycle=()=>{document.querySelectorAll('.mate').forEach((m,i)=>{const t=m.querySelector('.think');if(!t)return;const list=THOUGHTS[m.dataset.key]||[];if(!list.length)return;
+ setTimeout(()=>{t.classList.add('fade');setTimeout(()=>{m._ti=((m._ti||0)+1)%list.length;t.textContent=list[m._ti];t.classList.remove('fade');},350);},i*420);});};
+setInterval(()=>{if(!document.hidden)cycle();},4200);
+
+/* cargo vs crew */
+const c=document.getElementById('cvc');
+if(c){const inp=c.querySelector('input');const set=v=>{c.style.setProperty('--cut',v+'%');};inp.addEventListener('input',()=>set(inp.value));let drag=false;const at=e=>{const r=c.getBoundingClientRect();const v=Math.max(0,Math.min(100,(e.clientX-r.left)/r.width*100));set(v);inp.value=v;};c.addEventListener('pointerdown',e=>{drag=true;at(e);try{c.setPointerCapture(e.pointerId)}catch(_){}});c.addEventListener('pointermove',e=>{if(drag)at(e);});['pointerup','pointercancel'].forEach(t=>c.addEventListener(t,()=>{drag=false;}));
+ if(!RM){let t0=null;const intro=ts=>{if(t0===null)t0=ts;const p=Math.min(1,(ts-t0)/1800);const v=50+Math.sin(p*Math.PI*2)*28*(1-p);set(v);inp.value=v;if(p<1)requestAnimationFrame(intro);};
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(e=>{if(e[0].isIntersecting){io.disconnect();requestAnimationFrame(intro);}},{threshold:.5});io.observe(c);}}}
+
+/* orders console */
+const ORDERS=[
+ ['Give a job...','Fix the solar panel','a-kb-41ca770f','Engineer floats out on a spacewalk, cranks the bolt, pats the panel. Fixed!'],
+ ['Give a job...','Refuel the lander','a-kb-881061ff','Two Kerbals haul the fuel hose over, plug it in, high-five.'],
+ ['Drive the rover here','(click the ground)','a-kb-1e2343ed','They hop in a rover within 400 m and drive to the spot you clicked.'],
+ ['Follow me','','a-kb-a3f69b66','The whole crew falls in behind you and marches along.'],
+ ['Give a job...','Dig ore in the Strip Mine','a-ir-d1e438d1','Pickaxe swing, clink, ore for the colony. (With Iron Root.)'],
+ ['Plant a flag','','anim-kb-flag','Flag goes in with a thunk, then a victory cheer.'],
+ ['Group photo','','a-gu-4219814e','Everyone lines up. 3, 2, 1... "Say SNACKS!" A real screenshot gets saved.'],
+ ['Victory dance!','','a-kb-2ae2ee3b','High-fives, wiggles and glow wands. Every Kerbal nearby joins in.']];
+const menu=document.querySelector('.ordermenu'),vid=document.getElementById('orderVid'),txt=document.getElementById('orderText'),who=document.getElementById('orderWho');
+if(menu&&vid){ORDERS.forEach((o,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed','false');b.innerHTML='<b>Brain:</b> '+o[0]+(o[1]?' <span style="color:var(--muted)">'+o[1]+'</span>':'');b.onclick=()=>pick(i,true);menu.appendChild(b);});
+ let tt;const pick=(i,user)=>{menu.querySelectorAll('button').forEach((b,k)=>b.setAttribute('aria-pressed',k===i?'true':'false'));const o=ORDERS[i];
+  vid.poster='media/'+o[2]+'.jpg';vid.src='media/'+o[2]+'.mp4';vid.muted=true;vid.playsInline=true;const p=vid.play();if(p&&p.catch)p.catch(()=>{});
+  who.textContent='ORDER: '+(o[1]&&o[1][0]!=='('?o[1]:o[0]).toUpperCase();txt.textContent='';txt.className='typing';clearTimeout(tt);
+  tt=setTimeout(()=>{txt.className='';txt.textContent=o[3];},user?650:0);};
+ pick(0,false);}
+})();
+</script>
+</body></html>

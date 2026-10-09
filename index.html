@@ -72,6 +72,13 @@ html.kb-lock,html.kb-lock body{overflow:hidden}
 .bay video,.bay img,.mini video,.mini img,.mate img,.bay .shot,.mini .mshot{pointer-events:none;-webkit-touch-callout:none}
 .bay,.mini,.mate,.tier{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;touch-action:manipulation}
 main section[id]{scroll-margin-top:84px}
+
+.cvc-tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:22px auto 0}
+.cvc-tabs button{all:unset;cursor:pointer;padding:9px 16px;border-radius:999px;border:2px solid var(--line);background:var(--panel);font-weight:600;font-size:15px;-webkit-tap-highlight-color:transparent}
+.cvc-tabs button[aria-selected="true"]{background:var(--btn);color:#4a0d2a;border-color:var(--btn-edge)}
+.cvc-tabs button:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.cvc-tabs + .cvc{margin-top:12px}
+.cvc img{transition:opacity .25s}
 </style></head><body>
 <script>
 (function(){try{if('scrollRestoration' in history)history.scrollRestoration='manual';}catch(e){}
@@ -485,15 +492,21 @@ main section[id]{scroll-margin-top:84px}
         <p>Stock Kerbals sit in their seats and wait. Kerbal Brains Kerbals get up, walk around, take jobs, fix things, drive rovers, team up and make friends. You can boss them around, or just watch them live.</p>
       </div>
 
+      <div class="cvc-tabs" role="tablist" aria-label="Pick a scene">
+        <button type="button" role="tab" aria-selected="true" data-sl="0">&#129504; Power on</button>
+        <button type="button" role="tab" aria-selected="false" data-sl="1">&#127769; Moon base</button>
+        <button type="button" role="tab" aria-selected="false" data-sl="2">&#127981; Hangar</button>
+        <button type="button" role="tab" aria-selected="false" data-sl="3">&#128752;&#65039; Space station</button>
+      </div>
       <div class="cvc" id="cvc" style="--cut:50%">
-        <img src="media/a-kb-dc59ab89.jpg" alt="Four closed CARGO crates in the hangar">
-        <img class="after" src="media/a-kb-1f869580.jpg" alt="Four brain crew mascots standing on top of the open crates, cheering">
-        <span class="tag l">CARGO<small>Stock KSP. Rides along. Waits for you.</small></span>
-        <span class="tag r">CREW<small>Kerbal Brains. Thinks, works, talks, high-fives.</small></span>
+        <img id="cvcOff" src="media/sl-power-off.jpg" alt="">
+        <img id="cvcOn" class="after" src="media/sl-power-on.jpg" alt="">
+        <span class="tag l"><span id="cvcOffT">BRAINS OFF</span><small id="cvcOffS">Just cargo. Sits there. Waits for you.</small></span>
+        <span class="tag r"><span id="cvcOnT">BRAINS ON</span><small id="cvcOnS">Wide awake and ready to fly.</small></span>
         <span class="bar"></span><span class="knob" aria-hidden="true">&#129504;</span>
         <input type="range" min="0" max="100" value="50" aria-label="Drag to compare cargo and crew">
       </div>
-      <p class="cvc-hint">&#8596; Drag the brain to wake them up</p>
+      <p class="cvc-hint">&#8596; Drag the brain to switch their brains on</p>
 
       <div class="console">
         <div class="ordermenu" role="group" aria-label="Brain orders">
@@ -997,6 +1010,24 @@ if(menu&&vid){ORDERS.forEach((o,i)=>{const b=document.createElement('button');b.
   who.textContent='ORDER: '+(o[1]&&o[1][0]!=='('?o[1]:o[0]).toUpperCase();txt.textContent='';txt.className='typing';clearTimeout(tt);
   tt=setTimeout(()=>{txt.className='';txt.textContent=o[3];},user?650:0);};
  pick(0,false);}
+})();
+</script>
+
+<script>
+/* Brains off / on slider scenes */
+(function(){var SL=[
+ {k:'power',a:'A brain mascot slumped in a dark cockpit, brain grey and dim',b:'The same mascot with a glowing pink brain, thumbs up, cockpit lit',o:['BRAINS OFF','Just cargo. Sits there. Waits for you.'],n:['BRAINS ON','Wide awake and ready to fly.']},
+ {k:'base',a:'A frozen moon base, dome flat, crew standing still',b:'The same moon base alive: dome full of plants, rover driving, crew mining and planting a flag',o:['BRAINS OFF','A frozen base. Nobody moves.'],n:['BRAINS ON','Mining, building, driving, planting flags.']},
+ {k:'hangar',a:'A dark idle hangar, crew standing like mannequins',b:'The same hangar busy: welding, forklift, inspector, lunch truck',o:['BRAINS OFF','Lights off. Nothing gets built.'],n:['BRAINS ON','Welding, loading, inspecting. Lunch is ready.']},
+ {k:'station',a:'A station crew floating limp like crash-test dummies',b:'The same station crew floating happily, pressing buttons, on a spacewalk',o:['BRAINS OFF','Crash-test dummies along for the ride.'],n:['BRAINS ON','Running the ship and fixing it outside.']}];
+var c=document.getElementById('cvc');if(!c)return;var off=document.getElementById('cvcOff'),on=document.getElementById('cvcOn');
+SL.forEach(function(x){var i1=new Image();i1.src='media/sl-'+x.k+'-off.jpg';var i2=new Image();i2.src='media/sl-'+x.k+'-on.jpg';});
+function show(i){var x=SL[i];off.src='media/sl-'+x.k+'-off.jpg';on.src='media/sl-'+x.k+'-on.jpg';off.alt=x.a;on.alt=x.b;
+ document.getElementById('cvcOffT').textContent=x.o[0];document.getElementById('cvcOffS').textContent=x.o[1];
+ document.getElementById('cvcOnT').textContent=x.n[0];document.getElementById('cvcOnS').textContent=x.n[1];
+ document.querySelectorAll('.cvc-tabs button').forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');});}
+show(0);
+document.querySelector('.cvc-tabs').addEventListener('click',function(e){var b=e.target.closest('button[data-sl]');if(b)show(+b.dataset.sl);});
 })();
 </script>
 </body></html>

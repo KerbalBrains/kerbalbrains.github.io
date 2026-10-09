@@ -348,6 +348,15 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .lock .what{flex:1;min-width:0}
 .lock .what b{display:block}
 .lock .what span{font-size:14px;color:var(--muted)}
+.lock{cursor:zoom-in;-webkit-tap-highlight-color:transparent;transition:border-color .2s}
+.lock:hover{border-color:var(--gold)}
+.lock .thumb{pointer-events:none}
+.csbox{position:fixed;inset:0;z-index:9999;background:rgba(4,6,14,.92);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:calc(env(safe-area-inset-top,0px) + 56px) 16px calc(env(safe-area-inset-bottom,0px) + 24px);cursor:zoom-out;animation:csIn .2s ease-out}
+.csbox img{max-width:min(100%,1400px);max-height:78vh;width:auto;height:auto;border-radius:16px;border:2px solid var(--line);box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.csbox .cap{font-family:var(--f-display);font-weight:900;letter-spacing:.06em;color:var(--gold);text-align:center}
+.csbox .cap small{display:block;font-family:var(--f-body);font-weight:500;letter-spacing:0;color:var(--muted);margin-top:4px}
+.csbox .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 12px);right:16px;width:44px;height:44px;border-radius:50%;border:2px solid var(--line);background:rgba(7,11,24,.8);color:#fff;font-size:22px;line-height:1;cursor:pointer}
+@keyframes csIn{from{opacity:0}to{opacity:1}}
 .redact{display:inline-block;background:var(--text);opacity:.85;border-radius:3px;color:transparent;user-select:none}
 
 /* community */
@@ -911,6 +920,16 @@ lb.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouc
   if(still){ ctx.fillStyle='#070b18'; ctx.fillRect(0,0,W,H); core(W*.62,H*.42,48*k,1); swirl(W*.62,H*.42,0,1); return; }
   requestAnimationFrame(frame);
 })();
+</script>
+<script>
+(()=>{const box=document.createElement('div');box.className='csbox';box.hidden=true;box.setAttribute('role','dialog');box.setAttribute('aria-label','Coming soon picture');
+box.innerHTML='<button type="button" class="x" aria-label="Close">&#10005;</button><img alt=""><div class="cap"></div>';document.body.appendChild(box);
+const im=box.querySelector('img'),cap=box.querySelector('.cap');
+const close=()=>{box.hidden=true;im.removeAttribute('src');document.documentElement.style.overflow='';};
+document.querySelectorAll('.locked .lock').forEach(l=>{const t=l.querySelector('img.thumb');if(!t)return;l.setAttribute('role','button');l.tabIndex=0;
+ const open=()=>{im.src=t.getAttribute('src').replace('.jpg','-lg.jpg');im.alt=t.alt;const b=l.querySelector('.what b');cap.innerHTML=(l.querySelector('.num').textContent+' PATRONS')+'<small>'+(b?b.textContent:'')+'</small>';box.hidden=false;document.documentElement.style.overflow='hidden';};
+ l.addEventListener('click',open);l.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});});
+box.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close();});})();
 </script>
 <dialog id="guideView" aria-label="How-to guide"><div class="gbar"><img id="gvHead" alt=""><b><span id="gvName">Guide</span><small>How-to guide &middot; you're still on the site</small></b><button class="btn" id="gvBack">&larr; BACK TO THE HANGAR</button></div><iframe id="gvFrame" title="How-to guide"></iframe></dialog>
 

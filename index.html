@@ -107,7 +107,7 @@ document.addEventListener('click',function(e){if(!e.isTrusted)return;if(last&&Da
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Lexend:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: launch-night sales page. Video hero, a hangar grid of six mod bays that open into tabbed sheets
+/* Layout: launch-night sales page. Video hero, a hangar grid of seven mod bays that open into tabbed sheets
    (Overview / Photos / Videos / Guide), tier ladder, "classified" coming-soon bay, community dock.
    One committed dark look (the Kerbal Brains brand): ink ground, cyan + orange family rule, per-mod accents. */
 :root{
@@ -196,6 +196,10 @@ section{padding-block:clamp(48px,8vw,88px)}
 .bay .shot img.drift{animation:drift 14s ease-in-out infinite alternate;transform-origin:60% 40%}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.12) translate(-2%,1%)}}
 .bay .shot .chip{position:absolute;right:12px;top:12px}
+.bay .side{display:flex;flex-direction:column;min-width:0;flex:1}
+.bay .shot .endg{position:absolute;left:12px;top:12px;font-family:var(--f-display);font-weight:900;font-size:11px;letter-spacing:.14em;padding:6px 11px;border-radius:999px;color:#3a1a00;background:linear-gradient(90deg,#ffe08a,#ff9a1f);box-shadow:0 0 18px rgba(255,170,40,.6)}
+.bay.endgame{grid-column:1/-1;border-color:rgba(255,176,32,.7);box-shadow:0 22px 60px -28px rgba(255,140,0,.65)}
+@media (min-width:601px){.bay.endgame{flex-direction:row}.bay.endgame .top{flex:0 0 58%;max-width:58%}.bay.endgame .shot{height:100%;aspect-ratio:auto;min-height:300px}.bay.endgame .mascot{bottom:14px}.bay.endgame .guide-by{margin:18px 18px 0;min-height:0}.bay.endgame .side{justify-content:center}.bay.endgame h3{font-size:30px}}
 .bay .top{position:relative}
 .bay .mascot{position:absolute;left:14px;bottom:-34px;width:76px;height:76px;border-radius:50%;border:3px solid var(--acc);object-fit:cover;background:#0d1f5c;box-shadow:0 8px 20px rgba(0,0,0,.45)}
 .bay .guide-by{font-size:13px;color:var(--muted);margin-left:84px;margin-top:-6px;min-height:30px;display:flex;align-items:center}
@@ -433,14 +437,14 @@ main section[id]{scroll-margin-top:84px}
         <p class="eyebrow">Fan-made mods for Kerbal Space Program 1</p>
         <canvas id="neuroBg" aria-hidden="true"></canvas><h1 style="margin-top:12px">Your crew finally has <span class="p neuro" role="button" tabindex="0" aria-label="brains (tap for sparks)">brains.</span></h1>
         <p class="sub2" style="font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.2vw,24px);color:var(--cyan);margin-top:14px;letter-spacing:.03em">They were cargo. Now they're crew.</p>
-        <p class="lede">Six mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates and meet the locals.</p>
+        <p class="lede">Seven mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates, meet the locals and wake a Dyson sphere.</p>
         <div class="ctas">
           <a class="btn" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
           <a class="btn ghost" href="#mods">SEE THE MODS</a>
         </div>
         <p class="note">Join free on Patreon: HullWorks + Badge Bar.</p>
         <div class="facts" aria-label="Suite at a glance">
-          <div><b>6</b>mods</div>
+          <div><b>7</b>mods</div>
           <div><b>8 sec</b>to reach any planet</div>
           <div><b>8</b>critters to find</div>
           <div><b>42</b>new suits</div>
@@ -485,7 +489,7 @@ main section[id]{scroll-margin-top:84px}
         <button class="tier" style="--acc:var(--ok)" data-tier="FREE" aria-expanded="false"><h3>JOIN FREE</h3><div class="price" style="font-size:22px">Free membership</div><ul><li>HullWorks ship paint</li><li>Badge Bar</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier" style="--acc:var(--pink)" data-tier="NEURON" aria-expanded="false"><h3>NEURON</h3><div class="price">$8<small>/mo</small></div><ul><li>Kerbal Brains</li><li>All Kerbal Brains add-on packs</li><li>Glow-Up</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier" style="--acc:var(--orange)" data-tier="SYNAPSE" aria-expanded="false"><h3>SYNAPSE</h3><div class="price">$12<small>/mo</small></div><ul><li>Iron Root</li><li>All colony add-on packs</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li><li>Kerbal Dyson</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier best" style="--acc:var(--gold)" data-tier="HIVE" aria-expanded="false"><h3>HIVE MIND</h3><div class="price">$25<small>/mo</small></div><ul><li>Everything</li><li>Early access to new mods</li><li>Name in the credits</li><li>Priority roadmap vote</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
       </div>
       <div class="tier-open" id="tierOpen" hidden>
@@ -707,7 +711,13 @@ const MODS = [
    features:['8 critters on 8 worlds (4 still classified)','Land on a world to unlock its critter','Fill your Creature Book','Critters roam near your lander','Critter Crate part with a spinning hologram'],
    photos:[p('kc-book-hopper.jpg','Crater Hopper (Mun)',1),p('kc-book-slider.jpg','Mint Slider (Minmus)',1),p('kc-book-dustpuff.jpg','Dust Puff (Duna)',1),p('kc-book-drifter.jpg','Glow Drifter (Laythe)',1),p('kc-moon.jpg','Glow drifters at night'),p('kc-laythe.jpg','Laythe shores')],
    trailers:[], clips:[], gameplay:[], guide:'guides/critters/index.html', guideName:'Kerbal Critters Guide',
-   guideHas:['Where each critter lives','Using the Creature Book','The Critter Crate'] }
+   guideHas:['Where each critter lives','Using the Creature Book','The Critter Crate'] },
+ { id:'dyson', anims:[{src:'media/a-dy-wake.mp4',poster:'media/a-dy-wake.jpg',title:'Waking the sphere'}], loop:'a-dy-wake', crew:'engineer', role:'The Engineer', a:'KERBAL ', b:'DYSON', acc:'#ffb020', tier:'CORTEX', badge:'ENDGAME', tagline:'Open the Solara Gate. Wake the sphere. Earn the Dyson Drive.',
+   cover:'media/dy-crew.jpg', banner:'media/dy-sphere.jpg', bannerPos:'center 40%',
+   features:['The endgame goal: build Jump Gates at 4 planets to open the Solara Gate','Solara: a red dwarf inside a half-built Dyson sphere, way past the last planet','Land on the Dyson Hub and walk into the Control Station','Wake the sphere: a 16-second light show, 1,500 science, 2 million funds and a trophy','Earn the Dyson Drive: about 4x the efficiency of a nuclear engine, but too weak to lift off Kerbin','Hearth: a warm new world with extra solar power, perfect for a colony'],
+   photos:[p('dy-crew.jpg','Waking the sphere'),p('dy-sphere.jpg','The Solara Ring'),p('dy-station.jpg','The Dyson Hub station'),p('dy-load-1.jpg','Loading screen 1'),p('dy-load-2.jpg','Loading screen 2'),p('dy-load-3.jpg','Loading screen 3')],
+   trailers:[], clips:[], gameplay:[], guide:'guides/dyson/index.html', guideName:'Kerbal Dyson Guide',
+   guideHas:['Getting to Solara','Landing on the Dyson Hub','Waking the sphere and the Dyson Drive'] }
 ];
 
 const check = c => `<svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>`;
@@ -716,15 +726,15 @@ const vcount = m => m.trailers.length + m.anims.length + m.clips.length + m.game
 
 /* bays */
 document.getElementById('bays').innerHTML = MODS.map(m => `
-  <button class="bay" style="--acc:${m.acc}" data-id="${m.id}" aria-label="Open ${esc(m.a+m.b)}">
-    <div class="top"><div class="shot"><video class="live" muted loop playsinline autoplay preload="metadata" poster="media/${m.loop}.jpg" aria-hidden="true"><source src="media/${m.loop}.mp4" type="video/mp4"></video><span class="livetag">&#9679; LIVE</span><span class="chip" style="background:${TIERS[m.tier]}">${m.tier}</span></div><img class="mascot" src="media/head-${m.crew}.jpg" alt=""></div>
-    <div class="guide-by">Run by<b>${m.role}</b></div>
+  <button class="bay${m.badge?' endgame':''}" style="--acc:${m.acc}" data-id="${m.id}" aria-label="Open ${esc(m.a+m.b)}">
+    <div class="top"><div class="shot"><video class="live" muted loop playsinline autoplay preload="metadata" poster="media/${m.loop}.jpg" aria-hidden="true"><source src="media/${m.loop}.mp4" type="video/mp4"></video><span class="livetag">&#9679; LIVE</span><span class="chip" style="background:${TIERS[m.tier]}">${m.tier}</span>${m.badge?`<span class="endg">&#9733; ${m.badge}</span>`:''}</div><img class="mascot" src="media/head-${m.crew}.jpg" alt=""></div>
+    <div class="side"><div class="guide-by">Run by<b>${m.role}</b></div>
     <div class="meta" style="padding-top:6px">
       <h3>${esc(m.a)}<span>${esc(m.b)}</span></h3>
       <p class="tagline">${esc(m.tagline)}</p>
       <div class="counts"><span><b>${m.photos.length}</b> photos</span><span><b>${vcount(m)}</b> ${vcount(m)===1?"video":"videos"}</span><span><b>1</b> guide</span></div>
       <span class="open">OPEN BAY &#8594;</span><span class="hint">Tap to open. Hold for the quick menu.</span>
-    </div>
+    </div></div>
   </button>`).join('');
 
 /* card clips: play when on screen, pause when not */
@@ -739,7 +749,7 @@ document.getElementById('bays').innerHTML = MODS.map(m => `
 })();
 
 /* crew grid */
-const CREW = MODS.map(m => ({key:m.crew, role:m.role, job:esc(m.a+m.b).trim(), acc:m.acc, id:m.id}));
+const CREW = MODS.filter((m,i,a)=>a.findIndex(q=>q.crew===m.crew)===i).map(m => ({key:m.crew, role:m.role, job:esc(m.a+m.b).trim(), acc:m.acc, id:m.id}));
 CREW.push({key:'chef', role:'The Chef', job:'Install steps', acc:'#e84545', id:null});
 const LINES={hero:"Hi, I'm the Hero! My crew walks, works and chats on their own now.",pilot:"Pilot here. Strap in, we're jumping to Duna in seconds.",engineer:"Engineer reporting! I'll paint your whole ship in one click.",scientist:"Scientist on duty. Eight critters are out there. Let's find them!",groundcrew:"Ground Crew! New suits, helmet lights and Photo Mode, coming right up.",miner:"Miner here. Dig ore, smelt metal, build a colony. Easy!",chef:"Chef's in! Three steps to install, then lunch is on me."};
 const THOUGHTS={hero:["Plant a flag here? Yes!","Who wants a group photo?","Best friend: the Engineer","Victory dance time!","Following you, boss"],
@@ -834,7 +844,7 @@ document.addEventListener('pointerdown', e => { if(menuEl && !menuEl.contains(e.
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
 /* tap a tier: it opens with the mods inside */
-const TIER_MODS={FREE:['hullworks'],NEURON:['kerbal-brains','glow-up'],SYNAPSE:['iron-root'],CORTEX:['jump-gate','critters'],HIVE:['kerbal-brains','iron-root','jump-gate','hullworks','glow-up','critters']};
+const TIER_MODS={FREE:['hullworks'],NEURON:['kerbal-brains','glow-up'],SYNAPSE:['iron-root'],CORTEX:['jump-gate','critters','dyson'],HIVE:['kerbal-brains','iron-root','jump-gate','hullworks','glow-up','critters','dyson']};
 const TIER_INFO={FREE:['Free membership','Join free on Patreon. No card needed.','JOIN FREE'],NEURON:['Neuron · $8/mo','Plus everything in the free membership.','JOIN NEURON'],SYNAPSE:['Synapse · $12/mo','Plus everything in Neuron and the free membership.','JOIN SYNAPSE'],CORTEX:['Cortex · $20/mo','Plus everything in Synapse, Neuron and the free membership.','JOIN CORTEX'],HIVE:['Hive Mind · $25/mo','Every mod, plus early access, credits and a roadmap vote.','JOIN HIVE MIND']};
 const TIER_EXTRA={FREE:[],NEURON:[['Kerbal Brains add-on packs','Every add-on pack for Kerbal Brains as it drops.']],SYNAPSE:[['Colony add-on packs','Every Iron Root and Outworld Colonies pack.']],HIVE:[['Early access','New mods before anyone else, starting with the Void Ring.']]};
 const tierWrap=document.getElementById("tierGrid"), tierOpen=document.getElementById('tierOpen');

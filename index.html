@@ -107,7 +107,7 @@ document.addEventListener('click',function(e){if(!e.isTrusted)return;if(last&&Da
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Lexend:wght@400;500;600;700&display=swap">
 <style>
-/* Layout: launch-night sales page. Video hero, a hangar grid of seven mod bays that open into tabbed sheets
+/* Layout: launch-night sales page. Video hero, a hangar grid of mod bays grouped into the suite, the Gate saga and free tools that open into tabbed sheets
    (Overview / Photos / Videos / Guide), tier ladder, "classified" coming-soon bay, community dock.
    One committed dark look (the Kerbal Brains brand): ink ground, cyan + orange family rule, per-mod accents. */
 :root{
@@ -200,6 +200,11 @@ section{padding-block:clamp(48px,8vw,88px)}
 .bay .shot .endg{position:absolute;left:12px;top:12px;font-family:var(--f-display);font-weight:900;font-size:11px;letter-spacing:.14em;padding:6px 11px;border-radius:999px;color:#3a1a00;background:linear-gradient(90deg,#ffe08a,#ff9a1f);box-shadow:0 0 18px rgba(255,170,40,.6)}
 .bay .shot .endg.free{color:#06122e;background:linear-gradient(90deg,#7cf7ff,#b9a8ff);box-shadow:0 0 18px rgba(124,247,255,.55)}
 .bay.endgame[data-id="lightspeed"]{border-color:rgba(140,120,255,.7);box-shadow:0 22px 60px -28px rgba(124,247,255,.55)}
+.bay-group{grid-column:1/-1;display:grid;gap:4px;padding-top:18px;margin-top:6px;border-top:1px solid var(--line)}
+.bay-group h3{font-size:clamp(20px,2.6vw,26px);font-weight:900}
+.bay-group p{color:var(--muted);font-size:15px}
+.bay .shot .endg.newcrew{color:#fff;background:linear-gradient(90deg,#ff40a6,#22e5ff);box-shadow:0 0 18px rgba(255,64,166,.55)}
+.bay.endgame[data-id="brainy"]{border-color:rgba(255,64,166,.7);box-shadow:0 22px 60px -28px rgba(255,64,166,.6)}
 .bay.endgame{grid-column:1/-1;border-color:rgba(255,176,32,.7);box-shadow:0 22px 60px -28px rgba(255,140,0,.65)}
 @media (min-width:601px){.bay.endgame{flex-direction:row}.bay.endgame .top{flex:0 0 58%;max-width:58%}.bay.endgame .shot{height:100%;aspect-ratio:auto;min-height:300px}.bay.endgame .mascot{bottom:14px}.bay.endgame .guide-by{margin:18px 18px 0;min-height:0}.bay.endgame .side{justify-content:center}.bay.endgame h3{font-size:30px}}
 .bay .top{position:relative}
@@ -336,6 +341,27 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .tier.best{background:var(--panel-2)}
 .tiers-foot{margin-top:18px;color:var(--muted);font-size:15px}
 
+/* Brainy spotlight */
+.spot-card{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(18px,3vw,36px);align-items:center;background:var(--panel);border:2px solid rgba(255,64,166,.55);border-radius:var(--r);padding:clamp(16px,3vw,32px);box-shadow:0 26px 70px -34px rgba(255,64,166,.6)}
+@media (max-width:760px){.spot-card{grid-template-columns:minmax(0,1fr)}}
+.spot-art img{width:100%;max-width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:18px;display:block;border:2px solid var(--line)}
+.spot-copy{display:grid;gap:12px;min-width:0}
+.spot-copy h2{font-size:clamp(30px,4.6vw,48px)}
+.spot-name{background:linear-gradient(90deg,#ff40a6,#22e5ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.spot-sub{font-family:var(--f-display);font-weight:800;letter-spacing:.06em;color:var(--muted);font-size:14px}
+.spot-copy > p{max-width:62ch}
+.spot-quote{margin:0;padding:12px 16px;border-left:4px solid #ff40a6;background:rgba(255,64,166,.08);border-radius:0 12px 12px 0;font-style:italic;color:var(--text)}
+.spot-perks{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.spot-perks li{background:var(--panel-2,rgba(255,255,255,.04));border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:grid;gap:2px}
+.spot-perks b{font-family:var(--f-display);font-size:22px;color:#ff7cc4;font-variant-numeric:tabular-nums}
+.spot-perks span{font-size:13px;color:var(--muted)}
+.spot-suits{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:480px){.spot-suits,.spot-perks{grid-template-columns:minmax(0,1fr)}}
+.spot-suits > div{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;min-width:0}
+.spot-suits img,.spot-suits .sw{width:48px;height:48px;border-radius:50%;flex:none;object-fit:cover}
+.spot-suits .sw{background:conic-gradient(#ffd36b,#ff8a1f,#fff3d6,#ffb020,#ffd36b);box-shadow:0 0 14px rgba(255,170,40,.5)}
+.spot-suits span{font-size:13px;color:var(--muted);min-width:0}
+.spot-suits b{display:block;color:var(--text);font-size:14px}
 /* classified */
 .classified{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:20px}
 @media (max-width:860px){.classified{grid-template-columns:minmax(0,1fr)}}
@@ -439,14 +465,14 @@ main section[id]{scroll-margin-top:84px}
         <p class="eyebrow">Fan-made mods for Kerbal Space Program 1</p>
         <canvas id="neuroBg" aria-hidden="true"></canvas><h1 style="margin-top:12px">Your crew finally has <span class="p neuro" role="button" tabindex="0" aria-label="brains (tap for sparks)">brains.</span></h1>
         <p class="sub2" style="font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.2vw,24px);color:var(--cyan);margin-top:14px;letter-spacing:.03em">They were cargo. Now they're crew.</p>
-        <p class="lede">Seven mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates, meet the locals and wake a Dyson sphere. Plus a free launcher that gets you into the game faster.</p>
+        <p class="lede">Eight mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates with Brainy, meet the locals and wake a Dyson sphere. Plus a free launcher that gets you into the game faster.</p>
         <div class="ctas">
           <a class="btn" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
           <a class="btn ghost" href="#mods">SEE THE MODS</a>
         </div>
         <p class="note">Join free on Patreon: HullWorks, Badge Bar + Lightspeed Launcher.</p>
         <div class="facts" aria-label="Suite at a glance">
-          <div><b>7</b>mods</div>
+          <div><b>8</b>mods</div>
           <div><b>8 sec</b>to reach any planet</div>
           <div><b>8</b>critters to find</div>
           <div><b>42</b>new suits</div>
@@ -491,7 +517,7 @@ main section[id]{scroll-margin-top:84px}
         <button class="tier" style="--acc:var(--ok)" data-tier="FREE" aria-expanded="false"><h3>JOIN FREE</h3><div class="price" style="font-size:22px">Free membership</div><ul><li>HullWorks ship paint</li><li>Badge Bar</li><li>Lightspeed Launcher</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier" style="--acc:var(--pink)" data-tier="NEURON" aria-expanded="false"><h3>NEURON</h3><div class="price">$8<small>/mo</small></div><ul><li>Kerbal Brains</li><li>All Kerbal Brains add-on packs</li><li>Glow-Up</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier" style="--acc:var(--orange)" data-tier="SYNAPSE" aria-expanded="false"><h3>SYNAPSE</h3><div class="price">$12<small>/mo</small></div><ul><li>Iron Root</li><li>All colony add-on packs</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li><li>Kerbal Dyson</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li><li>Brainy</li><li>Kerbal Dyson</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
         <button class="tier best" style="--acc:var(--gold)" data-tier="HIVE" aria-expanded="false"><h3>HIVE MIND</h3><div class="price">$25<small>/mo</small></div><ul><li>Everything</li><li>Early access to new mods</li><li>Name in the credits</li><li>Priority roadmap vote</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
       </div>
       <div class="tier-open" id="tierOpen" hidden>
@@ -549,11 +575,36 @@ main section[id]{scroll-margin-top:84px}
     </div>
   </section>
 
+  <section id="brainy" class="spot" style="padding-top:clamp(24px,4vw,48px)">
+    <div class="wrap">
+      <div class="spot-card">
+        <div class="spot-art"><img src="media/br-portrait.jpg" alt="Brainy, the pink-brain Gate Navigator, giving a thumbs up in his pink and cyan Gatekeeper suit"></div>
+        <div class="spot-copy">
+          <p class="eyebrow" style="color:#ff7cc4">New crew member</p>
+          <h2>Meet <span class="spot-name">Brainy</span></h2>
+          <p class="spot-sub">Brainard &ldquo;Brainy&rdquo; Kerman &middot; Gate Navigator</p>
+          <p>For years Brainy has heard a strange signal from way past the last planet. It isn't noise. It's counting: seven blips, then one, just like a Jump Gate's lights. He guides you by radio, waits for you at your first gate, and decodes the signal one gate at a time until it becomes a map to a red star called Solara.</p>
+          <blockquote class="spot-quote">&ldquo;Somewhere past the last planet, something is calling, and I've been listening for years. Take me through a gate!&rdquo;</blockquote>
+          <ul class="spot-perks">
+            <li><b>2x</b><span>faster gate power-up</span></li>
+            <li><b>50%</b><span>jump power handed back</span></li>
+            <li><b>+25%</b><span>science on his ship</span></li>
+          </ul>
+          <div class="spot-suits">
+            <div><img src="media/br-patch.jpg" alt="" loading="lazy"><span><b>Gatekeeper suit</b>Pink, white and cyan. His everyday look.</span></div>
+            <div><span class="sw" aria-hidden="true"></span><span><b>Solara suit</b>Gold and orange. Unlocks when you wake the sphere together.</span></div>
+          </div>
+          <div class="row" style="gap:10px;flex-wrap:wrap;margin-top:6px"><button class="btn" type="button" data-open="brainy">OPEN BRAINY'S BAY</button><a class="btn ghost" href="#tiers">IN THE CORTEX TIER</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="crew" style="padding-top:clamp(24px,4vw,48px)">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Meet the crew</p>
-        <h2>Seven brains. One mission.</h2>
+        <h2>Eight brains. One mission.</h2>
         <p>Every mod has its own crew member. Tap one to see what they run.</p>
       </div>
       <div class="crew" id="crewGrid"></div>
@@ -714,16 +765,22 @@ const MODS = [
    photos:[p('kc-book-hopper.jpg','Crater Hopper (Mun)',1),p('kc-book-slider.jpg','Mint Slider (Minmus)',1),p('kc-book-dustpuff.jpg','Dust Puff (Duna)',1),p('kc-book-drifter.jpg','Glow Drifter (Laythe)',1),p('kc-moon.jpg','Glow drifters at night'),p('kc-laythe.jpg','Laythe shores')],
    trailers:[], clips:[], gameplay:[], guide:'guides/critters/index.html', guideName:'Kerbal Critters Guide',
    guideHas:['Where each critter lives','Using the Creature Book','The Critter Crate'] },
- { id:'dyson', anims:[{src:'media/a-dy-wake.mp4',poster:'media/a-dy-wake.jpg',title:'Waking the sphere'}], loop:'a-dy-wake', crew:'engineer', role:'The Engineer', a:'KERBAL ', b:'DYSON', acc:'#ffb020', tier:'CORTEX', badge:'ENDGAME', wide:true, tagline:'Open the Solara Gate. Wake the sphere. Earn the Dyson Drive.',
-   cover:'media/dy-crew.jpg', banner:'media/dy-sphere.jpg', bannerPos:'center 40%',
-   features:['The endgame goal: build Jump Gates at 4 planets to open the Solara Gate','Solara: a red dwarf inside a half-built Dyson sphere, way past the last planet','Land on the Dyson Hub and walk into the Control Station','Wake the sphere: a 16-second light show, 1,500 science, 2 million funds and a trophy','Earn the Dyson Drive: about 4x the efficiency of a nuclear engine, but too weak to lift off Kerbin','Hearth: a warm new world with extra solar power, perfect for a colony'],
-   photos:[p('dy-crew.jpg','Waking the sphere'),p('dy-sphere.jpg','The Solara Ring'),p('dy-station.jpg','The Dyson Hub station'),p('dy-load-1.jpg','Loading screen 1'),p('dy-load-2.jpg','Loading screen 2'),p('dy-load-3.jpg','Loading screen 3')],
+ { id:'brainy', group:'saga', anims:[{src:'media/a-br-gate.mp4',poster:'media/a-br-gate.jpg',title:'Brainy at the Jump Gate'}], loop:'a-br-gate', crew:'brainy', role:'Brainy', a:'GATE ', b:'NAVIGATOR', acc:'#ff40a6', tier:'CORTEX', badge:'NEW CREW', badgeClass:'newcrew', wide:true, tagline:'Brainard "Brainy" Kerman, the Gate Navigator, guides you through the Jump Gates to the Dyson sphere.',
+   cover:'media/br-gate.jpg', banner:'media/br-gate.jpg', bannerPos:'center 40%',
+   features:['A real crew Kerbal with his own pink Gatekeeper suit, pink helmet lights and jetpack','New job: Gate Navigator. Only Brainy has it, and he flies like a Pilot','With Brainy aboard, Jump Gates power up 2x faster and he hands back half the jump power','Experiments on his ship earn +25% science','A radio story: rescue him at your first gate, then decode 4 signal logs that lead to Solara','Wake the Dyson sphere with Brainy to unlock his golden Solara suit'],
+   photos:[p('br-gate.jpg','Brainy at the Jump Gate'),p('br-portrait.jpg','Brainy, the Gate Navigator',1),p('br-patch.jpg','The Gatekeeper patch',1),p('crew-brainy.jpg','Ready for duty'),p('br-load-meet.jpg','Loading screen')],
+   trailers:[], clips:[], gameplay:[], guide:'guides/brainy/index.html', guideName:'Brainy Guide',
+   guideHas:['Rescuing Brainy at your first gate','The Gate Navigator perks','Signal logs, the finale and his two suits'] },
+ { id:'dyson', group:'saga', anims:[{src:'media/a-dy-show.mp4',poster:'media/a-dy-show.jpg',title:'The rainbow light show'},{src:'media/a-dy-wake.mp4',poster:'media/a-dy-wake.jpg',title:'Waking the sphere'}], loop:'a-dy-show', crew:'engineer', role:'The Engineer', a:'KERBAL ', b:'DYSON', acc:'#ffb020', tier:'CORTEX', badge:'ENDGAME', wide:true, tagline:'Open the Solara Gate. Wake the sphere. Earn the Dyson Drive.',
+   cover:'media/dy-lightshow-a.jpg', banner:'media/dy-lightshow-a.jpg', bannerPos:'center 45%',
+   features:['The endgame goal: build Jump Gates at 4 planets to open the Solara Gate','Solara: a red dwarf inside a half-built Dyson sphere, way past the last planet','Land on the Dyson Hub and walk into the Control Station','Wake the sphere: a 16-second light show, 1,500 science, 2 million funds and a trophy','Earn the Dyson Drive: about 4x the efficiency of a nuclear engine, but too weak to lift off Kerbin','Hearth: a warm new world with extra solar power, perfect for a colony','New in v0.2: a rainbow light show with 4 moving patterns outside and rainbow lightning, chase lights and disco twinkles inside','New in v0.2: two swirling atom rings around Solara, energy swirls from the star, and sound for everything'],
+   photos:[p('dy-lightshow-a.jpg','The rainbow light show'),p('dy-lightshow-b.jpg','Rainbow lightning inside the sphere'),p('dy-drive.jpg','Dyson Drive and Dyson Clamp, new look'),p('dy2-dock.jpg','Docked at the Dyson Port'),p('dy2-cockpit.jpg','A star in a sphere'),p('dy2-control.jpg','The Control Room'),p('dy-crew.jpg','Waking the sphere'),p('dy-sphere.jpg','The Solara Ring'),p('dy-station.jpg','The Dyson Hub station'),p('dy-load-1.jpg','Loading screen 1'),p('dy-load-2.jpg','Loading screen 2'),p('dy-load-3.jpg','Loading screen 3')],
    trailers:[], clips:[], gameplay:[], guide:'guides/dyson/index.html', guideName:'Kerbal Dyson Guide',
    guideHas:['Getting to Solara','Landing on the Dyson Hub','Waking the sphere and the Dyson Drive'] },
- { id:'lightspeed', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Fly more. Load less. Park the mods you are not using and boot KSP faster.',
+ { id:'lightspeed', group:'tools', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Fly more. Load less. Park the mods you are not using and boot KSP faster.',
    cover:'media/ll-trio.jpg', banner:'media/ll-key.jpg', bannerPos:'center 45%',
    features:['Scans every save, every VAB and SPH craft and every recent launch','Parks the mods nothing uses: moves them aside, never deletes them','Keeps everything your ships need: models, code, IVAs, fuel types and save data','Backs up your saves before every change, and one click turns everything back on','Load Times tab shows where your boot time goes, with a history chart','Tested on a 248-mod install: a cached boot dropped from 9.6 to 3.9 minutes with one save protected'],
-   photos:[p('ll-key.jpg','Into lightspeed'),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
+   photos:[p('ll-key.jpg','Into lightspeed'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
    trailers:[], clips:[], gameplay:[], guide:'guides/lightspeed/index.html', guideName:'Lightspeed Launcher Guide',
    guideHas:['The Park List and keep rules','Launch modes and profiles','Load Times and health checks'] }
 ];
@@ -733,7 +790,11 @@ const esc = s => String(s).replace(/[&<>"]/g, ch => ({'&':'&amp;','<':'&lt;','>'
 const vcount = m => m.trailers.length + m.anims.length + m.clips.length + m.gameplay.length;
 
 /* bays */
-document.getElementById('bays').innerHTML = MODS.map(m => `
+const GROUPS={saga:['The Gate saga','Fly the Jump Gates with Brainy, follow his signal to Solara and wake the Dyson sphere.'],tools:['Free tools','Free with a free Patreon membership.']};
+let lastGroup=null;
+const groupHead=m=>{const g=m.group||null;if(g===lastGroup)return '';lastGroup=g;return g&&GROUPS[g]?`<div class="bay-group"><h3>${GROUPS[g][0]}</h3><p>${GROUPS[g][1]}</p></div>`:'';};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-open]');if(!b)return;const card=document.querySelector('.bay[data-id="'+b.dataset.open+'"]');if(card)card.click();});
+document.getElementById('bays').innerHTML = MODS.map(m => groupHead(m)+`
   <button class="bay${m.wide?' endgame':''}" style="--acc:${m.acc}" data-id="${m.id}" aria-label="Open ${esc(m.a+m.b)}">
     <div class="top"><div class="shot"><video class="live" muted loop playsinline autoplay preload="metadata" poster="media/${m.loop}.jpg" aria-hidden="true"><source src="media/${m.loop}.mp4" type="video/mp4"></video><span class="livetag">&#9679; LIVE</span><span class="chip" style="background:${TIERS[m.tier]}">${m.tier}</span>${m.badge?`<span class="endg ${m.badgeClass||''}">&#9733; ${m.badge}</span>`:''}</div><img class="mascot" src="media/head-${m.crew}.jpg" alt=""></div>
     <div class="side"><div class="guide-by">Run by<b>${m.role}</b></div>
@@ -759,8 +820,9 @@ document.getElementById('bays').innerHTML = MODS.map(m => `
 /* crew grid */
 const CREW = MODS.filter((m,i,a)=>a.findIndex(q=>q.crew===m.crew)===i).map(m => ({key:m.crew, role:m.role, job:esc(m.a+m.b).trim(), acc:m.acc, id:m.id}));
 CREW.push({key:'chef', role:'The Chef', job:'Install steps', acc:'#e84545', id:null});
-const LINES={hero:"Hi, I'm the Hero! My crew walks, works and chats on their own now.",pilot:"Pilot here. Strap in, we're jumping to Duna in seconds.",engineer:"Engineer reporting! I'll paint your whole ship in one click.",scientist:"Scientist on duty. Eight critters are out there. Let's find them!",groundcrew:"Ground Crew! New suits, helmet lights and Photo Mode, coming right up.",miner:"Miner here. Dig ore, smelt metal, build a colony. Easy!",chef:"Chef's in! Three steps to install, then lunch is on me."};
-const THOUGHTS={hero:["Plant a flag here? Yes!","Who wants a group photo?","Best friend: the Engineer","Victory dance time!","Following you, boss"],
+const LINES={brainy:"Hi, I'm Brainy, the Gate Navigator! Take me through a Jump Gate. Something past the last planet is calling.",hero:"Hi, I'm the Hero! My crew walks, works and chats on their own now.",pilot:"Pilot here. Strap in, we're jumping to Duna in seconds.",engineer:"Engineer reporting! I'll paint your whole ship in one click.",scientist:"Scientist on duty. Eight critters are out there. Let's find them!",groundcrew:"Ground Crew! New suits, helmet lights and Photo Mode, coming right up.",miner:"Miner here. Dig ore, smelt metal, build a colony. Easy!",chef:"Chef's in! Three steps to install, then lunch is on me."};
+const THOUGHTS={brainy:["Seven blips, then one...","Signal log decoded!","Gates power up 2x with me","Next stop: Solara","Wake the sphere!"],
+hero:["Plant a flag here? Yes!","Who wants a group photo?","Best friend: the Engineer","Victory dance time!","Following you, boss"],
 pilot:["Lining up the gate...","Drive the rover over there? On it","Floating hatch to hatch","Rainbow lane locked in","Guarding the base"],
 engineer:["That rover wheel looks broken","Welding this seam...","Solar panel fixed. Ta-daa!","Help! This job is big","Refueling the lander"],
 scientist:["Science on that rock!","Taking notes on the repair","A Mun Hopper? Must find it!","Stamp says: APPROVED","Hmm... TWR too low"],
@@ -768,7 +830,7 @@ groundcrew:["Glow wands ready","Fuel hose to the pad","Forklift, crates, go!","N
 miner:["Dig ore in the Strip Mine","Jackhammer time","Smelter needs a worker","The pit's getting deeper","Taking the colony rover"],
 chef:["Lunch bell! Ding ding ding","Burger tray: Yum!","Coffee spill... again","Picnic tables in 5","Mop crew, aisle 3"]};
 const STATN=['SMARTS','COURAGE','TEAMWORK','SNACKS'];
-const STATS={hero:[78,96,90,70],pilot:[84,99,72,55],engineer:[92,70,95,64],scientist:[99,48,80,60],groundcrew:[70,82,98,75],miner:[66,88,85,92],chef:[74,60,93,100]};
+const STATS={brainy:[97,90,94,72],hero:[78,96,90,70],pilot:[84,99,72,55],engineer:[92,70,95,64],scientist:[99,48,80,60],groundcrew:[70,82,98,75],miner:[66,88,85,92],chef:[74,60,93,100]};
 const order=['hero','pilot','engineer','scientist','groundcrew','miner','chef'];
 CREW.sort((a,b)=>order.indexOf(a.key)-order.indexOf(b.key));
 document.getElementById('crewGrid').innerHTML = CREW.map(c => `
@@ -852,7 +914,7 @@ document.addEventListener('pointerdown', e => { if(menuEl && !menuEl.contains(e.
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
 
 /* tap a tier: it opens with the mods inside */
-const TIER_MODS={FREE:['hullworks','lightspeed'],NEURON:['kerbal-brains','glow-up'],SYNAPSE:['iron-root'],CORTEX:['jump-gate','critters','dyson'],HIVE:['kerbal-brains','iron-root','jump-gate','hullworks','glow-up','critters','dyson','lightspeed']};
+const TIER_MODS={FREE:['hullworks','lightspeed'],NEURON:['kerbal-brains','glow-up'],SYNAPSE:['iron-root'],CORTEX:['jump-gate','critters','brainy','dyson'],HIVE:['kerbal-brains','iron-root','jump-gate','hullworks','glow-up','critters','brainy','dyson','lightspeed']};
 const TIER_INFO={FREE:['Free membership','Join free on Patreon. No card needed.','JOIN FREE'],NEURON:['Neuron · $8/mo','Plus everything in the free membership.','JOIN NEURON'],SYNAPSE:['Synapse · $12/mo','Plus everything in Neuron and the free membership.','JOIN SYNAPSE'],CORTEX:['Cortex · $20/mo','Plus everything in Synapse, Neuron and the free membership.','JOIN CORTEX'],HIVE:['Hive Mind · $25/mo','Every mod, plus early access, credits and a roadmap vote.','JOIN HIVE MIND']};
 const TIER_EXTRA={FREE:[],NEURON:[['Kerbal Brains add-on packs','Every add-on pack for Kerbal Brains as it drops.']],SYNAPSE:[['Colony add-on packs','Every Iron Root and Outworld Colonies pack.']],HIVE:[['Early access','New mods before anyone else, starting with the Void Ring.']]};
 const tierWrap=document.getElementById("tierGrid"), tierOpen=document.getElementById('tierOpen');

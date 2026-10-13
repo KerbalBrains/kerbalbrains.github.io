@@ -1242,4 +1242,14 @@ const v=document.getElementById('lhvid');if(v){v.muted=true;if(matchMedia('(pref
  else if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});}else v.pause();}),{threshold:.25}).observe(v);}}
 })();
 </script>
+<script id="kb-deeplink">
+/* Launcher deep link: ?mod=jump-gate (optional &tab=photos|videos|guide) opens that mod's pop-out */
+(function(){
+  var p; try { p = new URLSearchParams(location.search); } catch(e) { return; }
+  var id = p.get('mod'); if (!id) return;
+  var tab = p.get('tab') || undefined;
+  function go(){ try { if (typeof openMod === 'function') openMod(id, tab); } catch(e) {} }
+  window.addEventListener('load', function(){ setTimeout(go, 250); });
+})();
+</script>
 </body></html>

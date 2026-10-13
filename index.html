@@ -434,6 +434,7 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .lh-shot{all:unset;cursor:zoom-in;display:grid;gap:6px;min-width:0;-webkit-tap-highlight-color:transparent}
 .lh-shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left;border-radius:12px;border:2px solid var(--line);transition:border-color .2s;pointer-events:none}
 .lh-shot:hover img,.lh-shot:focus-visible img{border-color:var(--cyan)}
+.lh-shot.pop img{object-fit:contain;object-position:center;background:#05070f}
 .lh-shot span{font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .lh-h3{margin-top:30px;font-size:clamp(18px,2vw,22px)}
 .lh-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:12px}
@@ -556,7 +557,8 @@ main section[id]{scroll-margin-top:84px}
           <ul class="lh-list">
             <li><b>Mods Hub</b> shows every mod as a card or a table, with All, Installed, Updates and Locked filters.</li>
             <li><b>Update all</b> grabs every new version in one click.</li>
-            <li><b>Tray alerts</b> pop up when updates are ready. It checks every hour.</li>
+            <li><b>Speed Check</b> spots what slows KSP down and fixes it in one click.</li>
+            <li><b>Update alerts</b> pop up when your mods get new versions. It checks every hour.</li>
             <li><b>Park the extras</b> so KSP boots faster, then launch straight from Steam.</li>
           </ul>
           <div class="ctas" style="margin-top:6px">
@@ -567,8 +569,10 @@ main section[id]{scroll-margin-top:84px}
         </div>
       </div>
       <div class="lh-shots" aria-label="Real launcher screenshots">
-        <button type="button" class="lh-shot" data-cap="Mods Hub, card view"><img src="media/lh2-hub-grid.jpg" alt="Mods Hub card view" loading="lazy"><span>Mods Hub cards</span></button>
-        <button type="button" class="lh-shot" data-cap="Mods Hub, table view"><img src="media/lh2-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
+        <button type="button" class="lh-shot" data-cap="Mods Hub with the new Speed Check"><img src="media/lh3-hub-grid.jpg" alt="Mods Hub card view with Speed Check" loading="lazy"><span>Mods Hub + Speed Check</span></button>
+        <button type="button" class="lh-shot" data-cap="Table view: every mod, version and update"><img src="media/lh3-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
+        <button type="button" class="lh-shot pop" data-cap="Make KSP faster in one click"><img src="media/lh3-pop-faster.jpg" alt="Make KSP faster popup" loading="lazy"><span>Make KSP faster</span></button>
+        <button type="button" class="lh-shot pop" data-cap="Your mods just updated"><img src="media/lh3-pop-updated.jpg" alt="Mods updated popup" loading="lazy"><span>Update alerts</span></button>
       </div>
       <h3 class="lh-h3">How it works</h3>
       <div class="lh-steps">
@@ -872,7 +876,7 @@ const MODS = [
  { id:'lightspeed', group:'tools', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'},{src:'media/a-lh-install.mp4',poster:'media/a-lh-install.jpg',title:'One click, crates beam down'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Install every Kerbal Brains mod in one click. Park the rest and boot KSP faster.',
    cover:'media/ll-trio.jpg', banner:'media/ll-key.jpg', bannerPos:'center 45%',
    features:['NEW Mods Hub: install, update and open every Kerbal Brains mod in one place','Update all in one click, with tray alerts when updates are ready','Every download checked and the old version backed up first','Scans every save, every VAB and SPH craft and every recent launch','Parks the mods nothing uses: moves them aside, never deletes them','Keeps everything your ships need: models, code, IVAs, fuel types and save data','Backs up your saves before every change, and one click turns everything back on','Load Times tab shows where your boot time goes, with a history chart','Tested on a 248-mod install: a cached boot dropped from 9.6 to 3.9 minutes with one save protected'],
-   photos:[p('ll-key.jpg','Into lightspeed'),p('lh2-hub-grid.jpg','The Mods Hub'),p('lh2-hub-table.jpg','Mods Hub table view'),p('lh-crew.jpg','The crew installs a mod'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
+   photos:[p('ll-key.jpg','Into lightspeed'),p('lh3-hub-grid.jpg','The Mods Hub'),p('lh3-hub-table.jpg','Mods Hub table view'),p('lh-crew.jpg','The crew installs a mod'),p('lh3-pop-faster.jpg','Make KSP faster'),p('lh3-pop-updated.jpg','Your mods just updated'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
    trailers:[], clips:[], gameplay:[], guide:'guides/lightspeed/index.html', guideName:'Lightspeed Launcher Guide',
    guideHas:['The Park List and keep rules','Launch modes and profiles','Load Times and health checks'] }
 ];

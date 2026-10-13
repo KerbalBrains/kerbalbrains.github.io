@@ -429,8 +429,15 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .lh-list li::before{content:"\2B07";position:absolute;left:0;top:0;color:var(--cyan);font-weight:900}
 .lh-list b{color:var(--text)}
 .lh-req{color:var(--muted)}
-.lh-shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
-@media (max-width:560px){.lh-shots{grid-template-columns:minmax(0,1fr)}}
+.lh-shots{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,1fr);grid-auto-rows:auto;gap:14px;margin-top:22px;align-items:start}
+.lh-shot.main{grid-row:1/span 3}
+.lh-shot.main img{aspect-ratio:16/11}
+.lh-shot:not(.main){cursor:pointer}
+.lh-shot:not(.main) img{aspect-ratio:16/10}
+.lh-shot.main{position:relative}
+.lh-shot.main::after{content:"\2922  TAP TO ENLARGE";position:absolute;top:10px;right:10px;font-family:var(--f-display);font-weight:800;font-size:10px;letter-spacing:.14em;color:#9ff6ff;background:rgba(7,11,24,.8);border:1px solid rgba(34,229,255,.5);border-radius:999px;padding:4px 10px;pointer-events:none}
+.lh-shot.on img{border-color:var(--cyan)}
+@media (max-width:640px){.lh-shots{grid-template-columns:repeat(3,minmax(0,1fr))}.lh-shot.main{grid-row:auto;grid-column:1/-1}.lh-shot:not(.main) span{font-size:10px}}
 .lh-shot{all:unset;cursor:zoom-in;display:grid;gap:6px;min-width:0;-webkit-tap-highlight-color:transparent}
 .lh-shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left;border-radius:12px;border:2px solid var(--line);transition:border-color .2s;pointer-events:none}
 .lh-shot:hover img,.lh-shot:focus-visible img{border-color:var(--cyan)}
@@ -569,7 +576,7 @@ main section[id]{scroll-margin-top:84px}
         </div>
       </div>
       <div class="lh-shots" aria-label="Real launcher screenshots">
-        <button type="button" class="lh-shot" data-cap="Mods Hub with the new Speed Check"><img src="media/lh3-hub-grid.jpg" alt="Mods Hub card view with Speed Check" loading="lazy"><span>Mods Hub + Speed Check</span></button>
+        <button type="button" class="lh-shot main" aria-label="Enlarge screenshot" data-cap="Mods Hub with the new Speed Check"><img src="media/lh3-hub-grid.jpg" alt="Mods Hub card view with Speed Check" loading="lazy"><span>Mods Hub + Speed Check</span></button>
         <button type="button" class="lh-shot" data-cap="Table view: every mod, version and update"><img src="media/lh3-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
         <button type="button" class="lh-shot pop" data-cap="Make KSP faster in one click"><img src="media/lh3-pop-faster.jpg" alt="Make KSP faster popup" loading="lazy"><span>Make KSP faster</span></button>
         <button type="button" class="lh-shot pop" data-cap="Your mods just updated"><img src="media/lh3-pop-updated.jpg" alt="Mods updated popup" loading="lazy"><span>Update alerts</span></button>
@@ -1240,7 +1247,13 @@ const box=document.createElement('div');box.className='csbox';box.hidden=true;bo
 box.innerHTML='<button type="button" class="x" aria-label="Close">&#10005;</button><img alt=""><div class="cap"></div>';document.body.appendChild(box);
 const im=box.querySelector('img'),cap=box.querySelector('.cap');
 const close=()=>{box.hidden=true;im.removeAttribute('src');document.documentElement.style.overflow='';};
-shots.forEach(b=>b.addEventListener('click',()=>{const t=b.querySelector('img');im.src=t.getAttribute('src');im.alt=t.alt;cap.innerHTML='KERBAL BRAINS LAUNCHER<small>'+b.dataset.cap+'</small>';box.hidden=false;document.documentElement.style.overflow='hidden';}));
+const main=document.querySelector('.lh-shot.main');
+shots.forEach(b=>b.addEventListener('click',()=>{const t=b.querySelector('img');
+ if(b!==main&&main){const mi=main.querySelector('img'),ms=main.querySelector('span'),bs=b.querySelector('span');
+  const tmp={src:mi.getAttribute('src'),alt:mi.alt,cap:main.dataset.cap,txt:ms.textContent,pop:main.classList.contains('pop')};
+  mi.src=t.getAttribute('src');mi.alt=t.alt;main.dataset.cap=b.dataset.cap;ms.textContent=bs.textContent;main.classList.toggle('pop',b.classList.contains('pop'));
+  t.src=tmp.src;t.alt=tmp.alt;b.dataset.cap=tmp.cap;bs.textContent=tmp.txt;b.classList.toggle('pop',tmp.pop);return;}
+ im.src=t.getAttribute('src');im.alt=t.alt;cap.innerHTML='KERBAL BRAINS LAUNCHER<small>'+b.dataset.cap+'</small>';box.hidden=false;document.documentElement.style.overflow='hidden';}));
 box.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close();});
 const v=document.getElementById('lhvid');if(v){v.muted=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
  else if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});}else v.pause();}),{threshold:.25}).observe(v);}}

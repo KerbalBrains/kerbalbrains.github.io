@@ -567,8 +567,8 @@ main section[id]{scroll-margin-top:84px}
         </div>
       </div>
       <div class="lh-shots" aria-label="Real launcher screenshots">
-        <button type="button" class="lh-shot" data-cap="Mods Hub, card view"><img src="media/lh-hub-grid-hivemind.jpg" alt="Mods Hub card view" loading="lazy"><span>Mods Hub cards</span></button>
-        <button type="button" class="lh-shot" data-cap="Mods Hub, table view"><img src="media/lh-hub-table-hivemind.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
+        <button type="button" class="lh-shot" data-cap="Mods Hub, card view"><img src="media/lh2-hub-grid.jpg" alt="Mods Hub card view" loading="lazy"><span>Mods Hub cards</span></button>
+        <button type="button" class="lh-shot" data-cap="Mods Hub, table view"><img src="media/lh2-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
       </div>
       <h3 class="lh-h3">How it works</h3>
       <div class="lh-steps">
@@ -872,7 +872,7 @@ const MODS = [
  { id:'lightspeed', group:'tools', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'},{src:'media/a-lh-install.mp4',poster:'media/a-lh-install.jpg',title:'One click, crates beam down'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Install every Kerbal Brains mod in one click. Park the rest and boot KSP faster.',
    cover:'media/ll-trio.jpg', banner:'media/ll-key.jpg', bannerPos:'center 45%',
    features:['NEW Mods Hub: install, update and open every Kerbal Brains mod in one place','Update all in one click, with tray alerts when updates are ready','Every download checked and the old version backed up first','Scans every save, every VAB and SPH craft and every recent launch','Parks the mods nothing uses: moves them aside, never deletes them','Keeps everything your ships need: models, code, IVAs, fuel types and save data','Backs up your saves before every change, and one click turns everything back on','Load Times tab shows where your boot time goes, with a history chart','Tested on a 248-mod install: a cached boot dropped from 9.6 to 3.9 minutes with one save protected'],
-   photos:[p('ll-key.jpg','Into lightspeed'),p('lh-hub-grid-hivemind.jpg','The Mods Hub'),p('lh-hub-table-hivemind.jpg','Mods Hub table view'),p('lh-crew.jpg','The crew installs a mod'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
+   photos:[p('ll-key.jpg','Into lightspeed'),p('lh2-hub-grid.jpg','The Mods Hub'),p('lh2-hub-table.jpg','Mods Hub table view'),p('lh-crew.jpg','The crew installs a mod'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
    trailers:[], clips:[], gameplay:[], guide:'guides/lightspeed/index.html', guideName:'Lightspeed Launcher Guide',
    guideHas:['The Park List and keep rules','Launch modes and profiles','Load Times and health checks'] }
 ];
@@ -1240,16 +1240,6 @@ shots.forEach(b=>b.addEventListener('click',()=>{const t=b.querySelector('img');
 box.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close();});
 const v=document.getElementById('lhvid');if(v){v.muted=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
  else if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});}else v.pause();}),{threshold:.25}).observe(v);}}
-})();
-</script>
-<script id="kb-deeplink">
-/* Launcher deep link: ?mod=jump-gate (optional &tab=photos|videos|guide) opens that mod's pop-out */
-(function(){
-  var p; try { p = new URLSearchParams(location.search); } catch(e) { return; }
-  var id = p.get('mod'); if (!id) return;
-  var tab = p.get('tab') || undefined;
-  function go(){ try { if (typeof openMod === 'function') openMod(id, tab); } catch(e) {} }
-  window.addEventListener('load', function(){ setTimeout(go, 250); });
 })();
 </script>
 </body></html>

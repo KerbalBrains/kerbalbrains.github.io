@@ -411,6 +411,49 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .qr > div:last-child{min-width:0}.qr b{overflow-wrap:anywhere}
 .qr .box{width:96px;height:96px;flex:none;border:2px dashed var(--muted);border-radius:10px;display:grid;place-items:center;text-align:center;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.08em;color:var(--muted);line-height:1.3}
 
+
+/* launcher */
+@media (max-width:1100px){.nav nav{gap:14px}.nav nav a{font-size:14px}.nav nav a[href="#community"],.nav nav a[href="#brains"]{display:none}}
+@media (max-width:900px){.nav nav a[href="#soon"]{display:none}}
+.btn.dl{background:linear-gradient(90deg,#7cf7ff,#22e5ff);border-color:#b8fbff;color:#06122e;box-shadow:inset 0 -3px 0 rgba(0,60,90,.35),0 8px 24px -6px rgba(34,229,255,.6)}
+.btn.alt{background:var(--btn)}
+#launcher{padding-top:clamp(28px,5vw,64px)}
+.lh-show{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:22px;align-items:center}
+@media (max-width:900px){.lh-show{grid-template-columns:minmax(0,1fr)}}
+.lh-vid{border-radius:20px;overflow:hidden;border:2px solid var(--cyan);box-shadow:0 0 0 6px rgba(34,229,255,.08),0 24px 60px -20px rgba(34,229,255,.45);aspect-ratio:16/9;max-width:100%;background:#000}
+.lh-vid video{width:100%;height:100%;object-fit:cover;display:block}
+.lh-pitch{display:grid;gap:12px;min-width:0}
+.lh-pitch h3{font-size:clamp(20px,2.4vw,26px)}
+.lh-list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.lh-list li{padding-left:28px;position:relative;color:var(--muted);font-size:15px}
+.lh-list li::before{content:"\2B07";position:absolute;left:0;top:0;color:var(--cyan);font-weight:900}
+.lh-list b{color:var(--text)}
+.lh-req{color:var(--muted)}
+.lh-shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
+@media (max-width:820px){.lh-shots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lh-shot{all:unset;cursor:zoom-in;display:grid;gap:6px;min-width:0;-webkit-tap-highlight-color:transparent}
+.lh-shot img{width:100%;aspect-ratio:16/11;object-fit:cover;object-position:top left;border-radius:12px;border:2px solid var(--line);transition:border-color .2s;pointer-events:none}
+.lh-shot:hover img,.lh-shot:focus-visible img{border-color:var(--cyan)}
+.lh-shot span{font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.lh-h3{margin-top:30px;font-size:clamp(18px,2vw,22px)}
+.lh-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:12px}
+@media (max-width:820px){.lh-steps{grid-template-columns:minmax(0,1fr)}}
+.lh-step{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:2px solid var(--line);border-radius:16px;padding:16px}
+.lh-step img{width:64px;height:64px;border-radius:50%;object-fit:cover;flex:none;border:2px solid var(--cyan)}
+.lh-step > div{min-width:0}
+.lh-step h4{font-family:var(--f-display);font-size:17px;margin:2px 0 4px}
+.lh-step p{color:var(--muted);font-size:14px;margin:0}
+.lh-n{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--cyan);color:#06122e;font-family:var(--f-display);font-weight:900;font-size:13px}
+.lh-safe{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px;background:linear-gradient(90deg,rgba(74,222,128,.08),rgba(34,229,255,.08));border:2px solid rgba(74,222,128,.35);border-radius:16px;padding:14px}
+@media (max-width:1000px){.lh-safe{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:480px){.lh-safe{grid-template-columns:minmax(0,1fr)}}
+.lh-safe div{display:grid;gap:2px;min-width:0}
+.lh-safe b{color:var(--ok);font-family:var(--f-display);font-size:14px;letter-spacing:.04em}
+.lh-safe span{color:var(--muted);font-size:13px}
+.bay .inl{display:inline-flex;align-items:center;gap:6px;margin-top:8px;padding:4px 10px;border-radius:999px;border:1px solid rgba(34,229,255,.5);background:rgba(34,229,255,.1);color:#9ff6ff;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.1em;width:max-content;max-width:100%}
+.tier .lchip{display:block;margin-top:10px;font-family:var(--f-display);font-weight:800;font-size:11px;letter-spacing:.1em;color:#9ff6ff}
+.inst-alt{margin-top:16px;background:var(--panel);border:2px dashed var(--line);border-radius:16px;padding:16px 18px;color:var(--muted);font-size:15px}
+.inst-alt code{color:var(--text);background:rgba(255,255,255,.06);padding:2px 6px;border-radius:6px;overflow-wrap:anywhere}
 /* install */
 .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;counter-reset:s}
 @media (max-width:820px){.steps{grid-template-columns:minmax(0,1fr)}}
@@ -454,7 +497,7 @@ main section[id]{scroll-margin-top:84px}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img src="media/badge.png" alt="">KERBAL BRAINS</a>
-    <nav aria-label="Sections"><a href="#mods">Mods</a><a href="#tiers">Tiers</a><a href="#brains">Brains</a><a href="#soon">Coming soon</a><a href="#community">Community</a><a href="#install">Install</a></nav>
+    <nav aria-label="Sections"><a href="#launcher">Launcher</a><a href="#mods">Mods</a><a href="#tiers">Tiers</a><a href="#brains">Brains</a><a href="#soon">Coming soon</a><a href="#community">Community</a><a href="#install">Install</a></nav>
     <a class="btn" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
   </div>
 </header>
@@ -468,12 +511,13 @@ main section[id]{scroll-margin-top:84px}
         <p class="eyebrow">Fan-made mods for Kerbal Space Program 1</p>
         <canvas id="neuroBg" aria-hidden="true"></canvas><h1 style="margin-top:12px">Your crew finally has <span class="p neuro" role="button" tabindex="0" aria-label="brains (tap for sparks)">brains.</span></h1>
         <p class="sub2" style="font-family:var(--f-display);font-weight:800;font-size:clamp(18px,2.2vw,24px);color:var(--cyan);margin-top:14px;letter-spacing:.03em">They were cargo. Now they're crew.</p>
-        <p class="lede">Eight mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates with Brainy, meet the locals and wake a Dyson sphere. Plus a free launcher that gets you into the game faster.</p>
+        <p class="lede">Eight mods that turn KSP into a living universe. Your Kerbals work, build colonies, paint ships, jump through gates with Brainy, meet the locals and wake a Dyson sphere. Get them all with one free launcher: download it, click Install, play.</p>
         <div class="ctas">
-          <a class="btn" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
-          <a class="btn ghost" href="#mods">SEE THE MODS</a>
+          <a class="btn dl" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0-5-5m5 5 5-5M4 20h16"/></svg>GET THE FREE LAUNCHER</a>
+          <a class="btn alt" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
+          <a class="btn ghost" href="#launcher">HOW IT WORKS</a>
         </div>
-        <p class="note">Join free on Patreon: HullWorks, Badge Bar + Lightspeed Launcher.</p>
+        <p class="note">Free for Windows. HullWorks, Badge Bar and Lightspeed install right away. Sign in with Patreon to unlock the rest.</p>
         <div class="facts" aria-label="Suite at a glance">
           <div><b>8</b>mods</div>
           <div><b>8 sec</b>to reach any planet</div>
@@ -498,6 +542,52 @@ main section[id]{scroll-margin-top:84px}
     </div>
   </section>
 
+  <section id="launcher">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The Kerbal Brains Launcher</p>
+        <h2>One launcher. Every mod.</h2>
+        <p>Download one free app and it installs, updates and opens every Kerbal Brains mod for you. No unzipping, no GameData digging.</p>
+      </div>
+      <div class="lh-show">
+        <div class="lh-vid"><video id="lhvid" autoplay muted loop playsinline preload="metadata" poster="media/a-lh-install.jpg" aria-label="The crew installs mods from the launcher"><source src="media/a-lh-install.mp4" type="video/mp4"></video></div>
+        <div class="lh-pitch">
+          <h3>Click Install. The crates beam down.</h3>
+          <ul class="lh-list">
+            <li><b>Mods Hub</b> shows every mod as a card or a table, with All, Installed, Updates and Locked filters.</li>
+            <li><b>Update all</b> grabs every new version in one click.</li>
+            <li><b>Tray alerts</b> pop up when updates are ready. It checks every hour.</li>
+            <li><b>Park the extras</b> so KSP boots faster, then launch straight from Steam.</li>
+          </ul>
+          <div class="ctas" style="margin-top:6px">
+            <a class="btn dl" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener">GET THE FREE LAUNCHER</a>
+            <a class="btn alt" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
+          </div>
+          <p class="small lh-req">Windows PC with KSP 1.12.x. The launcher is free forever.</p>
+        </div>
+      </div>
+      <div class="lh-shots" aria-label="Real launcher screenshots">
+        <button type="button" class="lh-shot" data-cap="Mods Hub, card view"><img src="media/lh-hub-grid-hivemind.jpg" alt="Mods Hub card view" loading="lazy"><span>Mods Hub cards</span></button>
+        <button type="button" class="lh-shot" data-cap="Mods Hub, table view"><img src="media/lh-hub-table-hivemind.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
+        <button type="button" class="lh-shot" data-cap="Free membership: free mods ready, the rest locked"><img src="media/lh-hub-grid-free.jpg" alt="Free membership view" loading="lazy"><span>Free membership</span></button>
+        <button type="button" class="lh-shot" data-cap="Updates ready, one click each"><img src="media/lh-hub-table-free.jpg" alt="Updates in the table view" loading="lazy"><span>Updates ready</span></button>
+      </div>
+      <h3 class="lh-h3">How it works</h3>
+      <div class="lh-steps">
+        <div class="lh-step"><img src="media/head-pilot.jpg" alt=""><div><span class="lh-n">1</span><h4>Download</h4><p>Grab the free launcher and run setup. It installs itself into your KSP folder.</p></div></div>
+        <div class="lh-step"><img src="media/head-scientist.jpg" alt=""><div><span class="lh-n">2</span><h4>Sign in (optional)</h4><p>Free mods work right away. Sign in with Patreon and your tier's mods unlock.</p></div></div>
+        <div class="lh-step"><img src="media/head-engineer.jpg" alt=""><div><span class="lh-n">3</span><h4>Click Install</h4><p>Pick a mod, press Install, then Launch KSP. Updates are one click too.</p></div></div>
+      </div>
+      <div class="lh-safe" aria-label="Safe for your saves">
+        <div><b>&#10003; Checked</b><span>Every download is verified before it installs</span></div>
+        <div><b>&#10003; Backed up</b><span>The old version is saved before every update</span></div>
+        <div><b>&#10003; Saves untouched</b><span>It never touches your saves or settings</span></div>
+        <div><b>&#10003; Waits for KSP</b><span>Nothing installs while the game is running</span></div>
+        <div><b>&#10003; Yours to keep</b><span>Membership ends? Installed mods keep working</span></div>
+      </div>
+    </div>
+  </section>
+
   <section id="mods">
     <div class="wrap">
       <div class="sec-head">
@@ -514,19 +604,19 @@ main section[id]{scroll-margin-top:84px}
       <div class="sec-head">
         <p class="eyebrow">Patreon tiers</p>
         <h2>Join the crew</h2>
-        <p>Each tier includes everything in the tiers before it. Tap a tier to see what is inside.</p>
+        <p>Every tier installs in one click from the free launcher: sign in with Patreon and your mods unlock. Each tier includes everything before it. Tap a tier to see what is inside.</p>
       </div>
       <div class="tiers" id="tierGrid">
-        <button class="tier" style="--acc:var(--ok)" data-tier="FREE" aria-expanded="false"><h3>JOIN FREE</h3><div class="price" style="font-size:22px">Free membership</div><ul><li>HullWorks ship paint</li><li>Badge Bar</li><li>Lightspeed Launcher</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier" style="--acc:var(--pink)" data-tier="NEURON" aria-expanded="false"><h3>NEURON</h3><div class="price">$8<small>/mo</small></div><ul><li>Kerbal Brains</li><li>All Kerbal Brains add-on packs</li><li>Glow-Up</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier" style="--acc:var(--orange)" data-tier="SYNAPSE" aria-expanded="false"><h3>SYNAPSE</h3><div class="price">$12<small>/mo</small></div><ul><li>Iron Root</li><li>All colony add-on packs</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li><li>Brainy</li><li>Kerbal Dyson</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
-        <button class="tier best" style="--acc:var(--gold)" data-tier="HIVE" aria-expanded="false"><h3>HIVE MIND</h3><div class="price">$25<small>/mo</small></div><ul><li>Everything</li><li>Early access to new mods</li><li>Name in the credits</li><li>Priority roadmap vote</li></ul><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--ok)" data-tier="FREE" aria-expanded="false"><h3>JOIN FREE</h3><div class="price" style="font-size:22px">Free membership</div><ul><li>HullWorks ship paint</li><li>Badge Bar</li><li>Lightspeed Launcher</li></ul><span class="lchip">&#11015; 1-CLICK IN THE LAUNCHER</span><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--pink)" data-tier="NEURON" aria-expanded="false"><h3>NEURON</h3><div class="price">$8<small>/mo</small></div><ul><li>Kerbal Brains</li><li>All Kerbal Brains add-on packs</li><li>Glow-Up</li></ul><span class="lchip">&#11015; 1-CLICK IN THE LAUNCHER</span><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--orange)" data-tier="SYNAPSE" aria-expanded="false"><h3>SYNAPSE</h3><div class="price">$12<small>/mo</small></div><ul><li>Iron Root</li><li>All colony add-on packs</li></ul><span class="lchip">&#11015; 1-CLICK IN THE LAUNCHER</span><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier" style="--acc:var(--cyan)" data-tier="CORTEX" aria-expanded="false"><h3>CORTEX</h3><div class="price">$20<small>/mo</small></div><ul><li>Jump Gate</li><li>Kerbal Critters</li><li>Brainy</li><li>Kerbal Dyson</li></ul><span class="lchip">&#11015; 1-CLICK IN THE LAUNCHER</span><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
+        <button class="tier best" style="--acc:var(--gold)" data-tier="HIVE" aria-expanded="false"><h3>HIVE MIND</h3><div class="price">$25<small>/mo</small></div><ul><li>Everything</li><li>Early access to new mods</li><li>Name in the credits</li><li>Priority roadmap vote</li></ul><span class="lchip">&#11015; 1-CLICK IN THE LAUNCHER</span><span class="peek">TAP TO SEE WHAT'S INSIDE</span></button>
       </div>
       <div class="tier-open" id="tierOpen" hidden>
         <div class="tier-open-head"><h3 id="toTitle"></h3><p class="small" id="toNote"></p><button class="btn ghost" id="toClose" style="margin-left:auto;min-height:40px;padding:8px 16px;font-size:12px">CLOSE</button></div>
         <div class="minis" id="toMinis"></div>
-        <div class="row" style="margin-top:16px"><a class="btn" id="toJoin" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN</a></div>
+        <div class="row" style="margin-top:16px;gap:10px;flex-wrap:wrap"><a class="btn" id="toJoin" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN</a><a class="btn dl" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener">GET THE FREE LAUNCHER</a></div>
       </div>
       <p class="tiers-foot">Your membership supports development. Every paid tier gets all updates, the patron Discord and a vote on what's next.</p>
     </div>
@@ -661,14 +751,15 @@ main section[id]{scroll-margin-top:84px}
       <div class="sec-head">
         <p class="eyebrow">Getting started</p>
         <h2>Install in three steps</h2>
-        <p>Made for KSP 1.12.x on PC. Every mod has its own interactive guide inside its bay.</p>
+        <p>Made for KSP 1.12.x on a Windows PC. The launcher does the heavy lifting, and every mod still has its own guide inside its bay.</p>
       </div>
       <div class="chef-host"><img src="media/head-chef.jpg" alt="The Chef"><p><b>The Chef's recipe.</b> Three steps and your crew is ready to cook. Lunch is on us.</p></div>
       <div class="steps">
         <div class="step"><h3>Back up your save</h3><p>Copy your KSP saves folder somewhere safe before adding any mod.</p></div>
-        <div class="step"><h3>Get the helpers</h3><p>Install ModuleManager and Harmony from CKAN or SpaceDock. Both are free.</p></div>
-        <div class="step"><h3>Drop in the mod</h3><p>Unzip the mod into your KSP GameData folder and launch the game.</p></div>
+        <div class="step"><h3>Get the launcher</h3><p>Download the free Kerbal Brains Launcher and run setup. It finds your KSP folder and installs itself.</p><a class="btn dl" style="justify-self:start;margin-top:6px" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener">DOWNLOAD</a></div>
+        <div class="step"><h3>Install and launch</h3><p>Open the Mods Hub, click Install on any mod, then press Launch KSP. Free mods need no sign-in.</p></div>
       </div>
+      <div class="inst-alt"><b style="color:var(--text)">Play from Steam:</b> in Steam, right-click KSP, open Properties, and set Launch Options to <code>"...\LightspeedLauncher.exe" --steam %command%</code> (use the real path to your KSP folder). Now the Play button opens the launcher first.<br><br><b style="color:var(--text)">Prefer doing it by hand?</b> Every mod also comes as a zip. Install ModuleManager and Harmony from CKAN or SpaceDock, then unzip the mod into GameData.</div>
     </div>
   </section>
 </main>
@@ -738,16 +829,16 @@ const MODS = [
  { id:'iron-root', anims:[{src:'media/a-ir-f77eba8e.mp4',poster:'media/a-ir-f77eba8e.jpg',title:'Watering the seedlings'},{src:'media/anim-ir-build.mp4',poster:'media/anim-ir-build.jpg',title:'Building the dome colony'},{src:'media/anim-ir-pickaxe.mp4',poster:'media/anim-ir-pickaxe.jpg',title:'Mining shift'},{src:'media/a-ir-c97f2caa.mp4',poster:'media/a-ir-c97f2caa.jpg',title:'The colony at night'},{src:'media/a-ir-d1e438d1.mp4',poster:'media/a-ir-d1e438d1.jpg',title:'Pickaxe swing'}], loop:'a-ir-f77eba8e', crew:'miner', role:'The Miner', a:'IRON ', b:'ROOT', acc:'#ff8a3d', tier:'SYNAPSE', tagline:'Grow. Mine. Survive.',
    cover:'media/ir-colony.jpg', banner:'media/ir-redcolony.jpg', bannerPos:'center 30%',
    features:['Build colonies, greenhouses and habitats','Walk-in mines and smelters turn ore into metal','Farm cities that feed your crew','Colony Express drops a colony anywhere','A job board that keeps every Kerbal busy','Outworld Colonies add-on packs included at Synapse'],
-   photos:[p('ir-colony.jpg','Colony on Duna'),p('ir-mine.jpg','Open-pit mine and smelter'),p('ir-icemoon.jpg','Ice moon domes'),p('ir-landing.jpg','Colony Express landing'),p('ir-builders.jpg','Builders at work'),p('ir-rover.jpg','Supply rover'),p('ir-flag.jpg','Planting the flag'),p('ir-home.jpg','Home base')],
+   photos:[p('ig-ir-106.jpg','In game: the colony on the Mun'),p('ig-ir-104.jpg','In game: the strip mine at work'),p('ig-ir-105.jpg','In game: strip mine and power lines'),p('ig-ir-103.jpg','In game: the dome ring'),p('ig-ir-102.jpg','In game: inside the dome ring'),p('ig-ir-100.jpg','In game: the solar farm'),p('ig-ir-98.jpg','In game: habitat and supply lines'),p('ig-ir-96.jpg','In game: the base network at night'),p('ir-colony.jpg','Colony on Duna'),p('ir-mine.jpg','Open-pit mine and smelter'),p('ir-icemoon.jpg','Ice moon domes'),p('ir-landing.jpg','Colony Express landing'),p('ir-builders.jpg','Builders at work'),p('ir-rover.jpg','Supply rover'),p('ir-flag.jpg','Planting the flag'),p('ir-home.jpg','Home base')],
    trailers:[], clips:[{src:'media/clip-ir-mine.mp4',poster:'media/clip-ir-mine.jpg',title:'Running the mine and smelter'},{src:'media/clip-ir-colony.mp4',poster:'media/clip-ir-colony.jpg',title:'The colony at night'}],
-   gameplay:[], guide:'guides/iron-root/index.html', guideName:'IRONROOT Field Manual',
+   gameplay:[{src:'media/g-ir-colony.mp4',poster:'media/g-ir-colony.jpg',title:'In game: habitat and supply lines'},{src:'media/g-ir-mine.mp4',poster:'media/g-ir-mine.jpg',title:'In game: the solar farm'},{src:'media/g-ir-domes.mp4',poster:'media/ig-ir-103.jpg',title:'In game: the dome colony'},{src:'media/g-ir-night.mp4',poster:'media/g-ir-night.jpg',title:'In game: the base glowing at night'}], guide:'guides/iron-root/index.html', guideName:'IRONROOT Field Manual',
    guideHas:['Picking a colony site','Mines, smelters and metal','Colony Express and the job board'] },
  { id:'jump-gate', anims:[{src:'media/a-jg-e991c767.mp4',poster:'media/a-jg-e991c767.jpg',title:'Pilot drops the visor'},{src:'media/a-jg-5e1e3a08.mp4',poster:'media/a-jg-5e1e3a08.jpg',title:'Threading the rings'},{src:'media/anim-jg-portal.mp4',poster:'media/anim-jg-portal.jpg',title:'Portal powers up'},{src:'media/anim-jg-burst.mp4',poster:'media/anim-jg-burst.jpg',title:'Bursting out of the gate'},{src:'media/a-jg-d2b5434f.mp4',poster:'media/a-jg-d2b5434f.jpg',title:'Exit blast'},{src:'media/a-jg-c48b7f16.mp4',poster:'media/a-jg-c48b7f16.jpg',title:'Chase cam through the rings'},{src:'media/a-jg-c77354e6.mp4',poster:'media/a-jg-c77354e6.jpg',title:'Portal exit flash'},{src:'media/a-jg-d9f49dd7.mp4',poster:'media/a-jg-d9f49dd7.jpg',title:'Throttle up'},{src:'media/a-jg-53c20030.mp4',poster:'media/a-jg-53c20030.jpg',title:'The gate powers up'},{src:'media/a-jg-01cfa5ec.mp4',poster:'media/a-jg-01cfa5ec.jpg',title:'Warp tunnel'},{src:'media/a-jg-8128e298.mp4',poster:'media/a-jg-8128e298.jpg',title:'Cockpit close-up'},{src:'media/a-jg-5c1dd186.mp4',poster:'media/a-jg-5c1dd186.jpg',title:'Full throttle'},{src:'media/a-jg-a7411c38.mp4',poster:'media/a-jg-a7411c38.jpg',title:'Rainbow ring run'},{src:'media/a-jg-ada916b4.mp4',poster:'media/a-jg-ada916b4.jpg',title:'Portal swirl'}], loop:'a-jg-e991c767', crew:'pilot', role:'The Pilot', a:'JUMP ', b:'GATE', acc:'#22e5ff', tier:'CORTEX', tagline:'Fly through the ring. Pop out at another planet.',
    cover:'media/jg-rainbow.jpg', banner:'media/jg-lane.jpg', bannerPos:'center 62%',
    features:['Kerbin to Duna in seconds','Build and deploy your own gates','A 40 m ring that folds into a 3.75 m box','Gate contracts with landing bonuses','Link gates into a network across the system'],
-   photos:[p('jg-rainbow.jpg','Ring run'),p('ig-jg-vortex.jpg','In game: the gate vortex'),p('ig-jg-beam.jpg','In game: capture beam'),p('ig-jg-arrival.jpg','In game: jump to Duna'),p('ig-jg-dunarings.jpg','In game: rings at Duna'),p('ig-jg-guide.jpg','In game: rainbow guide rings'),p('ig-jg-gate.jpg','In game: the Kerbin Gate'),p('ig-jg-rings.jpg','In game: through the rings'),p('ig-jg-duna.jpg','In game: rainbow lane at Duna'),p('ig-jg-kerbin.jpg','In game: rings over Kerbin'),p('jg-hero.jpg','Gate over Kerbin'),p('jg-arrival.jpg','Arrival burst'),p('jg-network.jpg','The gate network'),p('jg-deploy.jpg','Deploying a gate'),p('jg-powerup.jpg','Powering up'),p('jg-beam.jpg','Capture beam'),p('jg-funnel.jpg','Approach funnel'),p('jg-lane.jpg','Approach lane'),p('jg-burst.jpg','Exit burst'),p('jg-jg_load_1.jpg','Loading screen 1'),p('jg-jg_load_2.jpg','Loading screen 2'),p('jg-jg_load_3.jpg','Loading screen 3')],
+   photos:[p('jg-rainbow.jpg','Ring run'),p('ig-jg2-89.jpg','In game: capture beam locked at the Kerbin Gate'),p('ig-jg2-90.jpg','In game: lining up the vortex'),p('ig-jg2-91.jpg','In game: rings over Duna'),p('ig-jg2-94.jpg','In game: the rainbow guide rings'),p('jg-hero.jpg','Gate over Kerbin'),p('jg-arrival.jpg','Arrival burst'),p('jg-network.jpg','The gate network'),p('jg-deploy.jpg','Deploying a gate'),p('jg-powerup.jpg','Powering up'),p('jg-beam.jpg','Capture beam'),p('jg-funnel.jpg','Approach funnel'),p('jg-lane.jpg','Approach lane'),p('jg-burst.jpg','Exit burst'),p('jg-jg_load_1.jpg','Loading screen 1'),p('jg-jg_load_2.jpg','Loading screen 2'),p('jg-jg_load_3.jpg','Loading screen 3')],
    trailers:[], clips:[{src:'media/clip-jg-gate.mp4',poster:'media/clip-jg-gate.jpg',title:'Through the gate'}],
-   gameplay:[{src:'media/g-jg-jump.mp4',poster:'media/g-jg-jump.jpg',title:'In game: vortex jump to Duna'},{src:'media/g-jg-beam.mp4',poster:'media/g-jg-beam.jpg',title:'In game: the capture beam locks on'},{src:'media/g-jg-rings.mp4',poster:'media/g-jg-rings.jpg',title:'In game: flying the rainbow guide rings'},{src:'media/g-jg-duna.mp4',poster:'media/g-jg-duna.jpg',title:'In game: arriving at the Duna gate'}], guide:'guides/jump-gate/index.html', guideName:'Kerbal Jump Gate Guide',
+   gameplay:[{src:'media/g-jg2-approach.mp4',poster:'media/g-jg2-approach.jpg',title:'In game: beam lock, vortex and jump'},{src:'media/g-jg2-beam.mp4',poster:'media/g-jg2-beam.jpg',title:'In game: rings over Duna'},{src:'media/g-jg2-deploy.mp4',poster:'media/g-jg2-deploy.jpg',title:'In game: the guide rings deploy'},{src:'media/g-jg2-tunnel.mp4',poster:'media/g-jg2-tunnel.jpg',title:'In game: flying the rainbow tunnel'}], guide:'guides/jump-gate/index.html', guideName:'Kerbal Jump Gate Guide',
    guideHas:['Building and deploying a gate','Lining up the approach','Gate contracts'] },
  { id:'hullworks', anims:[{src:'media/anim-hw-paint.mp4',poster:'media/anim-hw-paint.jpg',title:'Robot arms paint the rocket'},{src:'media/anim-hw-lineup.mp4',poster:'media/anim-hw-lineup.jpg',title:'The painted lineup at sunset'},{src:'media/a-hw-43dbb404.mp4',poster:'media/a-hw-43dbb404.jpg',title:'Fin check'},{src:'media/a-hw-fdbd7aa3.mp4',poster:'media/a-hw-fdbd7aa3.jpg',title:'Welding the seam'},{src:'media/a-hw-730e569d.mp4',poster:'media/a-hw-730e569d.jpg',title:'Hull welding in the hangar'},{src:'media/a-hw-f0ee4c83.mp4',poster:'media/a-hw-f0ee4c83.jpg',title:'Paintbrush flyby'}], loop:'anim-hw-paint', crew:'engineer', role:'The Engineer', a:'HULL', b:'WORKS', acc:'#ff4fd8', tier:'FREE', tagline:'A paint shop for every ship',
    cover:'media/hw-lineup.jpg', banner:'media/hw-paintbay.jpg',
@@ -780,10 +871,10 @@ const MODS = [
    photos:[p('dy-lightshow-a.jpg','The rainbow light show'),p('ig-dy-solarashow.jpg','In game: arriving at the light show'),p('ig-dy-disco.jpg','In game: the sphere lit up'),p('ig-dy-hub1.jpg','In game: Brainy at the Dyson Core'),p('ig-dy-hub2.jpg','In game: rainbow rings around Solara'),p('ig-dy-solara.jpg','In game: through the Solara Gate'),p('ig-dy-inside.jpg','In game: inside the light show'),p('ig-dy-panels.jpg','In game: Solara through the panels'),p('ig-dy-core.jpg','In game: the Dyson Core'),p('ig-dy-shell.jpg','In game: the golden shell'),p('dy-lightshow-b.jpg','Rainbow lightning inside the sphere'),p('dy-drive.jpg','Dyson Drive and Dyson Clamp, new look'),p('dy2-dock.jpg','Docked at the Dyson Port'),p('dy2-cockpit.jpg','A star in a sphere'),p('dy2-control.jpg','The Control Room'),p('dy-crew.jpg','Waking the sphere'),p('dy-sphere.jpg','The Solara Ring'),p('dy-station.jpg','The Dyson Hub station'),p('dy-load-1.jpg','Loading screen 1'),p('dy-load-2.jpg','Loading screen 2'),p('dy-load-3.jpg','Loading screen 3')],
    trailers:[], clips:[], gameplay:[{src:'media/g-dy-solara.mp4',poster:'media/g-dy-solara.jpg',title:'In game: through the Solara Gate to the light show'}], guide:'guides/dyson/index.html', guideName:'Kerbal Dyson Guide',
    guideHas:['Getting to Solara','Landing on the Dyson Hub','Waking the sphere and the Dyson Drive'] },
- { id:'lightspeed', group:'tools', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Fly more. Load less. Park the mods you are not using and boot KSP faster.',
+ { id:'lightspeed', group:'tools', anims:[{src:'media/a-ll-warp.mp4',poster:'media/a-ll-warp.jpg',title:'Into lightspeed'},{src:'media/a-lh-install.mp4',poster:'media/a-lh-install.jpg',title:'One click, crates beam down'}], loop:'a-ll-warp', crew:'hero', role:'The Hero', a:'LIGHTSPEED ', b:'LAUNCHER', acc:'#8c78ff', tier:'FREE', badge:'FREE TOOL', badgeClass:'free', wide:true, tagline:'Install every Kerbal Brains mod in one click. Park the rest and boot KSP faster.',
    cover:'media/ll-trio.jpg', banner:'media/ll-key.jpg', bannerPos:'center 45%',
-   features:['Scans every save, every VAB and SPH craft and every recent launch','Parks the mods nothing uses: moves them aside, never deletes them','Keeps everything your ships need: models, code, IVAs, fuel types and save data','Backs up your saves before every change, and one click turns everything back on','Load Times tab shows where your boot time goes, with a history chart','Tested on a 248-mod install: a cached boot dropped from 9.6 to 3.9 minutes with one save protected'],
-   photos:[p('ll-key.jpg','Into lightspeed'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
+   features:['NEW Mods Hub: install, update and open every Kerbal Brains mod in one place','Update all in one click, with tray alerts when updates are ready','Every download checked and the old version backed up first','Scans every save, every VAB and SPH craft and every recent launch','Parks the mods nothing uses: moves them aside, never deletes them','Keeps everything your ships need: models, code, IVAs, fuel types and save data','Backs up your saves before every change, and one click turns everything back on','Load Times tab shows where your boot time goes, with a history chart','Tested on a 248-mod install: a cached boot dropped from 9.6 to 3.9 minutes with one save protected'],
+   photos:[p('ll-key.jpg','Into lightspeed'),p('lh-hub-grid-hivemind.jpg','The Mods Hub'),p('lh-hub-table-hivemind.jpg','Mods Hub table view'),p('lh-crew.jpg','The crew installs a mod'),p('ll-icon.jpg','The launcher icon',1),p('ll-trio.jpg','Out of the warp'),p('ll-pilot.jpg','Throttle up'),p('ll-park.jpg','Crates parked, runway clear'),p('ll-launch.jpg','Launch!'),p('ll-app-parklist.jpg','The Park List'),p('ll-app-times.jpg','Load Times'),p('ll-app-modes.jpg','Launch modes'),p('ll-app-rules.jpg','Keep Rules'),p('ll-app-health.jpg','Health checks')],
    trailers:[], clips:[], gameplay:[], guide:'guides/lightspeed/index.html', guideName:'Lightspeed Launcher Guide',
    guideHas:['The Park List and keep rules','Launch modes and profiles','Load Times and health checks'] }
 ];
@@ -808,6 +899,7 @@ document.getElementById('bays').innerHTML = BAY_ORDER.map(id=>MODS.find(q=>q.id=
       <h3>${esc(m.a)}<span>${esc(m.b)}</span></h3>
       <p class="tagline">${esc(m.tagline)}</p>
       <div class="counts"><span><b>${m.photos.length}</b> photos</span><span><b>${vcount(m)}</b> ${vcount(m)===1?"video":"videos"}</span><span><b>1</b> guide</span></div>
+      <span class="inl">&#11015; IN THE FREE LAUNCHER</span>
       <span class="open">OPEN BAY &#8594;</span><span class="hint">Tap to open. Hold for the quick menu.</span>
     </div></div>
   </button>`).join('');
@@ -1138,6 +1230,18 @@ function show(i){var x=SL[i];off.src='media/sl-'+x.k+'-off.jpg';on.src='media/sl
  document.querySelectorAll('.cvc-tabs button').forEach(function(b,k){b.setAttribute('aria-selected',k===i?'true':'false');});}
 show(2);
 document.querySelector('.cvc-tabs').addEventListener('click',function(e){var b=e.target.closest('button[data-sl]');if(b)show(+b.dataset.sl);});
+})();
+</script>
+<script>
+(()=>{const shots=document.querySelectorAll('.lh-shot');if(!shots.length)return;
+const box=document.createElement('div');box.className='csbox';box.hidden=true;box.setAttribute('role','dialog');box.setAttribute('aria-label','Launcher screenshot');
+box.innerHTML='<button type="button" class="x" aria-label="Close">&#10005;</button><img alt=""><div class="cap"></div>';document.body.appendChild(box);
+const im=box.querySelector('img'),cap=box.querySelector('.cap');
+const close=()=>{box.hidden=true;im.removeAttribute('src');document.documentElement.style.overflow='';};
+shots.forEach(b=>b.addEventListener('click',()=>{const t=b.querySelector('img');im.src=t.getAttribute('src');im.alt=t.alt;cap.innerHTML='KERBAL BRAINS LAUNCHER<small>'+b.dataset.cap+'</small>';box.hidden=false;document.documentElement.style.overflow='hidden';}));
+box.addEventListener('click',close);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!box.hidden)close();});
+const v=document.getElementById('lhvid');if(v){v.muted=true;if(matchMedia('(prefers-reduced-motion: reduce)').matches){v.removeAttribute('autoplay');v.pause();}
+ else if('IntersectionObserver' in window){new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const pr=v.play();if(pr&&pr.catch)pr.catch(()=>{});}else v.pause();}),{threshold:.25}).observe(v);}}
 })();
 </script>
 </body></html>

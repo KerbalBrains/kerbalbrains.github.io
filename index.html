@@ -429,10 +429,10 @@ dialog.sheet::backdrop{background:rgba(3,5,12,.78);backdrop-filter:blur(4px)}
 .lh-list li::before{content:"\2B07";position:absolute;left:0;top:0;color:var(--cyan);font-weight:900}
 .lh-list b{color:var(--text)}
 .lh-req{color:var(--muted)}
-.lh-shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:22px}
-@media (max-width:820px){.lh-shots{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.lh-shots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:22px}
+@media (max-width:560px){.lh-shots{grid-template-columns:minmax(0,1fr)}}
 .lh-shot{all:unset;cursor:zoom-in;display:grid;gap:6px;min-width:0;-webkit-tap-highlight-color:transparent}
-.lh-shot img{width:100%;aspect-ratio:16/11;object-fit:cover;object-position:top left;border-radius:12px;border:2px solid var(--line);transition:border-color .2s;pointer-events:none}
+.lh-shot img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top left;border-radius:12px;border:2px solid var(--line);transition:border-color .2s;pointer-events:none}
 .lh-shot:hover img,.lh-shot:focus-visible img{border-color:var(--cyan)}
 .lh-shot span{font-family:var(--f-display);font-weight:800;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .lh-h3{margin-top:30px;font-size:clamp(18px,2vw,22px)}
@@ -569,8 +569,6 @@ main section[id]{scroll-margin-top:84px}
       <div class="lh-shots" aria-label="Real launcher screenshots">
         <button type="button" class="lh-shot" data-cap="Mods Hub, card view"><img src="media/lh-hub-grid-hivemind.jpg" alt="Mods Hub card view" loading="lazy"><span>Mods Hub cards</span></button>
         <button type="button" class="lh-shot" data-cap="Mods Hub, table view"><img src="media/lh-hub-table-hivemind.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
-        <button type="button" class="lh-shot" data-cap="Free membership: free mods ready, the rest locked"><img src="media/lh-hub-grid-free.jpg" alt="Free membership view" loading="lazy"><span>Free membership</span></button>
-        <button type="button" class="lh-shot" data-cap="Updates ready, one click each"><img src="media/lh-hub-table-free.jpg" alt="Updates in the table view" loading="lazy"><span>Updates ready</span></button>
       </div>
       <h3 class="lh-h3">How it works</h3>
       <div class="lh-steps">

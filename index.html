@@ -505,7 +505,7 @@ main section[id]{scroll-margin-top:84px}
 <header class="nav">
   <div class="wrap">
     <a class="brand" href="#top"><img src="media/badge.png" alt="">KERBAL BRAINS</a>
-    <nav aria-label="Sections"><a href="#launcher">Launcher</a><a href="#mods">Mods</a><a href="#tiers">Tiers</a><a href="#brains">Brains</a><a href="#soon">Coming soon</a><a href="#community">Community</a><a href="#install">Install</a></nav>
+    <nav aria-label="Sections"><a href="#mods">Mods</a><a href="#tiers">Tiers</a><a href="#brains">Brains</a><a href="#launcher">Launcher</a><a href="#soon">Coming soon</a><a href="#community">Community</a><a href="#install">Install</a></nav>
     <a class="btn" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
   </div>
 </header>
@@ -539,53 +539,6 @@ main section[id]{scroll-margin-top:84px}
         const pl=document.querySelector('.player');if(!pl)return;
         pl.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/JVYGYjZi2-g?playsinline=1&rel=0&modestbranding=1" title="Kerbal Brains promo" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;border-radius:inherit;display:block"></iframe>';})();
       </script>
-    </div>
-  </section>
-
-  <section id="launcher">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="eyebrow">The Kerbal Brains Launcher</p>
-        <h2>One launcher. Every mod.</h2>
-        <p>Download one free app and it installs, updates and opens every Kerbal Brains mod for you. No unzipping, no GameData digging.</p>
-      </div>
-      <div class="lh-show">
-        <div class="lh-vid"><video id="lhvid" autoplay muted loop playsinline preload="metadata" poster="media/a-lh-install.jpg" aria-label="The crew installs mods from the launcher"><source src="media/a-lh-install.mp4" type="video/mp4"></video></div>
-        <div class="lh-pitch">
-          <h3>Click Install. The crates beam down.</h3>
-          <ul class="lh-list">
-            <li><b>Mods Hub</b> shows every mod as a card or a table, with All, Installed, Updates and Locked filters.</li>
-            <li><b>Update all</b> grabs every new version in one click.</li>
-            <li><b>Speed Check</b> spots what slows KSP down and fixes it in one click.</li>
-            <li><b>Update alerts</b> pop up when your mods get new versions. It checks every hour.</li>
-            <li><b>Park the extras</b> so KSP boots faster, then launch straight from Steam.</li>
-          </ul>
-          <div class="ctas" style="margin-top:6px">
-            <a class="btn dl" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener">GET THE FREE LAUNCHER</a>
-            <a class="btn alt" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
-          </div>
-          <p class="small lh-req">Windows PC with KSP 1.12.x. The launcher is free forever.</p>
-        </div>
-      </div>
-      <div class="lh-shots" aria-label="Real launcher screenshots">
-        <button type="button" class="lh-shot main" aria-label="Enlarge screenshot" data-cap="Mods Hub with the new Speed Check"><img src="media/lh3-hub-grid.jpg" alt="Mods Hub card view with Speed Check" loading="lazy"><span>Mods Hub + Speed Check</span></button>
-        <button type="button" class="lh-shot" data-cap="Table view: every mod, version and update"><img src="media/lh3-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
-        <button type="button" class="lh-shot pop" data-cap="Make KSP faster in one click"><img src="media/lh3-pop-faster.jpg" alt="Make KSP faster popup" loading="lazy"><span>Make KSP faster</span></button>
-        <button type="button" class="lh-shot pop" data-cap="Your mods just updated"><img src="media/lh3-pop-updated.jpg" alt="Mods updated popup" loading="lazy"><span>Update alerts</span></button>
-      </div>
-      <h3 class="lh-h3">How it works</h3>
-      <div class="lh-steps">
-        <div class="lh-step"><img src="media/head-pilot.jpg" alt=""><div><span class="lh-n">1</span><h4>Download</h4><p>Grab the free launcher and run setup. It installs itself into your KSP folder.</p></div></div>
-        <div class="lh-step"><img src="media/head-scientist.jpg" alt=""><div><span class="lh-n">2</span><h4>Sign in (optional)</h4><p>Free mods work right away. Sign in with Patreon and your tier's mods unlock.</p></div></div>
-        <div class="lh-step"><img src="media/head-engineer.jpg" alt=""><div><span class="lh-n">3</span><h4>Click Install</h4><p>Pick a mod, press Install, then Launch KSP. Updates are one click too.</p></div></div>
-      </div>
-      <div class="lh-safe" aria-label="Safe for your saves">
-        <div><b>&#10003; Checked</b><span>Every download is verified before it installs</span></div>
-        <div><b>&#10003; Backed up</b><span>The old version is saved before every update</span></div>
-        <div><b>&#10003; Saves untouched</b><span>It never touches your saves or settings</span></div>
-        <div><b>&#10003; Waits for KSP</b><span>Nothing installs while the game is running</span></div>
-        <div><b>&#10003; Yours to keep</b><span>Membership ends? Installed mods keep working</span></div>
-      </div>
     </div>
   </section>
 
@@ -702,6 +655,53 @@ main section[id]{scroll-margin-top:84px}
         <p>Every mod has its own crew member. Tap one to see what they run.</p>
       </div>
       <div class="crew" id="crewGrid"></div>
+    </div>
+  </section>
+
+  <section id="launcher">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The Kerbal Brains Launcher</p>
+        <h2>One launcher. Every mod.</h2>
+        <p>Download one free app and it installs, updates and opens every Kerbal Brains mod for you. No unzipping, no GameData digging.</p>
+      </div>
+      <div class="lh-show">
+        <div class="lh-vid"><video id="lhvid" autoplay muted loop playsinline preload="metadata" poster="media/a-lh-install.jpg" aria-label="The crew installs mods from the launcher"><source src="media/a-lh-install.mp4" type="video/mp4"></video></div>
+        <div class="lh-pitch">
+          <h3>Click Install. The crates beam down.</h3>
+          <ul class="lh-list">
+            <li><b>Mods Hub</b> shows every mod as a card or a table, with All, Installed, Updates and Locked filters.</li>
+            <li><b>Update all</b> grabs every new version in one click.</li>
+            <li><b>Speed Check</b> spots what slows KSP down and fixes it in one click.</li>
+            <li><b>Update alerts</b> pop up when your mods get new versions. It checks every hour.</li>
+            <li><b>Park the extras</b> so KSP boots faster, then launch straight from Steam.</li>
+          </ul>
+          <div class="ctas" style="margin-top:6px">
+            <a class="btn dl" href="https://github.com/KerbalBrains/KerbalBrainsHub/releases/tag/setup" target="_blank" rel="noopener">GET THE FREE LAUNCHER</a>
+            <a class="btn alt" href="https://www.patreon.com/c/KerbalBrains/membership">JOIN ON PATREON</a>
+          </div>
+          <p class="small lh-req">Windows PC with KSP 1.12.x. The launcher is free forever.</p>
+        </div>
+      </div>
+      <div class="lh-shots" aria-label="Real launcher screenshots">
+        <button type="button" class="lh-shot main" aria-label="Enlarge screenshot" data-cap="Mods Hub with the new Speed Check"><img src="media/lh3-hub-grid.jpg" alt="Mods Hub card view with Speed Check" loading="lazy"><span>Mods Hub + Speed Check</span></button>
+        <button type="button" class="lh-shot" data-cap="Table view: every mod, version and update"><img src="media/lh3-hub-table.jpg" alt="Mods Hub table view" loading="lazy"><span>Table view</span></button>
+        <button type="button" class="lh-shot pop" data-cap="Make KSP faster in one click"><img src="media/lh3-pop-faster.jpg" alt="Make KSP faster popup" loading="lazy"><span>Make KSP faster</span></button>
+        <button type="button" class="lh-shot pop" data-cap="Your mods just updated"><img src="media/lh3-pop-updated.jpg" alt="Mods updated popup" loading="lazy"><span>Update alerts</span></button>
+      </div>
+      <h3 class="lh-h3">How it works</h3>
+      <div class="lh-steps">
+        <div class="lh-step"><img src="media/head-pilot.jpg" alt=""><div><span class="lh-n">1</span><h4>Download</h4><p>Grab the free launcher and run setup. It installs itself into your KSP folder.</p></div></div>
+        <div class="lh-step"><img src="media/head-scientist.jpg" alt=""><div><span class="lh-n">2</span><h4>Sign in (optional)</h4><p>Free mods work right away. Sign in with Patreon and your tier's mods unlock.</p></div></div>
+        <div class="lh-step"><img src="media/head-engineer.jpg" alt=""><div><span class="lh-n">3</span><h4>Click Install</h4><p>Pick a mod, press Install, then Launch KSP. Updates are one click too.</p></div></div>
+      </div>
+      <div class="lh-safe" aria-label="Safe for your saves">
+        <div><b>&#10003; Checked</b><span>Every download is verified before it installs</span></div>
+        <div><b>&#10003; Backed up</b><span>The old version is saved before every update</span></div>
+        <div><b>&#10003; Saves untouched</b><span>It never touches your saves or settings</span></div>
+        <div><b>&#10003; Waits for KSP</b><span>Nothing installs while the game is running</span></div>
+        <div><b>&#10003; Yours to keep</b><span>Membership ends? Installed mods keep working</span></div>
+      </div>
     </div>
   </section>
 
